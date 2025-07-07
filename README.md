@@ -11,7 +11,7 @@ written by an experienced Chingu, be your starting point -
 And before we go there's "one more thing"! Once you decide what to include
 in your `readme` feel free to replace the text we've provided here.
 
-> Own it & Make it your Own!
+> Own it & Make it your Own! - Y
 
 ## Team Documents
 
@@ -34,7 +34,7 @@ Everyone on your team should add their name along with a link to their GitHub
 your repo access and to practice PR'ing with your team *before* you start
 coding!
 
-- Teammate name #1: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
+- Hancke le Roux(SM) #1: [GitHub](https://github.com/HawkCoding) / [LinkedIn](https://www.linkedin.com/in/hancke-chris-le-roux-19981206za/)
 - Teammate name #2: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
 
    ...
