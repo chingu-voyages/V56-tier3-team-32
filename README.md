@@ -11,7 +11,7 @@ coding!
 - Evaldas Visockas (Dev) #4: [Github](https://github.com/EvalVis) / [LinkedIn](https://www.linkedin.com/in/evaldas-visockas/)
   ...
 - Brandon Datch (Dev) #5: [GitHub](https://github.com/Brandon-Isaac) / [LinkedIn](https://linkedin.com/in/isaac-datch-947067288)
- 
+  
 # voyage-tasks
 
 Your project's `readme` is as important to success as your code. For 
