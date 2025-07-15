@@ -1,3 +1,17 @@
+# Surgery app docs
+
+## Backend
+
+### Environment variables
+
+**`SURGERY_DATABASE_CONNECTION_CREDENTIALS`** - Connection string of MongoDB Atlas for authentication with the database. **Do not expose the variable since it contains database password**.
+
+### Running locally
+
+Run:
+1) `npm install`
+2) `npm run dev`
+
 ## Our Team
 
 Everyone on your team should add their name along with a link to their GitHub
