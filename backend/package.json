@@ -16,7 +16,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.1.0",
-    "mongodb": "^6.17.0"
+    "mongoose": "^8.16.3"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",

@@ -1,4 +1,4 @@
-import { MongoClient } from 'mongodb';
+import mongoose from 'mongoose';
 import express from 'express';
 import cors from 'cors';
 
@@ -14,8 +14,6 @@ declare global {
 }
 
 (async () => {
-  const client = new MongoClient(process.env.SURGERY_DATABASE_CONNECTION_CREDENTIALS!);
-
   const app = express();
 
   app.use(express.json());
@@ -26,20 +24,23 @@ declare global {
     console.log(`Server running on port ${port}`);
   });
 
-  const mongoDb = await connectToMongo();
+  await mongoose.connect(`${process.env.SURGERY_DATABASE_CONNECTION_CREDENTIALS!}testdb`);
 
-  async function connectToMongo() {
-    await client.connect();
-    return client.db("testdb");
-  }
+  const schema = new mongoose.Schema({
+    name: { type: String, required: true },
+    surname: { type: String, required: true }
+  });
+  
+  const model = mongoose.model('testCollection', schema, 'testCollection');
 
   app.get('/', async (_, res) => {
-    const testCollection = mongoDb.collection("testCollection");
+    const testResult = await model.findOne({ name: "Iforgot" });
 
-    const test = await testCollection.findOne({ name: "Iforgot" });
-
-    res.send(`Surname: ${test!.surname}`);
+    if (!testResult) {
+      return res.status(404).send("Document not found");
+    }
+    
+    res.send(`Surname: ${testResult!.surname}`);
   });
-
 
 })();
