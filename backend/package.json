@@ -1,15 +1,25 @@
 {
   "name": "surgery-backend",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "An API for registering hospital patients and showing their surgery status",
+  "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "health"
+  ],
+  "author": "Chingu V56-tier3-team-32",
+  "license": "AGPL-3.0",
   "dependencies": {
     "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.0.14",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
   }
 }
