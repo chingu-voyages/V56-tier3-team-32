@@ -30,5 +30,35 @@ router.post('/', async (req: Request, res: Response) => {
   }
 });
 
+router.put('/',async (req: Request, res: Response) => {
+  const { code, description } = req.body;
+  if (!code || !description) {
+    return res.status(400).json({ message: 'Code and description are required.' });
+  }
+  try {
+    const updatedStatus = await Status.findOneAndUpdate
+    ({ code }, { description }, { new: true });
+    if (!updatedStatus) {
+      return res.status(404).json({ message: 'Status not found.' });
+    } 
+    res.json(updatedStatus);
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to update status.' });
+  }
+});
+
+router.delete('/:code', async (req: Request, res: Response) => {
+  const { code } = req.params;
+  try {
+    const deletedStatus = await Status.findOneAndDelete({ code });
+    if (!deletedStatus) {
+      return res.status(404).json({ message: 'Status not found.' });
+    }
+    res.json({ message: 'Status deleted successfully.' });
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to delete status.' });
+  }
+});
+
 export default router;
 
