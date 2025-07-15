@@ -13,5 +13,22 @@ router.get('/', async (_req: Request, res: Response) => {
   }
 });
 
+// POST /api/statuses
+router.post('/', async (req: Request, res: Response) => {
+  const { code, description } = req.body;
+
+  if (!code || !description) {
+    return res.status(400).json({ message: 'Code and description are required.' });
+  }
+
+  try {
+    const newStatus = new Status({ code, description });
+    await newStatus.save();
+    res.status(201).json(newStatus);
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to create status.' });
+  }
+});
+
 export default router;
 

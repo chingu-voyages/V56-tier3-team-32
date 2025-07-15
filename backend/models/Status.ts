@@ -3,7 +3,6 @@ import mongoose, { Document, Schema } from 'mongoose';
 export interface IStatus extends Document {
   code: string;
   description: string;
-  color: string;
 }
 
 const StatusSchema: Schema = new Schema<IStatus>({
@@ -18,7 +17,6 @@ const StatusSchema: Schema = new Schema<IStatus>({
     ]
   },
   description: { type: String, required: true },
-  color: { type: String, required: true }
 }, { timestamps: true });
 
 const Status = mongoose.model<IStatus>('Status', StatusSchema);
