@@ -2,12 +2,15 @@
   "name": "surgery-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.ts",
   "scripts": {
+
     "start": "node dist/index.js",
     "dev": "ts-node-dev src/index.ts",
     "build": "rimraf dist && tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+     "start": "node server.ts",
+    "start:dev": "nodemon src/index.ts"
+
   },
   "keywords": [],
   "author": "",
@@ -19,11 +22,15 @@
     "mongoose": "^8.16.3"
   },
   "devDependencies": {
+
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
     "@types/node": "^24.0.14",
     "rimraf": "^6.0.1",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.3"
+    "@types/dotenv": "^6.1.1",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
   }
 }
