@@ -1,0 +1,9 @@
+.status-codes{
+    color: #fff;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
