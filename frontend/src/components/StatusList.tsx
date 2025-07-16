@@ -21,25 +21,35 @@ const statusColors: Record<string, string> = {
 
 const StatusList = () => {
   const [statuses, setStatuses] = useState<Status[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     axios.get(`${BASE_URL}/statuses`)
       .then((res) => setStatuses(res.data))
-      .catch((err) => console.error('Error fetching statuses:', err));
+      .catch((err) => {
+        console.error('Error fetching statuses:', err);
+        setError('Failed to fetch statuses. Please try again later.');
+      });
   }, []);
 
   return (
     <div className="grid grid-cols-2 gap-4 p-4">
-      {statuses.map((status) => (
-        <div
-          key={status._id}
-          title={status.description}
-          className="status-codes"
-          style={{ backgroundColor: statusColors[status.code] || '#ccc' }}
-        >
-          {status.code}
+      {error ? (
+        <div className="error-message">
+          {error}
         </div>
-      ))}
+      ) : (
+        statuses.map((status) => (
+          <div
+            key={status._id}
+            title={status.description}
+            className="status-codes"
+            style={{ backgroundColor: statusColors[status.code] || '#ccc' }}
+          >
+            {status.code}
+          </div>
+        ))
+      )}
     </div>
   );
 };
