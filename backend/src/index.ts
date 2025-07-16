@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import patientRoutes from './routes/patientRoutes';
+import statusRoutes from './routes/statusRoutes';
 
 dotenv.config();
 
@@ -38,6 +39,9 @@ app.get('/', (req, res) => {
 
 // Admin routes for patient management
 app.use('/admin', patientRoutes);
+
+//Routes for status management
+app.use('/statuses', statusRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
