@@ -11,8 +11,8 @@ const StatusSchema: Schema = new Schema<IStatus>({
     required: true,
     unique: true,
     enum: [
-      'Checked In', 'Pre-Procedure', 'Anesthesia', 'In-Progress',
-      'Suturing', 'Closing', 'Recovery', 'Observation',
+      'Checked In', 'Pre-Procedure', 'In-Progress',
+       'Closing', 'Recovery', 
       'Complete', 'Dismissal'
     ]
   },
