@@ -1,64 +1,12 @@
-import express, { Request, Response } from 'express';
-import Status from '../models/Status';
+import express from 'express';
+import { statusController } from '../controllers/statusController';
 
 const router = express.Router();
 
-// GET /api/statuses
-router.get('/', async (_req: Request, res: Response) => {
-  try {
-    const statuses = await Status.find();
-    res.json(statuses);
-  } catch (err) {
-    res.status(500).json({ message: 'Failed to fetch statuses.' });
-  }
-});
 
-// POST /api/statuses
-router.post('/', async (req: Request, res: Response) => {
-  const { code, description } = req.body;
-
-  if (!code || !description) {
-    return res.status(400).json({ message: 'Code and description are required.' });
-  }
-
-  try {
-    const newStatus = new Status({ code, description });
-    await newStatus.save();
-    res.status(201).json(newStatus);
-  } catch (err) {
-    res.status(500).json({ message: 'Failed to create status.' });
-  }
-});
-
-router.put('/',async (req: Request, res: Response) => {
-  const { code, description } = req.body;
-  if (!code || !description) {
-    return res.status(400).json({ message: 'Code and description are required.' });
-  }
-  try {
-    const updatedStatus = await Status.findOneAndUpdate
-    ({ code }, { description }, { new: true });
-    if (!updatedStatus) {
-      return res.status(404).json({ message: 'Status not found.' });
-    } 
-    res.json(updatedStatus);
-  } catch (err) {
-    res.status(500).json({ message: 'Failed to update status.' });
-  }
-});
-
-router.delete('/:code', async (req: Request, res: Response) => {
-  const { code } = req.params;
-  try {
-    const deletedStatus = await Status.findOneAndDelete({ code });
-    if (!deletedStatus) {
-      return res.status(404).json({ message: 'Status not found.' });
-    }
-    res.json({ message: 'Status deleted successfully.' });
-  } catch (err) {
-    res.status(500).json({ message: 'Failed to delete status.' });
-  }
-});
+router.get('/',statusController.getStatuses);
+router.post('/', statusController.createStatus);
+router.put('/',statusController.updateStatus);
+router.delete('/:code',statusController.deleteStatus);
 
 export default router;
-
