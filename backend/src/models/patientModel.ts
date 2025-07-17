@@ -1,4 +1,5 @@
 import mongoose, { Document, Schema } from 'mongoose';
+import Status from './Status';
 
 export interface PatientType extends Document {
   patientId: string;
@@ -11,6 +12,7 @@ export interface PatientType extends Document {
   telephone: number;
   contactEmail: string;
   createdAt: Date;
+  status: mongoose.Types.ObjectId;
 }
 
 const patientSchema = new Schema<PatientType>({
@@ -24,6 +26,7 @@ const patientSchema = new Schema<PatientType>({
   telephone: { type: Number, required: true },
   contactEmail: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
+  status: { type: Schema.Types.ObjectId, ref: 'Status', required: true },
 });
 
 export const Patient = mongoose.model<PatientType>('Patient', patientSchema);
