@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './StatusList.css';
-import { BASE_URL } from '../config.ts';
+import { BASE_URL } from '../config';
 
 interface Status {
   _id: string;
@@ -33,7 +33,12 @@ const StatusList = () => {
   }, []);
 
   return (
-    <div className="grid grid-cols-2 gap-4 p-4">
+    <div className='status-container'>
+      
+    <div className="grid grid-cols-2 gap-4 p-4 status-box">
+      <h4>
+        Status List
+      </h4>
       {error ? (
         <div className="error-message">
           {error}
@@ -50,6 +55,7 @@ const StatusList = () => {
           </div>
         ))
       )}
+    </div>
     </div>
   );
 };
