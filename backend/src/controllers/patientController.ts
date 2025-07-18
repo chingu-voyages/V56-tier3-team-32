@@ -4,16 +4,28 @@ import { generatePatientId } from '../utils/generatePatientId';
 
 const CHECKED_IN_STATUS_ID = '6876b51b6e7ee884eb6b67c3';
 
-export const createPatient = async (
+export const generateNewPatientId = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
   try {
     const patientId = await generatePatientId();
+    return res.status(200).json({ patientId });
+  } catch (error: any) {
+    console.error('Error generating patient ID:', error);
+    return res
+      .status(500)
+      .json({ message: 'Failed to generate patient ID', error: error.message });
+  }
+};
 
+export const createPatient = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  try {
     const newPatient = await Patient.create({
       ...req.body,
-      patientId: patientId,
       status: CHECKED_IN_STATUS_ID,
     });
     return res.status(201).json(newPatient);
