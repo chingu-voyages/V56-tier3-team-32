@@ -2,6 +2,8 @@ import { Request, Response } from 'express';
 import { Patient } from '../models/patientModel';
 import { generatePatientId } from '../utils/generatePatientId';
 
+const CHECKED_IN_STATUS_ID = '6876b51b6e7ee884eb6b67c3';
+
 export const createPatient = async (
   req: Request,
   res: Response
@@ -12,6 +14,7 @@ export const createPatient = async (
     const newPatient = await Patient.create({
       ...req.body,
       patientId: patientId,
+      status: CHECKED_IN_STATUS_ID,
     });
     return res.status(201).json(newPatient);
   } catch (error: any) {
@@ -27,7 +30,10 @@ export const getAllPatients = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const patients = await Patient.find();
+    const patients = await Patient.find().populate({
+      path: 'status',
+      select: 'code -_id',
+    });
     return res.status(200).json(patients);
   } catch (error: any) {
     console.error('Error fetching patients:', error);
