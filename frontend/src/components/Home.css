@@ -1,0 +1,27 @@
+.hero{
+    background-color: rgba(211, 213, 221, 0.849);
+    height: 60rem;
+}
+.nav-bar{
+    border: 2px solid balck;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color: rgba(56, 78, 71, 0.432);
+    height: 20rem;
+    width: 20rem;
+    position: relative;
+    top: 15rem;
+    left: 50rem;
+    border-radius: 2rem;
+
+}
+
+.btn{
+    height: 4rem;
+    background-color: rgb(255, 255, 255);
+    border-radius: 1rem;
+    font-size: 1.5rem;
+    
+}

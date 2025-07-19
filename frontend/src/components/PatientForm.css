@@ -1,0 +1,72 @@
+/* PatientForm.css */
+.form-container{
+    background-color: rgba(211, 213, 221, 0.849);
+    height: 70rem;
+
+}
+.patient-form {
+    border: 2px solid red;
+    border-radius: 2rem;
+    background-color: rgba(131, 151, 151, 0.699);
+    height: 55rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+    width:30rem ;
+  position: relative;
+  top: 10rem;
+  left: 45rem;
+
+}
+form h3{
+    margin-top: 2rem;
+    text-align: center;
+}
+form label {
+  font-size: 1.5rem;
+  color: rgb(27, 2, 255);
+  position: relative;
+  left: 2rem;
+  top: 2rem;
+}
+
+form input, select{
+  position: relative;
+  left: 2rem;
+  top: 2rem;
+  height: 2rem;
+  width: 25rem;
+  border-radius: 0.5rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.cancel-btn,
+.submit-btn {
+  background-color: #33b5e5;
+  color: white;
+  /* padding: 6px 12px; */
+  border: none;
+  height: 3rem;
+  width: 6rem;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 6px;
+  position:relative;
+  top: 3rem;
+}
+
+.cancel-btn {
+  background-color: #ff4444;
+  position: relative;
+  left: 2rem;
+  
+}
+.submit-btn {
+    position: relative;
+    right: 2rem;
+}
