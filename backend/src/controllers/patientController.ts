@@ -24,8 +24,10 @@ export const createPatient = async (
   res: Response
 ): Promise<Response> => {
   try {
+    const patientId = req.body.patientId || (await generatePatientId());
     const newPatient = await Patient.create({
       ...req.body,
+      patientId,
       status: CHECKED_IN_STATUS_ID,
     });
     return res.status(201).json(newPatient);
