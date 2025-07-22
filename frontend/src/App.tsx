@@ -4,9 +4,8 @@ import StatusList from './components/StatusList';
 function App() {
   return (
     <>
-     <StatusList/>
+      <StatusList />
     </>
-   
   );
 }
 
