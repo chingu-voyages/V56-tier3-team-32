@@ -1,3 +1,13 @@
+## Project setup instructions
+
+### Backend
+
+#### Environmental variables
+
+You can store env variables in your computer, or inside `.env` or `.env.local` files.
+
+**`REACT_APP_CLERK_PUBLISHABLE_KEY`**: Clerk key used to enable frontend authentication.
+
 ## Our Team
 
 Everyone on your team should add their name along with a link to their GitHub
