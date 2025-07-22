@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './StatusList.css';
-import { BASE_URL } from '../environment'; // Adjust the import based on your project structure
+import { BASE_URL } from '../environment';
 
 interface Status {
   _id: string;
