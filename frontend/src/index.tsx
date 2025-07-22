@@ -9,7 +9,9 @@ if (!PUBLISHABLE_KEY) {
   throw new Error('Missing Clerk Publishable Key');
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+);
 root.render(
   <React.StrictMode>
     <ClerkProvider publishableKey={PUBLISHABLE_KEY}>

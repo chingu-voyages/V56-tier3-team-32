@@ -1,6 +1,6 @@
 import './App.css';
-import StatusList from './components/StatusList.tsx';
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton, useUser } from '@clerk/clerk-react';
+import StatusList from './components/StatusList';
 
 function App() {
   const { user } = useUser();
