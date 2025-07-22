@@ -19,6 +19,8 @@ const StatusSchema: Schema = new Schema<IStatus>({
   description: { type: String, required: true },
 }, { timestamps: true });
 
+//to add any new status codes, you must update the enum above
+
 const Status = mongoose.model<IStatus>('Status', StatusSchema);
 
 export default Status;
