@@ -1,5 +1,5 @@
 import './App.css';
-import StatusList from './components/StatusList';
+import StatusList from './components/StatusList.tsx';
 
 function App() {
   return (
