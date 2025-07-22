@@ -1,5 +1,5 @@
 import mongoose, { Document, Schema } from 'mongoose';
-import Status from './Status';
+import Status from './statusModel';
 
 export interface PatientType extends Document {
   patientId: string;
