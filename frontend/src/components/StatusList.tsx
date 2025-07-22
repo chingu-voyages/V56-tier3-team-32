@@ -13,10 +13,10 @@ const statusColors: Record<string, string> = {
   'Checked In': '#ffcc00',
   'Pre-Procedure': '#33b5e5',
   'In-Progress': '#ff4444',
-  Closing: '#aa66cc',
-  Recovery: '#00C851',
-  Complete: '#2BBBAD',
-  Dismissal: '#576574',
+  'Closing': '#aa66cc',
+  'Recovery': '#00C851',
+  'Complete': '#2BBBAD',
+  'Dismissal': '#576574',
 };
 
 const StatusList = () => {
