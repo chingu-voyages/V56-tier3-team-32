@@ -1,14 +1,13 @@
 import './App.css';
-import { SignInButton, UserButton, useUser } from '@clerk/clerk-react';
+import { UserButton, useUser, useClerk } from '@clerk/clerk-react';
 import StatusList from './components/StatusList';
 
 function App() {
   const { user, isSignedIn } = useUser();
+  const { openSignIn } = useClerk();
 
   const signedOutState = () => (
-    <div className="sign-in-button">
-      <SignInButton />
-    </div>
+    <button className="sign-in-button" onClick={() => openSignIn()}>Sign in</button>
   );
 
   const signedInState = () => (

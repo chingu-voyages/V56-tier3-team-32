@@ -41,7 +41,6 @@
   }
 }
 
-
 .sign-in-button {
-  @apply inline-block w-full max-w-xs text-center px-6 py-3 bg-blue-500 text-white rounded-lg transition hover:bg-blue-600 hover:shadow-lg hover:translate-y-0.5;
+  @apply w-full px-6 py-3 bg-blue-500 text-white rounded-lg transition text-center hover:bg-blue-600 hover:shadow-lg hover:translate-y-0.5;
 }
