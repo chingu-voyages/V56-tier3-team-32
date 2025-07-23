@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './StatusList.css';
-import { BASE_URL } from '../environment';
+
+// Ensure BASE_URL is set correctly in your environment variables
+const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
 
 interface Status {
   _id: string;
