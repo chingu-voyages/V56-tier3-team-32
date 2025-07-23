@@ -30,7 +30,8 @@ in your `readme` feel free to replace the text we've provided here.
 ## Team Documents
 
 You may find these helpful as you work together to organize your project.
-
+- Frontend-[https://surgerystatus.vercel.app/](https://surgerystatus.vercel.app/)
+- Backend-[https://surgery-status.onrender.com/](https://surgery-status.onrender.com/)
 - [Team Project Ideas](./docs/team_project_ideas.md)
 - [Team Decision Log](./docs/team_decision_log.md)
 
