@@ -1,13 +1,16 @@
 import './App.css';
 import { UserButton, useUser, useClerk } from '@clerk/clerk-react';
 import StatusList from './components/StatusList';
+import PatientList from './components/PatientList';
 
 function App() {
   const { user, isSignedIn } = useUser();
   const { openSignIn } = useClerk();
 
   const signedOutState = () => (
-    <button className="sign-in-button" onClick={() => openSignIn()}>Sign in</button>
+    <button className='sign-in-button' onClick={() => openSignIn()}>
+      Sign in
+    </button>
   );
 
   const signedInState = () => (
@@ -22,12 +25,10 @@ function App() {
   );
 
   return (
-    <div className="App">
-      <header>
-        {!isSignedIn ? signedOutState() : signedInState()}
-      </header>
+    <div className='App'>
+      <header>{!isSignedIn ? signedOutState() : signedInState()}</header>
       <main>
-        <StatusList />
+        {isSignedIn && user?.publicMetadata?.role === 'admin' && <StatusList />}
       </main>
     </div>
   );
