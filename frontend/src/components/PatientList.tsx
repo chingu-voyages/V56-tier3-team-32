@@ -55,10 +55,7 @@ const PatientList = () => {
             {patients.map((patient) => {
               const statusCode = getStatusCode(patient.status);
               return (
-                <tr
-                  key={patient.patientId}
-                  className='text-center hover:bg-hover'
-                >
+                <tr key={patient._id} className='text-center hover:bg-hover'>
                   <td className='border p-2'>{patient.patientId}</td>
                   <td className='border p-2'>
                     {patient.firstName} {patient.lastName}
@@ -75,7 +72,10 @@ const PatientList = () => {
                     </div>
                   </td>
                   <td className='border p-2'>
-                    <button className='border border-primary hover:bg-primary hover:text-hover px-2 py-1 rounded-md'>
+                    <button
+                      className='border border-primary hover:bg-primary hover:text-hover px-2 py-1 rounded-md'
+                      aria-label='View Patient Details'
+                    >
                       View
                     </button>
                   </td>
