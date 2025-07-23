@@ -1,5 +1,5 @@
 import './App.css';
-import { SignInButton, SignUpButton, UserButton, useUser } from '@clerk/clerk-react';
+import { SignInButton, UserButton, useUser } from '@clerk/clerk-react';
 import StatusList from './components/StatusList';
 
 function App() {

@@ -1,3 +1,7 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
 .App {
   text-align: center;
 }
@@ -37,16 +41,7 @@
   }
 }
 
-.sign-in-button {
-  padding: 12px 24px;
-  background-color: #3b82f6;
-  color: white;
-  border-radius: 8px;
-  transition: 0.2s;
-}
 
-.sign-in-button:hover {
-  background-color: #2563eb;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
-  transform: translateY(2px);
+.sign-in-button {
+  @apply inline-block w-full max-w-xs text-center px-6 py-3 bg-blue-500 text-white rounded-lg transition hover:bg-blue-600 hover:shadow-lg hover:translate-y-0.5;
 }
