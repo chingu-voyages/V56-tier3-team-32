@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './StatusList.css';
-import { BASE_URL } from '../config.ts';
 
 interface Status {
   _id: string;
@@ -23,7 +22,7 @@ const StatusList = () => {
   const [statuses, setStatuses] = useState<Status[]>([]);
 
   useEffect(() => {
-    axios.get(`${BASE_URL}/statuses`)
+    axios.get(`${process.env.REACT_APP_BASE_URL}/statuses`)
       .then((res) => setStatuses(res.data))
       .catch((err) => console.error('Error fetching statuses:', err));
   }, []);
