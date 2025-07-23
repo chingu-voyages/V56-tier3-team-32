@@ -36,3 +36,17 @@
     transform: rotate(360deg);
   }
 }
+
+.sign-in-button {
+  padding: 12px 24px;
+  background-color: #3b82f6;
+  color: white;
+  border-radius: 8px;
+  transition: 0.2s;
+}
+
+.sign-in-button:hover {
+  background-color: #2563eb;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  transform: translateY(2px);
+}

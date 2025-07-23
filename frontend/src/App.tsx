@@ -6,7 +6,7 @@ function App() {
   const { user, isSignedIn } = useUser();
 
   const signedOutState = () => (
-    <div>
+    <div className="sign-in-button">
       <SignInButton />
     </div>
   );
