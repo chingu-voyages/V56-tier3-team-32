@@ -1,25 +1,30 @@
 import './App.css';
-import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton, useUser } from '@clerk/clerk-react';
+import { UserButton, useUser, useClerk } from '@clerk/clerk-react';
 import StatusList from './components/StatusList';
 
 function App() {
-  const { user } = useUser();
+  const { user, isSignedIn } = useUser();
+  const { openSignIn } = useClerk();
+
+  const signedOutState = () => (
+    <button className="sign-in-button" onClick={() => openSignIn()}>Sign in</button>
+  );
+
+  const signedInState = () => (
+    <div>
+      <UserButton />
+      {user && (
+        <p>
+          You are {user.username}. You are {String(user.publicMetadata?.role)}.
+        </p>
+      )}
+    </div>
+  );
 
   return (
     <div className="App">
       <header>
-        <SignedOut>
-          <SignInButton />
-          <SignUpButton />
-        </SignedOut>
-        <SignedIn>
-          <UserButton />
-          {user && (
-            <p>
-              You are {user.username}. You are {user.publicMetadata?.role}.
-            </p>
-          )}
-        </SignedIn>
+        {!isSignedIn ? signedOutState() : signedInState()}
       </header>
       <main>
         <StatusList />
