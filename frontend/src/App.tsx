@@ -8,7 +8,6 @@ function App() {
   const signedOutState = () => (
     <div>
       <SignInButton />
-      <SignUpButton />
     </div>
   );
 
