@@ -1,13 +1,6 @@
 import './App.css';
 import { UserButton, useUser, useClerk } from '@clerk/clerk-react';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from 'react-router-dom';
-import StatusList from './components/StatusList';
-import PatientList from './components/PatientList';
+import { BrowserRouter as Router } from 'react-router-dom';
 import MenuSideBar from './components/MenuSideBar';
 import AppRoutes from './routes/AppRoutes';
 
