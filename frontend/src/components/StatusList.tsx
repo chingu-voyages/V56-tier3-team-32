@@ -45,8 +45,8 @@ const StatusList = () => {
             title={status.description}
             className='status-codes'
             style={{
-              backgroundColor: getStatusColor(status.code) || '#607D8B',
-              color: getStatusTextColor(status.code) || '#000000',
+              backgroundColor: getStatusColor(status.code),
+              color: getStatusTextColor(status.code),
             }}
           >
             {status.code}

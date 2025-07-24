@@ -1,0 +1,43 @@
+.patient-list-container {
+  @apply mx-10;
+}
+
+.patient-list-title {
+  @apply text-3xl font-semibold my-4 text-primary text-center;
+}
+
+.loading-text {
+  @apply text-primary;
+}
+
+.error-text {
+  @apply text-red-500 text-center;
+}
+
+.table {
+  @apply border-2 border-border-line w-full;
+}
+
+.table-head {
+  @apply text-primary;
+}
+
+.table-cell {
+  @apply border p-2;
+}
+
+.table-row {
+  @apply text-center hover:bg-hover;
+}
+
+.status-badge {
+  @apply inline-block px-2 py-1 rounded w-[125px] text-center font-medium;
+}
+
+.edit-button {
+  @apply border border-primary text-primary bg-white hover:bg-accent hover:text-white hover:border-accent px-2 py-1 rounded-md mr-2 transition w-14;
+}
+
+.view-button {
+  @apply border border-primary text-primary bg-white hover:bg-primary hover:text-hover px-2 py-1 rounded-md transition w-14;
+}

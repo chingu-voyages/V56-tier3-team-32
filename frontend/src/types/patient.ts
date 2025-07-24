@@ -10,5 +10,5 @@ export interface Patient {
   telephone: number;
   contactEmail: string;
   createdAt: string;
-  status: { code: string } | string;
+  status: { code: string };
 }

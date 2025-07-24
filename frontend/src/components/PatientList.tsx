@@ -4,6 +4,7 @@ import { useAuth } from '@clerk/clerk-react';
 import { BASE_URL } from '../config';
 import { Patient } from '../types/patient';
 import { getStatusColor, getStatusTextColor } from '../utils/StatusColors';
+import './PatientList.css';
 
 const PatientList = () => {
   const { getToken } = useAuth();
@@ -33,67 +34,76 @@ const PatientList = () => {
   }, [getToken]);
 
   const getStatusCode = (status: Patient['status']): string => {
-    if (typeof status === 'string') return status;
-    if (status && typeof status === 'object' && 'code' in status)
-      return status.code;
-    return 'Unknown';
+    return status?.code ?? 'Unknown';
   };
 
+  // Patient List Table
+  const patientData = () => (
+    <table className='table'>
+      <thead>
+        <tr className='tablehead'>
+          <th className='table-cell'>Patient Id</th>
+          <th className='table-cell'>Name</th>
+          <th className='table-cell'>Status</th>
+          <th className='table-cell'>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {patients.map((patient) => {
+          const statusCode = getStatusCode(patient.status);
+          return (
+            <tr key={patient._id} className='table-row'>
+              <td className='table-cell'>{patient.patientId}</td>
+              <td className='table-cell'>
+                {patient.firstName} {patient.lastName}
+              </td>
+              <td className='table-cell'>
+                <div
+                  className='status-badge'
+                  style={{
+                    backgroundColor: getStatusColor(statusCode),
+                    color: getStatusTextColor(statusCode),
+                  }}
+                >
+                  {statusCode}
+                </div>
+              </td>
+              <td className='table-cell'>
+                <button
+                  className='edit-button'
+                  aria-label='Edit Patient Details'
+                >
+                  Edit
+                </button>
+                <button
+                  className='view-button'
+                  aria-label='View Patient Details'
+                >
+                  View
+                </button>
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+      {/* TODO(Maybe): Search/filter functionality */}
+      {/* TODO(Maybe): Add pagination if needed */}
+    </table>
+  );
+
   return (
-    <div className='patient-list-container mx-10'>
+    <div className='mx-10'>
       <h1 className='text-3xl font-semibold my-4 text-primary text-center'>
         Patient List
       </h1>
 
-      {loading && <p className='text-primary'>Loading patients...</p>}
-      {error && <p className='text-red-500'>{error}</p>}
-
-      {!loading && !error && (
-        <table className='border-2 border-border-line w-full'>
-          <thead>
-            <tr className='text-primary'>
-              <th className='border p-2'>Patient Id</th>
-              <th className='border p-2'>Name</th>
-              <th className='border p-2'>Status</th>
-              <th className='border p-2'>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {patients.map((patient) => {
-              const statusCode = getStatusCode(patient.status);
-              return (
-                <tr key={patient._id} className='text-center hover:bg-hover'>
-                  <td className='border p-2'>{patient.patientId}</td>
-                  <td className='border p-2'>
-                    {patient.firstName} {patient.lastName}
-                  </td>
-                  <td className='border p-2 font-medium rounded'>
-                    <div
-                      className='inline-block px-2 py-1 rounded w-[125px] text-center'
-                      style={{
-                        backgroundColor: getStatusColor(statusCode),
-                        color: getStatusTextColor(statusCode),
-                      }}
-                    >
-                      {statusCode}
-                    </div>
-                  </td>
-                  <td className='border p-2'>
-                    <button
-                      className='border border-primary hover:bg-primary hover:text-hover px-2 py-1 rounded-md'
-                      aria-label='View Patient Details'
-                    >
-                      View
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+      {loading ? (
+        <p className='loading-text'>Loading patients...</p>
+      ) : error ? (
+        <p className='error-text'>{error}</p>
+      ) : (
+        patientData()
       )}
-      {/* TODO(Maybe): Search/filter functionality */}
-      {/* TODO(Maybe): Add pagination if needed */}
     </div>
   );
 };
