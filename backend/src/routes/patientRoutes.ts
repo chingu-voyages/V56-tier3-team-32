@@ -4,8 +4,12 @@ import {
   generateNewPatientId,
   getAllPatients,
 } from '../controllers/patientController';
+import { authenticate, requireAdmin } from '../middleware/authMiddleware';
 
 const router = Router();
+
+router.use(authenticate);
+router.use(requireAdmin);
 
 router.post('/newPatient', createPatient);
 router.get('/patients', getAllPatients);
