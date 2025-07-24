@@ -52,7 +52,7 @@ const PatientForm: React.FC<PatientFormProps> = ({
             `${BASE_URL}/admin/generate-patient-id`,
             {
               headers: {
-                Authorization: `Bearer ${token} `,
+                Authorization: `Bearer ${token}`,
               },
             }
           );
@@ -150,7 +150,7 @@ const PatientForm: React.FC<PatientFormProps> = ({
           ...patient,
           status: selectedStatus,
         };
-        // ToDo: update with correct endpoint after backend api
+        // TODO: update with correct endpoint after backend api
         response = await axios.put(
           `${BASE_URL}/admin/editPatientInfo/${patientData?._id}`,
           updatePatient,
