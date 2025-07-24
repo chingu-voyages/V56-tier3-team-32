@@ -42,13 +42,12 @@ in your `readme` feel free to replace the text we've provided here.
 You may find these helpful as you work together to organize your project.
 
 For development (at the dev branch)
-- Frontend-[v56-tier3-team-32dev-git-dev-evaldas-projects-1b81790e.vercel.app](v56-tier3-team-32dev-git-dev-evaldas-projects-1b81790e.vercel.app)
-
-- Backend-[https://surgery-status.onrender.com/](https://surgery-status.onrender.com/)
+- [Frontend](v56-tier3-team-32dev-git-dev-evaldas-projects-1b81790e.vercel.app)
+- [Backend](https://surgery-status.onrender.com)
 
 For production (at the main branch)
-- Frontend-[https://v56-tier3-team-32main.vercel.app/](https://v56-tier3-team-32main.vercel.app/)
-- Backend-[https://v56-tier3-team-32.onrender.com/](https://v56-tier3-team-32.onrender.com/)
+- [Frontend](https://v56-tier3-team-32main.vercel.app)
+- [Backend](https://v56-tier3-team-32.onrender.com)
 - [Team Project Ideas](./docs/team_project_ideas.md)
 - [Team Decision Log](./docs/team_decision_log.md)
 
