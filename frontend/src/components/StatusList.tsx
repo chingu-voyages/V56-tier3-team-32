@@ -2,22 +2,13 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './StatusList.css';
 import { BASE_URL } from '../config';
+import { getStatusColor, getStatusTextColor } from '../utils/StatusColors';
 
 interface Status {
   _id: string;
   code: string;
   description: string;
 }
-
-const statusColors: Record<string, string> = {
-  'Checked In': '#ffcc00',
-  'Pre-Procedure': '#33b5e5',
-  'In-Progress': '#ff4444',
-  'Closing': '#aa66cc',
-  'Recovery': '#00C851',
-  'Complete': '#2BBBAD',
-  'Dismissal': '#576574',
-};
 
 const StatusList = () => {
   const [statuses, setStatuses] = useState<Status[]>([]);
@@ -43,7 +34,10 @@ const StatusList = () => {
             key={status._id}
             title={status.description}
             className='status-codes'
-            style={{ backgroundColor: statusColors[status.code] || '#ccc' }}
+            style={{
+              backgroundColor: getStatusColor(status.code) || '#607D8B',
+              color: getStatusTextColor(status.code) || '#000000',
+            }}
           >
             {status.code}
           </div>
