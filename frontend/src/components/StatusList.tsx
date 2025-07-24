@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '@clerk/clerk-react';
 import './StatusList.css';
-import { BASE_URL } from '../config';
 import { getStatusColor, getStatusTextColor } from '../utils/StatusColors';
 
 interface Status {
@@ -10,7 +9,7 @@ interface Status {
   code: string;
   description: string;
 }
-
+const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
 const StatusList = () => {
   const { getToken } = useAuth();
   const [statuses, setStatuses] = useState<Status[]>([]);

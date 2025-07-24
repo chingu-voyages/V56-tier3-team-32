@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '@clerk/clerk-react';
-import { BASE_URL } from '../config';
 import { Patient } from '../types/patient';
 import { getStatusColor, getStatusTextColor } from '../utils/StatusColors';
 import './PatientList.css';
 
+const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
 const PatientList = () => {
   const { getToken } = useAuth();
   const [patients, setPatients] = useState<Patient[]>([]);
