@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useAuth } from '@clerk/clerk-react';
 import { BASE_URL } from '../config';
 import { Patient } from '../types/patient';
 import { getStatusColor, getStatusTextColor } from '../utils/StatusColors';
 
 const PatientList = () => {
+  const { getToken } = useAuth();
   const [patients, setPatients] = useState<Patient[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -13,7 +15,12 @@ const PatientList = () => {
     const fetchPatients = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`${BASE_URL}/admin/patients`);
+        const token = await getToken();
+        const response = await axios.get(`${BASE_URL}/admin/patients`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setPatients(response.data);
         setError(null);
       } catch (err) {
@@ -23,7 +30,7 @@ const PatientList = () => {
       }
     };
     fetchPatients();
-  }, []);
+  }, [getToken]);
 
   const getStatusCode = (status: Patient['status']): string => {
     if (typeof status === 'string') return status;

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useAuth } from '@clerk/clerk-react';
 import './StatusList.css';
 import { BASE_URL } from '../config';
 import { getStatusColor, getStatusTextColor } from '../utils/StatusColors';
@@ -11,18 +12,27 @@ interface Status {
 }
 
 const StatusList = () => {
+  const { getToken } = useAuth();
   const [statuses, setStatuses] = useState<Status[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    axios
-      .get(`${BASE_URL}/statuses`)
-      .then((res) => setStatuses(res.data))
-      .catch((err) => {
+    const fetchStatuses = async () => {
+      try {
+        const token = await getToken();
+        const response = await axios.get(`${BASE_URL}/statuses`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setStatuses(response.data);
+      } catch (err) {
         console.error('Error fetching statuses:', err);
         setError('Failed to fetch statuses. Please try again later.');
-      });
-  }, []);
+      }
+    };
+    fetchStatuses();
+  }, [getToken]);
 
   return (
     <div className='grid grid-cols-2 gap-4 p-4'>
