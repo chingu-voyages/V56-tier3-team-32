@@ -19,9 +19,9 @@ coding!
 - Shivanand Gupta (Svont)(Dev)" #2: [GitHub](https://github.com/Shivanand-0) / [LinkedIn](https://www.linkedin.com/in/ishivanandgupta/)
 - Win Win Khaing (Thea) (Developer) #3: [GitHub](https://github.com/TheaWin) / [LinkedIn](https://www.linkedin.com/in/thea-win/)
 - Evaldas Visockas (Dev) #4: [Github](https://github.com/EvalVis) / [LinkedIn](https://www.linkedin.com/in/evaldas-visockas/)
-   ...
+  ...
 - Brandon Datch (Dev) #5: [GitHub](https://github.com/Brandon-Isaac) / [LinkedIn](https://linkedin.com/in/isaac-datch-947067288)
-
+  
 # voyage-tasks
 
 Your project's `readme` is as important to success as your code. For 
@@ -41,6 +41,9 @@ in your `readme` feel free to replace the text we've provided here.
 
 You may find these helpful as you work together to organize your project.
 
+For development (at the dev branch)
+- Frontend-[https://surgerystatus.vercel.app/](https://surgerystatus.vercel.app/)
+- Backend-[https://surgery-status.onrender.com/](https://surgery-status.onrender.com/)
 - [Team Project Ideas](./docs/team_project_ideas.md)
 - [Team Decision Log](./docs/team_decision_log.md)
 
