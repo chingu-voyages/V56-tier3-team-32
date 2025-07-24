@@ -40,7 +40,7 @@ const PatientForm: React.FC<PatientFormProps> = ({ mode }) => {
             `${BASE_URL}/admin/generate-patient-id`,
             {
               headers: {
-                Authorization: `Bearer ${token} `,
+                Authorization: `Bearer ${token}`,
               },
             }
           );
@@ -56,7 +56,7 @@ const PatientForm: React.FC<PatientFormProps> = ({ mode }) => {
       }
     };
     handleCreateNewUser();
-  }, [getToken]);
+  }, [mode, getToken]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -123,7 +123,7 @@ const PatientForm: React.FC<PatientFormProps> = ({ mode }) => {
               name='patientId'
               value={patient.patientId}
               readOnly
-              className='readyonly-input'
+              className='readonly-input'
             />
           </div>
           <div>
@@ -202,7 +202,7 @@ const PatientForm: React.FC<PatientFormProps> = ({ mode }) => {
             <label htmlFor='telephone'>Telephone:</label>
             <br />
             <input
-              type='text'
+              type='tel'
               id='telephone'
               name='telephone'
               value={patient.telephone}
