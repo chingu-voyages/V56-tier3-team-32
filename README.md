@@ -42,7 +42,7 @@ in your `readme` feel free to replace the text we've provided here.
 You may find these helpful as you work together to organize your project.
 
 For development (at the dev branch)
-- [Frontend](v56-tier3-team-32dev-git-dev-evaldas-projects-1b81790e.vercel.app)
+- [Frontend](https://v56-tier3-team-32dev-git-dev-evaldas-projects-1b81790e.vercel.app/)
 - [Backend](https://surgery-status.onrender.com)
 
 For production (at the main branch)
