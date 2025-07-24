@@ -9,10 +9,9 @@ import { authenticate, requireAdmin } from '../middleware/authMiddleware';
 const router = Router();
 
 router.use(authenticate);
-router.use(requireAdmin);
 
-router.post('/newPatient', createPatient);
-router.get('/patients', getAllPatients);
-router.get('/generate-patient-id', generateNewPatientId);
+router.post('/newPatient', requireAdmin,createPatient);
+router.get('/patients', requireAdmin, getAllPatients);
+router.get('/generate-patient-id', requireAdmin, generateNewPatientId);
 
 export default router;
