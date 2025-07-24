@@ -48,7 +48,7 @@ For development (at the dev branch)
 
 For production (at the main branch)
 - Frontend-[https://v56tier3team32-oxka53ycl-evaldas-projects-1b81790e.vercel.app/](https://v56tier3team32-oxka53ycl-evaldas-projects-1b81790e.vercel.app/)
--Backend-[https://v56-tier3-team-32.onrender.com/](https://v56-tier3-team-32.onrender.com/)
+- Backend-[https://v56-tier3-team-32.onrender.com/](https://v56-tier3-team-32.onrender.com/)
 - [Team Project Ideas](./docs/team_project_ideas.md)
 - [Team Decision Log](./docs/team_decision_log.md)
 
