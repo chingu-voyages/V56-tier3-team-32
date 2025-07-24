@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import './MenuSideBar.css';
 
 interface SidebarProps {
   userRole: string;
@@ -28,21 +29,17 @@ const MenuSideBar: React.FC<SidebarProps> = ({ userRole }) => {
   );
 
   return (
-    <div className='w-64 bg-primary text-white shadow-lg'>
+    <div className='sidebar'>
       <div className='p-6'>
-        <h2 className='font-semibold text-2xl text-left pb-4'>
-          SurgeVenger Dashboard
-        </h2>
+        <h2 className='sidebar-header'>SurgeVenger Dashboard</h2>
         <nav>
           <ul className='space-y-2'>
             {filteredNavItems.map((item) => (
               <li key={item.path}>
                 <Link
                   to={item.path}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors duration-200 ${
-                    isActive(item.path)
-                      ? 'bg-accent text-primary font-semibold'
-                      : 'hover:bg-hover hover:text-primary'
+                  className={`sidebar-link ${
+                    isActive(item.path) ? 'sidebar-link--active' : ''
                   }`}
                 >
                   <span>{item.label}</span>

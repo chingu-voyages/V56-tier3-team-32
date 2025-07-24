@@ -9,6 +9,7 @@ import {
 import StatusList from './components/StatusList';
 import PatientList from './components/PatientList';
 import MenuSideBar from './components/MenuSideBar';
+import AppRoutes from './routes/AppRoutes';
 
 function App() {
   const { user, isSignedIn } = useUser();
@@ -24,11 +25,11 @@ function App() {
     const userRole = String(user?.publicMetadata?.role);
     return (
       <Router>
-        <div className='flex min-h-screen bg-background'>
+        <div className='dashboard-container'>
           <MenuSideBar userRole={userRole} />
           <div className='flex-1'>
-            <header className='bg-white shadow-sm border-b border-border-line p-4 flex justify-end items-center'>
-              <div className='flex items-center gap-4'>
+            <header className='welcome-header'>
+              <div className='header-content'>
                 {user && (
                   <p className='text-font-secondary'>
                     Welcome, {user.username} ({userRole})
@@ -38,14 +39,7 @@ function App() {
               </div>
             </header>
             <main className='p-6'>
-              <Routes>
-                <Route path='/' element={<Navigate to='/status' replace />} />
-                <Route path='/status' element={<StatusList />} />
-                {userRole === 'admin' && (
-                  <Route path='/patients' element={<PatientList />} />
-                )}
-                <Route path='*' element={<Navigate to='/status' replace />} />
-              </Routes>
+              <AppRoutes userRole={userRole} />
             </main>
           </div>
         </div>
