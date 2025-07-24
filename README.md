@@ -47,7 +47,7 @@ For development (at the dev branch)
 - Backend-[https://surgery-status.onrender.com/](https://surgery-status.onrender.com/)
 
 For production (at the main branch)
-- Frontend-[https://v56tier3team32-oxka53ycl-evaldas-projects-1b81790e.vercel.app/](https://v56tier3team32-oxka53ycl-evaldas-projects-1b81790e.vercel.app/)
+- Frontend-[https://v56tier3team32main-cf5sg0wts-evaldas-projects-1b81790e.vercel.app/](https://v56tier3team32-oxka53ycl-evaldas-projects-1b81790e.vercel.app/)
 - Backend-[https://v56-tier3-team-32.onrender.com/](https://v56-tier3-team-32.onrender.com/)
 - [Team Project Ideas](./docs/team_project_ideas.md)
 - [Team Decision Log](./docs/team_decision_log.md)
