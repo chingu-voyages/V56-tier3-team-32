@@ -4,7 +4,6 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import patientRoutes from './routes/patientRoutes';
 import statusRoutes from './routes/statusRoutes';
-import methodOverride from 'method-override';
 
 dotenv.config();
 
@@ -13,7 +12,6 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
-app.use(methodOverride('_method'))
 
 const connectDB = async () => {
   try {

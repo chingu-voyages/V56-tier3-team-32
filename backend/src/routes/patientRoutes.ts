@@ -3,7 +3,6 @@ import {
   createPatient,
   generateNewPatientId,
   getAllPatients,
-  updatePatientForm,
   updatePatient
 } from '../controllers/patientController';
 import { authenticate, requireAdmin } from '../middleware/authMiddleware';
@@ -15,9 +14,6 @@ router.use(authenticate);
 router.post('/newPatient', requireAdmin,createPatient);
 router.get('/patients', requireAdmin, getAllPatients);
 router.get('/generate-patient-id', requireAdmin, generateNewPatientId);
-// update patient info
-router.route("/editPatientInfo/:patientId")
-.get(updatePatientForm)
-.put(updatePatient)
+router.put("/patients/:patientId", requireAdmin, updatePatient);
 
 export default router;
