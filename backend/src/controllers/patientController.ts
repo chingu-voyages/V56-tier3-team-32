@@ -57,7 +57,7 @@ export const getAllPatients = async (
   }
 };
 
-export const updatePatient= async (
+export const updatePatient = async (
   req:Request,
   res:Response
 ):Promise<Response> =>{
