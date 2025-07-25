@@ -148,7 +148,7 @@ const PatientForm: React.FC<PatientFormProps> = ({
       } else if (mode === 'edit') {
         const updatePatient = {
           ...patient,
-          status: selectedStatus,
+          status: statuses.find(status => status.code === selectedStatus)!._id,
         };
         // TODO: update with correct endpoint after backend api
         response = await axios.put(
