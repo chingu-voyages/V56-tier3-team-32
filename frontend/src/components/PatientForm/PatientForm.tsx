@@ -156,7 +156,6 @@ const PatientForm: React.FC<PatientFormProps> = ({
           {
             updatePatient
           },
-          updatePatient,
           {
             headers: {
               Authorization: `Bearer ${token}`,
