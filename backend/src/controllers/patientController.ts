@@ -62,12 +62,15 @@ export const updatePatient = async (
   res:Response
 ):Promise<Response> =>{
   try {
-    const newPatient = await Patient.findOneAndUpdate(
+    const patientToUpdate = {
+      ...req.body.updatePatient, patientId: req.params.patientId
+    };
+    const result = await Patient.findOneAndUpdate(
       { patientId: req.params.patientId },
-      { $set: { ...req.body } },
+      { $set: { ...patientToUpdate } },
       { new: true, runValidators: true }
     );
-    return res.status(200).json(newPatient);
+    return res.status(200).json(result);
   } catch (error: any) {
     console.error('Error updating patient:', error);
     return res
