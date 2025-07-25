@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useAuth } from '@clerk/clerk-react';
 import { useNavigate } from 'react-router-dom';
 import './PatientForm.css';
-import { BASE_URL } from '../config';
 import { Patient } from '../types/patient';
 import { Status } from '../types/status';
 
@@ -14,6 +13,7 @@ interface PatientFormProps {
   onCancel?: () => void;
 }
 
+const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
 const initialState: Omit<Patient, '_id' | 'createdAt' | 'status'> = {
   patientId: '',
   firstName: '',
