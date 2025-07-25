@@ -146,13 +146,20 @@ const PatientForm: React.FC<PatientFormProps> = ({
         });
         setSuccessMessage('Patient has been successfully created.');
       } else if (mode === 'edit') {
+        const selectedStatusObj = statuses.find(
+        (s) => s.code === selectedStatus
+        );
+
+        if (!selectedStatusObj) {
+        throw new Error('Selected status not found');
+        }
         const updatePatient = {
           ...patient,
-          status: selectedStatus,
+          status: selectedStatusObj._id,
         };
         // TODO: update with correct endpoint after backend api
         response = await axios.put(
-          `${BASE_URL}/admin/editPatientInfo/${patientData?._id}`,
+          `${BASE_URL}/admin/editPatientInfo/${patientData?.patientId}`,
           updatePatient,
           {
             headers: {

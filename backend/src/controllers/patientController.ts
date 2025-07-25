@@ -56,3 +56,19 @@ export const getAllPatients = async (
       .json({ message: 'Failed to fetch patients', error: error.message });
   }
 };
+
+
+export const updatePatient= async (
+  req:Request,
+  res:Response
+):Promise<Response> =>{
+  try {
+    const newPatient = await Patient.findOneAndUpdate({patientId:req.params.patientId},{ $set:{...req.body} });
+    return res.status(201).json(newPatient);
+  } catch (error: any) {
+    console.error('Error update patient:', error);
+    return res
+      .status(500)
+      .json({ message: 'Failed to update patient', error: error.message });
+  }
+}
