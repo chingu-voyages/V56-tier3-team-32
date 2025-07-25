@@ -1,7 +1,7 @@
 import './App.css';
 import { UserButton, useUser, useClerk } from '@clerk/clerk-react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import MenuSideBar from './components/MenuSideBar';
+import MenuSideBar from './components/MenuSideBar/MenuSideBar';
 import AppRoutes from './routes/AppRoutes';
 
 function App() {

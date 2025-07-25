@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import StatusList from '../components/StatusList';
-import PatientList from '../components/PatientList';
-import PatientForm from '../components/PatientForm';
+import StatusList from '../components/StatusList/StatusList';
+import PatientList from '../components/PatientList/PatientList';
+import PatientForm from '../components/PatientForm/PatientForm';
 
 interface AppRoutesProps {
   userRole: string;

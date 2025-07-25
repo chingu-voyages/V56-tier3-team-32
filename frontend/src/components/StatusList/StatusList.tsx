@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '@clerk/clerk-react';
 import './StatusList.css';
-import { getStatusColor, getStatusTextColor } from '../utils/StatusColors';
+import { getStatusColor, getStatusTextColor } from '../../utils/StatusColors';
 
 interface Status {
   _id: string;

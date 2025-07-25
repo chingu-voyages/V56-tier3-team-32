@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '@clerk/clerk-react';
-import { Patient } from '../types/patient';
-import { getStatusColor, getStatusTextColor } from '../utils/StatusColors';
-import PatientForm from './PatientForm';
+import { Patient } from '../../types/patient';
+import { getStatusColor, getStatusTextColor } from '../../utils/StatusColors';
+import PatientForm from '../PatientForm/PatientForm';
 import './PatientList.css';
 
 const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';

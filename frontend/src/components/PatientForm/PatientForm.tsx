@@ -3,8 +3,8 @@ import axios from 'axios';
 import { useAuth } from '@clerk/clerk-react';
 import { useNavigate } from 'react-router-dom';
 import './PatientForm.css';
-import { Patient } from '../types/patient';
-import { Status } from '../types/status';
+import { Patient } from '../../types/patient';
+import { Status } from '../../types/status';
 
 interface PatientFormProps {
   mode: 'create' | 'view' | 'edit';
