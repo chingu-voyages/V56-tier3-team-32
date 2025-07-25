@@ -152,7 +152,10 @@ const PatientForm: React.FC<PatientFormProps> = ({
         };
         // TODO: update with correct endpoint after backend api
         response = await axios.put(
-          `${BASE_URL}/admin/editPatientInfo/${patientData?._id}`,
+          `${BASE_URL}/admin/patients/${patient.patientId}`,
+          {
+            updatePatient
+          },
           updatePatient,
           {
             headers: {
