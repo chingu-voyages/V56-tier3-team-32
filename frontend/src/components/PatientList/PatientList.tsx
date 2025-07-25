@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '@clerk/clerk-react';
-import { Patient } from '../types/patient';
-import { getStatusColor, getStatusTextColor } from '../utils/StatusColors';
+import { Patient } from '../../types/patient';
+import { getStatusColor, getStatusTextColor } from '../../utils/StatusColors';
+import PatientForm from '../PatientForm/PatientForm';
 import './PatientList.css';
 
 const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
@@ -11,6 +12,8 @@ const PatientList = () => {
   const [patients, setPatients] = useState<Patient[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
+  const [formMode, setFormMode] = useState<'edit' | 'view' | null>(null);
 
   useEffect(() => {
     const fetchPatients = async () => {
@@ -36,6 +39,41 @@ const PatientList = () => {
   const getStatusCode = (status: Patient['status']): string => {
     return status?.code ?? 'Unknown';
   };
+
+  const handleEditPatient = (patient: Patient) => {
+    setSelectedPatient(patient);
+    setFormMode('edit');
+  };
+
+  const handleViewPatient = (patient: Patient) => {
+    setSelectedPatient(patient);
+    setFormMode('view');
+  };
+
+  const handleCloseForm = () => {
+    setSelectedPatient(null);
+    setFormMode(null);
+  };
+
+  const handleSavePatient = (updatedPatient: Patient) => {
+    setPatients((prev) =>
+      prev.map((patient) =>
+        patient._id === updatedPatient._id ? updatedPatient : patient
+      )
+    );
+    handleCloseForm();
+  };
+
+  if (selectedPatient && formMode) {
+    return (
+      <PatientForm
+        mode={formMode}
+        patientData={selectedPatient}
+        onSave={handleSavePatient}
+        onCancel={handleCloseForm}
+      />
+    );
+  }
 
   // Patient List Table
   const patientData = () => (
@@ -72,12 +110,14 @@ const PatientList = () => {
                 <button
                   className='edit-button'
                   aria-label='Edit Patient Details'
+                  onClick={() => handleEditPatient(patient)}
                 >
                   Edit
                 </button>
                 <button
                   className='view-button'
                   aria-label='View Patient Details'
+                  onClick={() => handleViewPatient(patient)}
                 >
                   View
                 </button>
