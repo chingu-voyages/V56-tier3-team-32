@@ -329,7 +329,7 @@ const PatientForm: React.FC<PatientFormProps> = ({
             type='text'
             id='telephone'
             name='telephone'
-            value={patient.telephone !== null && patient.telephone !== undefined ? String(patient.telephone) : ''}
+            value={patient.telephone?.toString() ?? ''}
             onChange={handleChange}
             readOnly={isReadOnly}
             required={!isReadOnly}
