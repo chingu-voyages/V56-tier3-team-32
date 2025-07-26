@@ -95,6 +95,7 @@ const PatientForm: React.FC<PatientFormProps> = ({
   // load patient data for edit/view mode
   useEffect(() => {
     if ((mode === 'view' || mode === 'edit') && patientData) {
+      console.log("patientData: ", patientData);
       const statusValue =
         typeof patientData.status === 'string'
           ? patientData.status
@@ -136,6 +137,7 @@ const PatientForm: React.FC<PatientFormProps> = ({
 
     try {
       const token = await getToken();
+      // @ts-ignore
       let response;
 
       if (mode === 'create') {
@@ -148,7 +150,7 @@ const PatientForm: React.FC<PatientFormProps> = ({
       } else if (mode === 'edit') {
         const updatePatient = {
           ...patient,
-          status: statuses.find(status => status.code === selectedStatus)!._id,
+          status: statuses.find(status => status.code === selectedStatus)?._id ?? selectedStatus,
         };
         // TODO: update with correct endpoint after backend api
         response = await axios.put(
@@ -166,7 +168,8 @@ const PatientForm: React.FC<PatientFormProps> = ({
       }
 
       if (onSave && response) {
-        onSave(response.data);
+        // @ts-ignore
+        onSave({...response.data, status: statuses.find(status => status._id === response.data.status)?._id ?? response.data.status});
       }
       setShowSuccessModal(true);
     } catch (err) {
