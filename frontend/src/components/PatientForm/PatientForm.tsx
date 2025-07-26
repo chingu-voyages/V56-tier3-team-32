@@ -169,7 +169,7 @@ const PatientForm: React.FC<PatientFormProps> = ({
 
       if (onSave && response) {
         // @ts-ignore
-        onSave({...response.data, status: statuses.find(status => status._id === response.data.status)?._id ?? response.data.status});
+        onSave({...response.data, status: statuses.find(status => status._id === response.data.status)});
       }
       setShowSuccessModal(true);
     } catch (err) {
