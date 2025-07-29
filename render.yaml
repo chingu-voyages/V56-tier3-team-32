@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: surgery-status
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    branch: main
+    plan: free
+    autoDeploy: true
+    rootDir: backend
