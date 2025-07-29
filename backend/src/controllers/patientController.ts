@@ -58,12 +58,13 @@ export const getAllPatients = async (
 };
 
 export const updatePatient = async (
-  req:Request,
-  res:Response
-):Promise<Response> =>{
+  req: Request,
+  res: Response
+): Promise<Response> => {
   try {
     const patientToUpdate = {
-      ...req.body.updatePatient, patientId: req.params.patientId
+      ...req.body.updatePatient,
+      patientId: req.params.patientId,
     };
     const result = await Patient.findOneAndUpdate(
       { patientId: req.params.patientId },
@@ -77,4 +78,4 @@ export const updatePatient = async (
       .status(500)
       .json({ message: 'Failed to update patient', error: error.message });
   }
-}
+};
