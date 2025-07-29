@@ -1,3 +1,13 @@
+## Project setup instructions
+
+### Backend
+
+#### Environmental variables
+
+You can store env variables in your computer, or inside `.env` or `.env.local` files.
+
+**`REACT_APP_CLERK_PUBLISHABLE_KEY`**: Clerk key used to enable frontend authentication.
+
 ## Our Team
 
 Everyone on your team should add their name along with a link to their GitHub
@@ -6,7 +16,7 @@ your repo access and to practice PR'ing with your team *before* you start
 coding!
 
 - Hancke le Roux(SM) #1: [GitHub](https://github.com/HawkCoding) / [LinkedIn](https://www.linkedin.com/in/hancke-chris-le-roux-19981206za/)
-- Shivanand Gupta, known as Svont(Developer)" #2: [GitHub](https://github.com/Shivanand-0) / [LinkedIn](https://www.linkedin.com/in/ishivanandgupta/)
+- Shivanand Gupta (Svont)(Dev)" #2: [GitHub](https://github.com/Shivanand-0) / [LinkedIn](https://www.linkedin.com/in/ishivanandgupta/)
 - Win Win Khaing (Thea) (Developer) #3: [GitHub](https://github.com/TheaWin) / [LinkedIn](https://www.linkedin.com/in/thea-win/)
 - Evaldas Visockas (Dev) #4: [Github](https://github.com/EvalVis) / [LinkedIn](https://www.linkedin.com/in/evaldas-visockas/)
   ...
@@ -31,6 +41,13 @@ in your `readme` feel free to replace the text we've provided here.
 
 You may find these helpful as you work together to organize your project.
 
+For development (at the dev branch)
+- [Frontend](https://v56-tier3-team-32dev-git-dev-evaldas-projects-1b81790e.vercel.app/)
+- [Backend](https://surgery-status.onrender.com)
+
+For production (at the main branch)
+- [Frontend](https://v56-tier3-team-32main.vercel.app)
+- [Backend](https://v56-tier3-team-32.onrender.com)
 - [Team Project Ideas](./docs/team_project_ideas.md)
 - [Team Decision Log](./docs/team_decision_log.md)
 

@@ -1,0 +1,15 @@
+.sidebar {
+  @apply w-64 bg-primary text-white shadow-lg;
+}
+
+.sidebar-header {
+  @apply font-semibold text-2xl text-left pb-4;
+}
+
+.sidebar-link {
+  @apply flex items-center gap-3 px-4 py-3 rounded-lg transition-colors duration-200 hover:bg-hover hover:text-primary;
+}
+
+.sidebar-link--active {
+  @apply bg-accent text-primary font-semibold;
+}

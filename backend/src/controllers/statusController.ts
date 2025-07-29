@@ -1,5 +1,5 @@
-import express, { Request, Response } from 'express';  
-import Status from '../models/Status';
+import { Request, Response } from 'express';  
+import Status from '../models/statusModel';
 
 
 const getStatuses = async (req: Request, res: Response) => {

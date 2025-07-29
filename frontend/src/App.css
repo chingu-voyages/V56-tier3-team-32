@@ -1,3 +1,7 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
 .App {
   text-align: center;
 }
@@ -35,4 +39,20 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.sign-in-button {
+  @apply w-full px-6 py-3 bg-blue-500 text-white rounded-lg transition text-center hover:bg-blue-600 hover:shadow-lg hover:translate-y-0.5;
+}
+
+.dashboard-container {
+  @apply flex min-h-screen bg-background;
+}
+
+.welcome-header {
+  @apply bg-white shadow-sm border-b border-border-line p-4 flex justify-end items-center;
+}
+
+.header-content {
+  @apply flex items-center gap-4;
 }
