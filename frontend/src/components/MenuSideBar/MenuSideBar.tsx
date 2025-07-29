@@ -20,7 +20,7 @@ const MenuSideBar: React.FC<SidebarProps> = ({ userRole }) => {
     {
       path: '/patients',
       label: 'Patient List',
-      roles: ['admin'],
+      roles: ['admin', 'surgery-team'],
     },
     {
       path: '/new-patient',
