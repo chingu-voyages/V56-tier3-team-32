@@ -171,7 +171,6 @@ const PatientList = () => {
             name='firstName'
             placeholder='Enter Last Name'
             onChange={handleSearchChange}
-            className='inline'
           />
           <button type='submit' className='submit-btn' disabled={loading}>Search</button>
       </form>
