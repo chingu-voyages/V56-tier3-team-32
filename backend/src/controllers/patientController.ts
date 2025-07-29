@@ -62,6 +62,7 @@ export const updatePatient = async (
   res:Response
 ):Promise<Response> =>{
   try {
+    console.log(req)
     const patientToUpdate = {
       ...req.body.updatePatient, patientId: req.params.patientId
     };
@@ -76,5 +77,26 @@ export const updatePatient = async (
     return res
       .status(500)
       .json({ message: 'Failed to update patient', error: error.message });
+  }
+}
+
+// search operation
+export const searchPatients=async(
+  req:Request,
+  res:Response
+):Promise<Response>=>{
+  try{
+    const patients = await Patient.find(
+      {lastName:req.query.lastName}
+    ).populate({
+      path: 'status',
+      select: 'code -_id',
+    });
+    return res.status(200).json(patients);
+  }catch (error: any) {
+    console.error('Error searching patient:', error);
+    return res
+      .status(500)
+      .json({ message: 'Failed to search patient', error: error.message });
   }
 }
