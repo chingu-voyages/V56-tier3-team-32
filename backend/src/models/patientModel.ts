@@ -26,7 +26,7 @@ const patientSchema = new Schema<PatientType>({
   country: { type: String, required: true },
   telephone: { type: Number, required: true },
   contactEmail: { type: String, required: true },
-  createdAt: { type: Date, default: Date.now },
+  // The `createdAt` field is managed automatically by the `timestamps` option.
   status: { type: Schema.Types.ObjectId, ref: 'Status', required: true },
 }, {
   timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' }
