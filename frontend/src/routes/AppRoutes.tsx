@@ -12,9 +12,9 @@ const AppRoutes = ({ userRole }: AppRoutesProps) => {
     <Routes>
       <Route path='/' element={<Navigate to='/status' replace />} />
       <Route path='/status' element={<StatusList />} />
+      <Route path='/patients' element={<PatientList />} />
       {userRole === 'admin' && (
         <>
-          <Route path='/patients' element={<PatientList />} />
           <Route path='/new-patient' element={<PatientForm mode='create' />} />
         </>
       )}
