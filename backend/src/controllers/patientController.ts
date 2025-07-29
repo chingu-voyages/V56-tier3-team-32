@@ -78,3 +78,29 @@ export const updatePatient = async (
       .json({ message: 'Failed to update patient', error: error.message });
   }
 }
+
+export const getPatientByRecentlyChangedStatus = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  try {
+    // Fetch the 6 most recently created or updated patients
+    const patients = await Patient.find()
+      .sort({ updatedAt: -1, createdAt: -1 })
+      .limit(6)
+      .populate({ path: 'status', select: 'code -_id' });
+
+    return res.status(200).json(patients.map(patient => ({
+      patientId: patient.patientId,
+      status: patient.status,
+      createdAt: patient.createdAt,
+      updatedAt: patient.updatedAt
+    })));
+  } catch (error: any) {
+    console.error('Error fetching recent patients:', error);
+    return res
+      .status(500)
+      .json({ message: 'Failed to fetch recent patients', error: error.message });
+  }
+};
+
