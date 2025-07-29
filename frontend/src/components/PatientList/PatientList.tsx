@@ -37,7 +37,7 @@ const PatientList = () => {
   }, [getToken]);
 
   const getStatusCode = (status: Patient['status']): string => {
-    return status?.code ?? 'Unknown';
+    return status?.code ?? 'Unknown'; 
   };
 
   const handleEditPatient = (patient: Patient) => {
