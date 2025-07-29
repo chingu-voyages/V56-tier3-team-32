@@ -157,7 +157,7 @@ const PatientForm: React.FC<PatientFormProps> = ({
         response = await axios.put(
           `${BASE_URL}/admin/patients/${patient.patientId}`,
           {
-            updatePatient,
+            updatePatient
           },
           {
             headers: {
