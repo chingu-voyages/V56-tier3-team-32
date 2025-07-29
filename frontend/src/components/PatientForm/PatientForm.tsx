@@ -95,7 +95,7 @@ const PatientForm: React.FC<PatientFormProps> = ({
   // load patient data for edit/view mode
   useEffect(() => {
     if ((mode === 'view' || mode === 'edit') && patientData) {
-      console.log('patientData: ', patientData);
+      console.log("patientData: ", patientData);
       const statusValue =
         typeof patientData.status === 'string'
           ? patientData.status
@@ -150,9 +150,7 @@ const PatientForm: React.FC<PatientFormProps> = ({
       } else if (mode === 'edit') {
         const updatePatient = {
           ...patient,
-          status:
-            statuses.find((status) => status.code === selectedStatus)?._id ??
-            selectedStatus,
+          status: statuses.find(status => status.code === selectedStatus)?._id ?? selectedStatus,
         };
         response = await axios.put(
           `${BASE_URL}/admin/patients/${patient.patientId}`,
@@ -170,12 +168,7 @@ const PatientForm: React.FC<PatientFormProps> = ({
 
       if (onSave && response) {
         // @ts-ignore
-        onSave({
-          ...response.data,
-          status: statuses.find(
-            (status) => status._id === response.data.status
-          ),
-        });
+        onSave({...response.data, status: statuses.find(status => status._id === response.data.status)});
       }
       setShowSuccessModal(true);
     } catch (err) {
