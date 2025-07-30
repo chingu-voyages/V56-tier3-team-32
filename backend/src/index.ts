@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import patientRoutes from './routes/patientRoutes';
 import statusRoutes from './routes/statusRoutes';
+import patientDisplayRoutes from './routes/patientDisplayRoutes';
 
 dotenv.config();
 
@@ -42,6 +43,9 @@ app.use('/admin', patientRoutes);
 
 //Routes for status management
 app.use('/statuses', statusRoutes);
+
+// Routes for patient display
+app.use('/patients', patientDisplayRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
