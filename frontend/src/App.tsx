@@ -1,18 +1,12 @@
 import './App.css';
-import { UserButton, useUser, useClerk } from '@clerk/clerk-react';
+import { UserButton, useUser } from '@clerk/clerk-react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import MenuSideBar from './components/MenuSideBar/MenuSideBar';
 import AppRoutes from './routes/AppRoutes';
+import PublicRoutes from './routes/PublicRoutes';
 
 function App() {
   const { user, isSignedIn } = useUser();
-  const { openSignIn } = useClerk();
-
-  const signedOutState = () => (
-    <button className='sign-in-button' onClick={() => openSignIn()}>
-      Sign in
-    </button>
-  );
 
   const signedInState = () => {
     const userRole = String(user?.publicMetadata?.role);
@@ -42,7 +36,7 @@ function App() {
 
   return (
     <div className='App'>
-      {!isSignedIn ? signedOutState() : signedInState()}
+      {!isSignedIn ? <PublicRoutes /> : signedInState()}
     </div>
   );
 }
