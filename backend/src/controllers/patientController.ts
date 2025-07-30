@@ -80,7 +80,42 @@ export const updatePatient = async (
   }
 }
 
-// search operation
+
+
+export const updatePatientStatus = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  try {
+    const { patientId } = req.params;
+    const { statusId } = req.body;
+
+    if (!patientId || !statusId) {
+      return res.status(400).json({ message: 'Missing patient ID or Status ID' });
+    }
+
+    const updatedPatient = await Patient.findOneAndUpdate(
+      { patientId },
+      { $set: { status: statusId } },
+      { new: true, runValidators: true }
+    ).populate({
+      path: 'status',
+      select: 'code -_id',
+    });
+        if (!updatedPatient) {
+      return res.status(404).json({ message: 'Patient not found' });
+    }
+
+    return res.status(200).json(updatedPatient);
+  } catch (error: any) {
+    console.error('Error updating patient status:', error);
+    return res
+      .status(500)
+      .json({ message: 'Failed to update patient status', error: error.message });
+  }
+};
+
+    // search operation
 export const searchPatients=async(
   req:Request,
   res:Response
@@ -88,10 +123,6 @@ export const searchPatients=async(
   try{
     const patients = await Patient.find(
       {lastName:req.query.lastName}
-    ).populate({
-      path: 'status',
-      select: 'code -_id',
-    });
     return res.status(200).json(patients);
   }catch (error: any) {
     console.error('Error searching patient:', error);

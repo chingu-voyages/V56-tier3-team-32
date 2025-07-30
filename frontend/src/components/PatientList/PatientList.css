@@ -34,6 +34,15 @@
   @apply inline-block px-2 py-1 rounded w-[125px] text-center font-medium;
 }
 
+.status-dropdown {
+  @apply inline-block px-2 py-1 rounded w-[125px] text-center font-bold
+  text-xs cursor-pointer;
+}
+
+.status-dropdown option {
+  @apply bg-white text-black;
+}
+
 .edit-button {
   @apply border border-primary text-primary bg-white hover:bg-accent hover:text-white hover:border-accent px-2 py-1 rounded-md mr-2 transition w-14;
 }
