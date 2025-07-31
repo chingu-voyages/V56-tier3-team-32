@@ -24,6 +24,7 @@ export const createPatient = async (
   res: Response
 ): Promise<Response> => {
   try {
+    if(req.body.patientId!=6) return res.status(400).json({ message: 'Failed to create patient'})
     const patientId = req.body.patientId || (await generatePatientId());
     const newPatient = await Patient.create({
       ...req.body,
