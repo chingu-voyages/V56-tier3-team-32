@@ -6,9 +6,10 @@ const LogIn: React.FC = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
 
   useEffect(() => {
+    const hourInterval = 60 * 60 * 1000;
     const timer = setInterval(() => {
       setCurrentDate(new Date());
-    }, 60 * 60 * 1000);
+    }, hourInterval);
     return () => clearInterval(timer);
   }, []);
 
@@ -47,7 +48,7 @@ const LogIn: React.FC = () => {
           <h2 className='content-title'>Track surgery progress with ease</h2>
           <p className='content-description'>
             Stay informed on patient status throughout their surgical journey
-            with our SurgeVeneger Status Board.
+            with our SurgeVenger Status Board.
           </p>
           <a
             href='https://github.com/chingu-voyages/V56-tier3-team-32/tree/main'

@@ -69,12 +69,8 @@
 }
 
 .divider::before {
-  @apply absolute inset-0 flex items-center;
+  @apply absolute inset-0 flex items-center border-t border-border-line;
   content: '';
-}
-
-.divider::before {
-  @apply border-t border-border-line;
 }
 
 .divider-text {
