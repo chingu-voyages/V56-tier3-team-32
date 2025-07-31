@@ -27,6 +27,11 @@ const MenuSideBar: React.FC<SidebarProps> = ({ userRole }) => {
       label: 'Create Patient',
       roles: ['admin'],
     },
+    {
+      path: '/guest',
+      label: 'Guest View',
+      roles: ['admin', 'surgery-team'],
+  }
   ];
 
   const filteredNavItems = navItems.filter((item) =>

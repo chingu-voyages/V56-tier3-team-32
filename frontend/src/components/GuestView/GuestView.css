@@ -1,0 +1,31 @@
+.guest-view{
+    @apply px-4 py-8;
+}
+.title{
+    @apply text-2xl font-bold mb-6
+}
+.grid-look{
+    @apply grid grid-cols-1 sm:grid-cols-2 gap-10
+}
+.patient-card {
+  @apply flex flex-col items-center justify-center min-h-[130px] rounded-lg shadow-md p-4 text-black transition-colors duration-300 ;
+}
+.glow-text {
+    @apply text-3xl font-bold text-black;
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.7), 0 0 20px rgba(59, 130, 246, 0.5);
+}
+.move-animation {
+    animation: ease-in-out 10s;
+}
+.pulse-animation {
+  animation: appear 10s infinite;
+}
+
+@keyframes appear {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes spin {
+  0% ,100%{ transform: rotate(0deg); }
+  50% { transform: rotate(10deg); }
+}
