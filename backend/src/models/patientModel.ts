@@ -13,6 +13,7 @@ export interface PatientType extends Document {
   contactEmail: string;
   createdAt: Date;
   status: mongoose.Types.ObjectId;
+  updatedAt: Date;
 }
 
 const patientSchema = new Schema<PatientType>({
@@ -25,8 +26,10 @@ const patientSchema = new Schema<PatientType>({
   country: { type: String, required: true },
   telephone: { type: Number, required: true },
   contactEmail: { type: String, required: true },
-  createdAt: { type: Date, default: Date.now },
+  // The `createdAt` field is managed automatically by the `timestamps` option.
   status: { type: Schema.Types.ObjectId, ref: 'Status', required: true },
+}, {
+  timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' }
 });
 
 export const Patient = mongoose.model<PatientType>('Patient', patientSchema);
