@@ -30,7 +30,7 @@ const MenuSideBar: React.FC<SidebarProps> = ({ userRole }) => {
     {
       path: '/guest',
       label: 'Guest View',
-      roles: ['admin', 'surgery-team'],
+      roles: [],// No roles required
   }
   ];
 
