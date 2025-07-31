@@ -15,7 +15,7 @@
     text-shadow: 0 0 10px rgba(59, 130, 246, 0.7), 0 0 20px rgba(59, 130, 246, 0.5);
 }
 .move-animation {
-    animation: ease-in-out 10s;
+    animation: move ease-in-out 10s infinite;
 }
 .pulse-animation {
   animation: appear 10s infinite;
