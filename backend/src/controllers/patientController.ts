@@ -122,7 +122,7 @@ export const searchPatients=async(
 ):Promise<Response>=>{
   try{
     const patients = await Patient.find(
-      {lastName:req.query.lastName}
+      {lastName:req.query.lastName});
     return res.status(200).json(patients);
   }catch (error: any) {
     console.error('Error searching patient:', error);
