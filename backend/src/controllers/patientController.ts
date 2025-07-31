@@ -62,7 +62,7 @@ export const updatePatient = async (
   res:Response
 ):Promise<Response> =>{
   try {
-    console.log(req)
+    console.log(req);
     const patientToUpdate = {
       ...req.body.updatePatient, patientId: req.params.patientId
     };
@@ -78,7 +78,7 @@ export const updatePatient = async (
       .status(500)
       .json({ message: 'Failed to update patient', error: error.message });
   }
-}
+};
 
 
 
@@ -130,4 +130,4 @@ export const searchPatients=async(
       .status(500)
       .json({ message: 'Failed to search patient', error: error.message });
   }
-}
+};
