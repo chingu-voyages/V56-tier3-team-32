@@ -117,7 +117,7 @@ const PatientList = () => {
         e.preventDefault();
         try{
           const token = await getToken();
-          let response= await axios.get(`${BASE_URL}/admin/search?lastName=${searchName}`,{
+          const response= await axios.get(`${BASE_URL}/admin/search?lastName=${searchName}`,{
             headers: {
               Authorization: `Bearer ${token}`,
             }
