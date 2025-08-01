@@ -2,7 +2,6 @@ import { Request, Response } from 'express';
 import { Patient } from '../models/patientModel';
 import { generatePatientId } from '../utils/generatePatientId';
 import Status from '../models/statusModel';
-
 const CHECKED_IN_STATUS_ID = '6876b51b6e7ee884eb6b67c3';
 
 export const generateNewPatientId = async (
@@ -166,13 +165,13 @@ export const getPatientsByStatus= async (
 };
 
 export const getPatientsCountByStatus = async (
-  req: Request,
+  _req: unknown,
   res: Response
 ): Promise<Response> => {
   try {
     const statuses = await Status.find();
     const counts = await Promise.all(
-      statuses.map(async (status: { _id: string; code: string }) => {
+      statuses.map(async (status) => {
         const count = await Patient.countDocuments({ status: status._id });
         return { status: status.code, count };
       })
