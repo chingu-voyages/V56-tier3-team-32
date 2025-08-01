@@ -172,7 +172,7 @@ export const getPatientsCountByStatus = async (
   try {
     const statuses = await Status.find();
     const counts = await Promise.all(
-      statuses.map(async (status: any) => {
+      statuses.map(async (status: { _id: string; code: string }) => {
         const count = await Patient.countDocuments({ status: status._id });
         return { status: status.code, count };
       })
