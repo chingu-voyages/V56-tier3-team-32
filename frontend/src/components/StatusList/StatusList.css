@@ -1,5 +1,7 @@
 .glow-text {
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 10px rgba(255, 255, 255, 0.3);
+    text-shadow: 0 0 8px #fff, 0 0 16px #fff, 0 0 24px #fff;
+    font-weight: 700;
+    font-size: 1.5rem;
 }
 
 .status-codes {

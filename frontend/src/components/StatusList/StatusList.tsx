@@ -69,11 +69,6 @@ const StatusList = () => {
             <span>{status.code}</span>
             <span
               className="glow-text ml-4"
-              style={{
-                textShadow: '0 0 8px #fff, 0 0 16px #fff, 0 0 24px #fff',
-                fontWeight: 700,
-                fontSize: '1.5rem',
-              }}
             >
               {statusCounts[status.code] ?? 0}
             </span>
