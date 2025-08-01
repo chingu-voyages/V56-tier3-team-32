@@ -1,9 +1,9 @@
+.glow-text {
+    text-shadow: 0 0 8px #fff, 0 0 16px #fff, 0 0 24px #fff;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
 .status-codes {
-    color: #fff;
-    padding: 0.5rem;
-    border-radius: 0.25rem;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+   @apply flex justify-between px-6 py-4 rounded shadow mb-2;
 }
