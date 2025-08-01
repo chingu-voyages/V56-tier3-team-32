@@ -64,6 +64,7 @@ export const updatePatient = async (
   res:Response
 ):Promise<Response> =>{
   try {
+    console.log(req);
     const patientToUpdate = {
       ...req.body.updatePatient, patientId: req.params.patientId
     };
@@ -79,7 +80,9 @@ export const updatePatient = async (
       .status(500)
       .json({ message: 'Failed to update patient', error: error.message });
   }
-}
+};
+
+
 
 export const getPatientByRecentlyChangedStatus = async (
   req: Request,
@@ -126,8 +129,7 @@ export const updatePatientStatus = async (
       path: 'status',
       select: 'code -_id',
     });
-
-    if (!updatedPatient) {
+        if (!updatedPatient) {
       return res.status(404).json({ message: 'Patient not found' });
     }
 
@@ -140,6 +142,21 @@ export const updatePatientStatus = async (
   }
 };
 
+export const searchPatients=async(
+  req:Request,
+  res:Response
+):Promise<Response>=>{
+  try{
+    const patients = await Patient.find(
+      {lastName:req.query.lastName});
+    return res.status(200).json(patients);
+  }catch (error: any) {
+    console.error('Error searching patient:', error);
+    return res
+      .status(500)
+      .json({ message: 'Failed to search patient', error: error.message });
+  }
+};
 export const getPatientsByStatus = async (
   req: Request,
   res: Response
@@ -207,3 +224,4 @@ export const getAnonymizedPatients = async(
       .json({ message: 'Failed to fetch anonymized patients', error: error.message });
   }
 };
+

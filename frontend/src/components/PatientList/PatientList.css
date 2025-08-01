@@ -3,7 +3,7 @@
 }
 
 .patient-list-title {
-  @apply text-3xl font-semibold my-4 text-primary text-center;
+  @apply text-9xl font-semibold my-4 text-primary text-center;
 }
 
 .loading-text {
@@ -49,4 +49,17 @@
 
 .view-button {
   @apply border border-primary text-primary bg-white hover:bg-primary hover:text-hover px-2 py-1 rounded-md transition w-14;
+}
+.search-container form {
+  @apply flex items-center;
+
+}
+.search-container form p{
+  @apply text-3xl font-semibold my-6 mx-4 text-primary flex-initial w-64;
+}
+.search-container form input{
+  @apply flex-initial w-64 mx-3;
+}
+.search-container form button{
+  @apply flex-initial;
 }
