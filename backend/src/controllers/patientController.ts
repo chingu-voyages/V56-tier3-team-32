@@ -187,4 +187,17 @@ export const getPatientsCountByStatus = async (
   }
 };
 
-
+export const getAnonymizedPatients=async(
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  try {
+    const patients = await Patient.find().select('patientId status createdAt updatedAt');
+    return res.status(200).json(patients);
+  } catch (error: any) {
+    console.error('Error fetching anonymized patients:', error);
+    return res
+      .status(500)
+      .json({ message: 'Failed to fetch anonymized patients', error: error.message });
+  }
+};
