@@ -63,7 +63,6 @@ export const updatePatient = async (
   res:Response
 ):Promise<Response> =>{
   try {
-    console.log(req);
     const patientToUpdate = {
       ...req.body.updatePatient, patientId: req.params.patientId
     };
@@ -146,8 +145,12 @@ export const searchPatients=async(
   res:Response
 ):Promise<Response>=>{
   try{
-    const patients = await Patient.find(
-      {lastName:req.query.lastName});
+    const { lastName } = req.query;
+    if (!lastName || typeof lastName !== 'string' || lastName.trim() === '') {
+      return res.status(400).json({ message: 'Invalid lastName parameter' });
+    }
+    const sanitizedLastName = lastName.replace(/[^a-zA-Z\s]/g, '').trim();
+    const patients = await Patient.find({ lastName: sanitizedLastName });
     return res.status(200).json(patients);
   }catch (error: any) {
     console.error('Error searching patient:', error);

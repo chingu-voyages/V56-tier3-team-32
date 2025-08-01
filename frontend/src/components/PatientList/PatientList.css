@@ -3,7 +3,7 @@
 }
 
 .patient-list-title {
-  @apply text-9xl font-semibold my-4 text-primary text-center;
+  @apply text-3xl font-semibold my-4 text-primary text-center;
 }
 
 .loading-text {
@@ -62,4 +62,10 @@
 }
 .search-container form button{
   @apply flex-initial;
+}
+.search{
+  @apply text-3xl font-semibold my-4 text-primary inline;
+}
+.header {
+  @apply text-3xl font-semibold my-4 text-primary text-center;
 }

@@ -212,7 +212,7 @@ const PatientList = () => {
     <div className='mx-10'>
       <div className='search-container'>
       <form className='patient-form' onSubmit={handleSearch}>
-          <p className='text-3xl font-semibold my-4 text-primary inline'>
+          <p className='search'>
             Search Patient
           </p>
           <input
@@ -226,7 +226,7 @@ const PatientList = () => {
       </form>
       </div>
       <hr />
-      <h1 className='text-3xl font-semibold my-4 text-primary text-center'>
+      <h1 className='header'>
         Patient List
       </h1>
 
