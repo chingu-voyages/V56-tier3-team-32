@@ -1,5 +1,5 @@
-.grid-layout{
-    @apply grid w-full h-full
+.grid-layout {
+    @apply grid w-full h-full gap-4;
 }
 
 .entry{

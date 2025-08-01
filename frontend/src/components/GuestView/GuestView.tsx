@@ -46,7 +46,7 @@ const GuestView: React.FC = () => {
             style={{
                 gridTemplateRows: `repeat(${ROWS}, 1fr)`,
                 gridTemplateColumns: `repeat(${COLS}, 1fr)`,
-                gap: "1rem",
+               
             }}
         >
             {Array.from({ length: ENTRIES_PER_PAGE }).map((_, idx) => {
