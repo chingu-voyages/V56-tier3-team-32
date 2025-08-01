@@ -27,11 +27,14 @@ const MenuSideBar: React.FC<SidebarProps> = ({ userRole }) => {
       label: 'Create Patient',
       roles: ['admin'],
     },
+    {
+      path: '/guest-view',
+      label: 'Guest View',
+      roles: [], // No roles required - accessible to all
+    }
   ];
 
-  const filteredNavItems = navItems.filter((item) =>
-    item.roles.includes(userRole)
-  );
+const filteredNavItems = navItems.filter((item) => item.roles.length === 0 || item.roles.includes(userRole));
 
   return (
     <div className='sidebar'>

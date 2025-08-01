@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { Patient } from '../models/patientModel';
 import { generatePatientId } from '../utils/generatePatientId';
+import Status from '../models/statusModel';
 
 const CHECKED_IN_STATUS_ID = '6876b51b6e7ee884eb6b67c3';
 
@@ -24,6 +25,7 @@ export const createPatient = async (
   res: Response
 ): Promise<Response> => {
   try {
+    if(req.body.patientId!=6) return res.status(400).json({ message: 'Failed to create patient'})
     const patientId = req.body.patientId || (await generatePatientId());
     const newPatient = await Patient.create({
       ...req.body,
@@ -155,3 +157,71 @@ export const searchPatients=async(
       .json({ message: 'Failed to search patient', error: error.message });
   }
 };
+export const getPatientsByStatus = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  try {
+    const { statusId } = req.params;
+
+    if (!statusId) {
+      return res.status(400).json({ message: 'Status ID is required' });
+    }
+
+    const patients = await Patient.find({ status: statusId }).populate({
+      path: 'status',
+      select: 'code -_id',
+    });
+
+    return res.status(200).json(patients);
+  } catch (error: any) {
+    console.error('Error fetching patients by status:', error);
+    return res
+      .status(500)
+      .json({ message: 'Failed to fetch patients by status', error: error.message });
+  }
+};
+
+export const getPatientsCountByStatus = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  try {
+    const statuses = await Status.find();
+    const counts = await Promise.all(
+      statuses.map(async (status: any) => {
+        const count = await Patient.countDocuments({ status: status._id });
+        return { status: status.code, count };
+      })
+    );
+
+    return res.status(200).json(counts);
+  } catch (error: any) {
+    console.error('Error fetching patients count by status:', error);
+    return res
+      .status(500)
+      .json({ message: 'Failed to fetch patients count by status', error: error.message });
+  }
+};
+
+export const getAnonymizedPatients = async(
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  try {
+    const patients = await Patient.find()
+      .populate({ path: 'status', select: 'code -_id' })
+      .select('patientId status createdAt updatedAt');
+    const anonymizedPatients = patients.map((patient: any) => ({
+      patientId: patient.patientId,
+      statusCode: patient.status?.code,
+    }));
+    return res.status(200).json(anonymizedPatients);
+  } catch (error: any) {
+    console.error('Error fetching anonymized patients:', error);
+    return res
+      .status(500)
+      .json({ message: 'Failed to fetch anonymized patients', error: error.message });
+  }
+};
+
