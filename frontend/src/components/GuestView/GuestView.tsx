@@ -11,6 +11,7 @@ const ROWS = 2;
 const COLS = 3;
 const ENTRIES_PER_PAGE = ROWS * COLS;
 const INTERVAL_MS = 5000;
+const BASE_URL =process.env.REACT_APP_BASE_URL || "http://localhost:5000";
 
 const GuestView: React.FC = () => {
     const [patients, setPatients] = useState<Patient[]>([]);
@@ -18,7 +19,7 @@ const GuestView: React.FC = () => {
 
     // Fetch patients on mount
     useEffect(() => {
-        fetch("http://localhost:5000/patients/anonymized")
+        fetch(`${BASE_URL}/patients/anonymized`)
             .then((res) => res.json())
             .then((data) => setPatients(data))
             .catch(() => setPatients([]));
