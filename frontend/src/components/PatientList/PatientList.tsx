@@ -20,6 +20,7 @@ const PatientList = () => {
   const [error, setError] = useState<string | null>(null);
   const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
   const [formMode, setFormMode] = useState<'edit' | 'view' | null>(null);
+  const [searchName,setSearchName]=useState<string | null>(null);
 
   useEffect(() => {
     const fetchPatients = async () => {
@@ -104,7 +105,29 @@ const PatientList = () => {
     );
     handleCloseForm();
   };
-
+  
+// handling search functionality 
+  const handleSearchChange = (
+      e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    ) => {
+      const { value } = e.target;
+      setSearchName(value);
+    };
+    const handleSearch = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try{
+          const token = await getToken();
+          const response= await axios.get(`${BASE_URL}/admin/search?lastName=${searchName}`,{
+            headers: {
+              Authorization: `Bearer ${token}`,
+            }
+          });
+          setPatients(response.data);
+          setError(null);
+        }catch (err) {
+          setError('Failed to fetch patient data.');
+        }
+      }
   if (selectedPatient && formMode) {
     return (
       <PatientForm
@@ -121,7 +144,8 @@ const PatientList = () => {
       <thead>
         <tr className='tablehead'>
           <th className='table-cell'>Patient Id</th>
-          <th className='table-cell'>Name</th>
+          <th className='table-cell'>First Name</th>
+          <th className='table-cell'>Last Name</th> 
           <th className='table-cell'>Status</th>
           {isAdmin && <th className='table-cell'>Actions</th>}
         </tr>
@@ -135,7 +159,10 @@ const PatientList = () => {
             <tr key={patient._id} className='table-row'>
               <td className='table-cell'>{patient.patientId}</td>
               <td className='table-cell'>
-                {patient.firstName} {patient.lastName}
+                {patient.firstName}
+              </td>
+              <td className='table-cell'>
+                {patient.lastName}
               </td>
               <td className='table-cell'>
                 <select
@@ -183,6 +210,22 @@ const PatientList = () => {
 
   return (
     <div className='mx-10'>
+      <div className='search-container'>
+      <form className='patient-form' onSubmit={handleSearch}>
+          <p className='text-3xl font-semibold my-4 text-primary inline'>
+            Search Patient
+          </p>
+          <input
+            type='text'
+            id='firstName'
+            name='firstName'
+            placeholder='Enter Last Name'
+            onChange={handleSearchChange}
+          />
+          <button type='submit' className='submit-btn' disabled={loading}>Search</button>
+      </form>
+      </div>
+      <hr />
       <h1 className='text-3xl font-semibold my-4 text-primary text-center'>
         Patient List
       </h1>
@@ -191,7 +234,9 @@ const PatientList = () => {
         <p className='loading-text'>Loading patients...</p>
       ) : error ? (
         <p className='error-text'>{error}</p>
-      ) : (
+      ) : patients.length===0? (
+        <p className='error-text'>No patients found with that last name</p>
+      ):(
         patientData()
       )}
     </div>
