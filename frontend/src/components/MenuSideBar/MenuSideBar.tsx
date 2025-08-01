@@ -26,7 +26,7 @@ const MenuSideBar: React.FC<SidebarProps> = ({ userRole }) => {
       path: '/new-patient',
       label: 'Create Patient',
       roles: ['admin'],
-    },
+    }
   ];
 
   const filteredNavItems = navItems.filter((item) =>

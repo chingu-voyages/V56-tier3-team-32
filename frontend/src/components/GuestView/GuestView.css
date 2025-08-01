@@ -1,0 +1,17 @@
+.grid-layout{
+    @apply grid w-full h-full
+}
+
+.entry{
+    @apply rounded-lg flex flex-col items-center justify-center mb-4 w-96 min-w-80 min-h-56;
+}
+.patient-id {
+    @apply font-bold text-black glow-text text-lg;
+}
+.glow-text {
+    @apply font-bold text-2xl;
+    text-shadow: 0 0 8px #fff, 0 0 16px #fff, 0 0 24px #fff;
+}
+.status {
+    @apply mt-2 text-black text-base font-semibold text-2xl;
+}

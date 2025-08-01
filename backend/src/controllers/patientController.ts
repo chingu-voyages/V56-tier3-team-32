@@ -192,7 +192,13 @@ export const getAnonymizedPatients=async(
   res: Response
 ): Promise<Response> => {
   try {
-    const patients = await Patient.find().select('patientId status createdAt updatedAt');
+    const patients = await Patient.find()
+      .populate({ path: 'status', select: 'code -_id' })
+      .select('patientId status createdAt updatedAt');
+    const anonymizedPatients = patients.map((patient: any) => ({
+      patientId: patient.patientId,
+      statusCode: patient.status?.code,
+    }));
     return res.status(200).json(patients);
   } catch (error: any) {
     console.error('Error fetching anonymized patients:', error);
