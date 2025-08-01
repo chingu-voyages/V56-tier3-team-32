@@ -1,9 +1,14 @@
 .glow-text {
+    @apply font-bold text-2xl ml-4;
     text-shadow: 0 0 8px #fff, 0 0 16px #fff, 0 0 24px #fff;
-    font-weight: 700;
-    font-size: 1.5rem;
 }
 
 .status-codes {
-   @apply flex justify-between px-6 py-4 rounded shadow mb-2;
+    @apply flex justify-between px-6 py-4 rounded shadow mb-2 font-semibold text-xl;
+}
+.status-page{
+    @apply flex flex-col gap-4 p-4
+}
+.loading-indicator{
+    @apply flex items-center justify-center h-screen;
 }

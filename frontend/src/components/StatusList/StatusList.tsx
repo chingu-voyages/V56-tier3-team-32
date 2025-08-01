@@ -21,9 +21,11 @@ const StatusList = () => {
   const [statuses, setStatuses] = useState<Status[]>([]);
   const [statusCounts, setStatusCounts] = useState<Record<string, number>>({});
   const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchStatuses = async () => {
+      setIsLoading(true);
       try {
         const token = await getToken();
         const [statusesRes, countsRes] = await Promise.all([
@@ -35,23 +37,27 @@ const StatusList = () => {
           }),
         ]);
         setStatuses(statusesRes.data);
-        // countsRes.data should be an array of { status: string, count: number }
         const counts: Record<string, number> = {};
         countsRes.data.forEach((item: StatusCount) => {
           counts[item.status] = item.count;
         });
         setStatusCounts(counts);
+        setError(null);
       } catch (err) {
         console.error('Error fetching statuses or counts:', err);
         setError('Failed to fetch statuses. Please try again later.');
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchStatuses();
   }, [getToken]);
 
   return (
-    <div className="flex flex-col gap-4 p-4">
-      {error ? (
+    <div className="status-page">
+      {isLoading ? (
+        <div className="loading-indicator">Loading...</div>
+      ) : error ? (
         <div className="error-message">{error}</div>
       ) : (
         statuses.map((status) => (
@@ -62,14 +68,10 @@ const StatusList = () => {
             style={{
               backgroundColor: getStatusColor(status.code),
               color: getStatusTextColor(status.code),
-              fontWeight: 600,
-              fontSize: '1.25rem',
             }}
           >
             <span>{status.code}</span>
-            <span
-              className="glow-text ml-4"
-            >
+            <span className="glow-text">
               {statusCounts[status.code] ?? 0}
             </span>
           </div>
