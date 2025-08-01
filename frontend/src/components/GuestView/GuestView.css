@@ -13,5 +13,5 @@
     text-shadow: 0 0 8px #fff, 0 0 16px #fff, 0 0 24px #fff;
 }
 .status {
-    @apply mt-2 text-black text-base font-semibold text-2xl;
+    @apply mt-2 text-black font-semibold text-2xl;
 }

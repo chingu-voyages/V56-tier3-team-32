@@ -26,6 +26,11 @@ const MenuSideBar: React.FC<SidebarProps> = ({ userRole }) => {
       path: '/new-patient',
       label: 'Create Patient',
       roles: ['admin'],
+    },
+    {
+      path: '/guest',
+      label: 'Guest View',
+      roles: [], // No roles required - accessible to all
     }
   ];
 

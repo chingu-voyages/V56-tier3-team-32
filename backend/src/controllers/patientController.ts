@@ -140,7 +140,7 @@ export const updatePatientStatus = async (
   }
 };
 
-export const getPatientsByStatus= async (
+export const getPatientsByStatus = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
@@ -187,7 +187,7 @@ export const getPatientsCountByStatus = async (
   }
 };
 
-export const getAnonymizedPatients=async(
+export const getAnonymizedPatients = async(
   req: Request,
   res: Response
 ): Promise<Response> => {
@@ -199,7 +199,7 @@ export const getAnonymizedPatients=async(
       patientId: patient.patientId,
       statusCode: patient.status?.code,
     }));
-    return res.status(200).json(patients);
+    return res.status(200).json(anonymizedPatients);
   } catch (error: any) {
     console.error('Error fetching anonymized patients:', error);
     return res

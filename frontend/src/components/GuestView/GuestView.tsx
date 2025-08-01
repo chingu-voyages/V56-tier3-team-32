@@ -10,8 +10,8 @@ type Patient = {
 const ROWS = 2;
 const COLS = 3;
 const ENTRIES_PER_PAGE = ROWS * COLS;
-const INTERVAL_MS = 5000;
-const BASE_URL =process.env.REACT_APP_BASE_URL || "http://localhost:5000";
+const INTERVAL_MS = 10000;
+const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:5000";
 
 const GuestView: React.FC = () => {
     const [patients, setPatients] = useState<Patient[]>([]);
@@ -25,7 +25,7 @@ const GuestView: React.FC = () => {
             .catch(() => setPatients([]));
     }, []);
 
-    // Move the window every 20 seconds
+    // Move the window every 10 seconds
     useEffect(() => {
         if (patients.length === 0) return;
         const interval = setInterval(() => {
