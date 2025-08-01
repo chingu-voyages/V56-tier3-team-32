@@ -28,15 +28,13 @@ const MenuSideBar: React.FC<SidebarProps> = ({ userRole }) => {
       roles: ['admin'],
     },
     {
-      path: '/guest',
+      path: '/guest-view',
       label: 'Guest View',
       roles: [], // No roles required - accessible to all
     }
   ];
 
-  const filteredNavItems = navItems.filter((item) =>
-    item.roles.includes(userRole)
-  );
+const filteredNavItems = navItems.filter((item) => item.roles.length === 0 || item.roles.includes(userRole));
 
   return (
     <div className='sidebar'>

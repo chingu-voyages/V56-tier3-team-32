@@ -4,7 +4,7 @@ import "./GuestView.css";
 
 type Patient = {
     patientId: string;
-    status: string | { code: string };
+    statusCode: string;
 };
 
 const ROWS = 2;
@@ -55,10 +55,7 @@ const GuestView: React.FC = () => {
                 if (!patient) {
                     return <div key={idx} />;
                 }
-                const status =
-                    typeof patient.status === "object" && patient.status !== null
-                        ? patient.status.code
-                        : patient.status;
+                const status = patient.statusCode ;
                 const bgColor = getStatusColor(status);
                 return (
                     <div
