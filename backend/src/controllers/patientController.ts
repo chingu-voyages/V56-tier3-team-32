@@ -24,7 +24,8 @@ export const createPatient = async (
   res: Response
 ): Promise<Response> => {
   try {
-    if(req.body.patientId!=6) return res.status(400).json({ message: 'Failed to create patient'})
+    if (req.body.patientId.length != 6)
+      return res.status(400).json({ message: 'Failed to create patient' });
     const patientId = req.body.patientId || (await generatePatientId());
     const newPatient = await Patient.create({
       ...req.body,
@@ -59,13 +60,14 @@ export const getAllPatients = async (
 };
 
 export const updatePatient = async (
-  req:Request,
-  res:Response
-):Promise<Response> =>{
+  req: Request,
+  res: Response
+): Promise<Response> => {
   try {
     console.log(req);
     const patientToUpdate = {
-      ...req.body.updatePatient, patientId: req.params.patientId
+      ...req.body.updatePatient,
+      patientId: req.params.patientId,
     };
     const result = await Patient.findOneAndUpdate(
       { patientId: req.params.patientId },
@@ -81,8 +83,6 @@ export const updatePatient = async (
   }
 };
 
-
-
 export const getPatientByRecentlyChangedStatus = async (
   req: Request,
   res: Response
@@ -94,30 +94,37 @@ export const getPatientByRecentlyChangedStatus = async (
       .limit(6)
       .populate({ path: 'status', select: 'code -_id' });
 
-    return res.status(200).json(patients.map(patient => ({
-      patientId: patient.patientId,
-      status: patient.status,
-      createdAt: patient.createdAt,
-      updatedAt: patient.updatedAt
-    })));
+    return res.status(200).json(
+      patients.map((patient) => ({
+        patientId: patient.patientId,
+        status: patient.status,
+        createdAt: patient.createdAt,
+        updatedAt: patient.updatedAt,
+      }))
+    );
   } catch (error: any) {
     console.error('Error fetching recent patients:', error);
     return res
       .status(500)
-      .json({ message: 'Failed to fetch recent patients', error: error.message });
+      .json({
+        message: 'Failed to fetch recent patients',
+        error: error.message,
+      });
   }
 };
 
 export const updatePatientStatus = async (
   req: Request,
   res: Response
-  ): Promise<Response> => {
+): Promise<Response> => {
   try {
     const { patientId } = req.params;
     const { statusId } = req.body;
 
     if (!patientId || !statusId) {
-      return res.status(400).json({ message: 'Missing patient ID or Status ID' });
+      return res
+        .status(400)
+        .json({ message: 'Missing patient ID or Status ID' });
     }
 
     const updatedPatient = await Patient.findOneAndUpdate(
@@ -128,7 +135,7 @@ export const updatePatientStatus = async (
       path: 'status',
       select: 'code -_id',
     });
-        if (!updatedPatient) {
+    if (!updatedPatient) {
       return res.status(404).json({ message: 'Patient not found' });
     }
 
@@ -137,19 +144,21 @@ export const updatePatientStatus = async (
     console.error('Error updating patient status:', error);
     return res
       .status(500)
-      .json({ message: 'Failed to update patient status', error: error.message });
+      .json({
+        message: 'Failed to update patient status',
+        error: error.message,
+      });
   }
 };
 
-export const searchPatients=async(
-  req:Request,
-  res:Response
-):Promise<Response>=>{
-  try{
-    const patients = await Patient.find(
-      {lastName:req.query.lastName});
+export const searchPatients = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  try {
+    const patients = await Patient.find({ lastName: req.query.lastName });
     return res.status(200).json(patients);
-  }catch (error: any) {
+  } catch (error: any) {
     console.error('Error searching patient:', error);
     return res
       .status(500)
@@ -177,7 +186,10 @@ export const getPatientsByStatus = async (
     console.error('Error fetching patients by status:', error);
     return res
       .status(500)
-      .json({ message: 'Failed to fetch patients by status', error: error.message });
+      .json({
+        message: 'Failed to fetch patients by status',
+        error: error.message,
+      });
   }
 };
 
@@ -199,11 +211,14 @@ export const getPatientsCountByStatus = async (
     console.error('Error fetching patients count by status:', error);
     return res
       .status(500)
-      .json({ message: 'Failed to fetch patients count by status', error: error.message });
+      .json({
+        message: 'Failed to fetch patients count by status',
+        error: error.message,
+      });
   }
 };
 
-export const getAnonymizedPatients = async(
+export const getAnonymizedPatients = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
@@ -220,7 +235,9 @@ export const getAnonymizedPatients = async(
     console.error('Error fetching anonymized patients:', error);
     return res
       .status(500)
-      .json({ message: 'Failed to fetch anonymized patients', error: error.message });
+      .json({
+        message: 'Failed to fetch anonymized patients',
+        error: error.message,
+      });
   }
 };
-
