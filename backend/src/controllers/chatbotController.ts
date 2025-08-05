@@ -65,3 +65,88 @@ export const executeDbQuery = async (
     }
   }
 };
+
+export const getDatabaseSchema = async (): Promise<any> => {
+  let readonlyConnection: mongoose.Connection | null = null;
+  
+  try {
+    const readonlyUri = process.env.SURGERY_DATABASE_CONNECTION_READONLY_CREDENTIALS;
+    
+    if (!readonlyUri) {
+      throw new Error('Readonly database connection string not found in environment variables');
+    }
+
+    readonlyConnection = mongoose.createConnection(readonlyUri);
+    
+    await new Promise((resolve, reject) => {
+      readonlyConnection!.once('open', resolve);
+      readonlyConnection!.once('error', reject);
+    });
+
+    const db = readonlyConnection.db;
+    if (!db) {
+      throw new Error('Failed to access database from connection');
+    }
+
+    const collections = await db.listCollections().toArray();
+    const schemaInfo: any = {
+      databaseName: db.databaseName,
+      collections: {},
+      retrievedAt: new Date().toISOString()
+    };
+
+    for (const collectionInfo of collections) {
+      const collectionName = collectionInfo.name;
+      const collection = db.collection(collectionName);
+      
+      const documentCount = await collection.countDocuments().catch(() => 0);
+      
+      const sampleDocs = await collection.find({}).limit(2).toArray();
+      
+      const fieldTypes: any = {};
+      if (sampleDocs.length > 0) {
+        sampleDocs.forEach(doc => {
+          Object.keys(doc).forEach(key => {
+            const value = doc[key];
+            const type = Array.isArray(value) ? 'array' : typeof value;
+            if (!fieldTypes[key]) {
+              fieldTypes[key] = new Set();
+            }
+            fieldTypes[key].add(type);
+          });
+        });
+
+        Object.keys(fieldTypes).forEach(key => {
+          fieldTypes[key] = Array.from(fieldTypes[key]);
+        });
+      }
+
+      schemaInfo.collections[collectionName] = {
+        name: collectionName,
+        documentCount: documentCount,
+        fields: fieldTypes,
+        sampleDocuments: sampleDocs.map(doc => {
+          const { _id, ...docWithoutId } = doc;
+          return docWithoutId;
+        }).slice(0, 2)
+      };
+    }
+
+    return {
+      success: true,
+      data: schemaInfo
+    };
+
+  } catch (error: any) {
+    console.error('Database schema retrieval error:', error);
+    return {
+      success: false,
+      error: error.message,
+      retrievedAt: new Date().toISOString()
+    };
+  } finally {
+    if (readonlyConnection) {
+      await readonlyConnection.close();
+    }
+  }
+};
