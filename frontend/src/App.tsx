@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MenuSideBar from './components/MenuSideBar/MenuSideBar';
 import AppRoutes from './routes/AppRoutes';
 import LogIn from './components/LogIn/LogIn';
+import ChatLauncher from './components/ChatLauncher/ChatLauncher';
 
 function App() {
   const { user, isSignedIn } = useUser();
@@ -27,6 +28,7 @@ function App() {
           <main className='p-6'>
             <AppRoutes userRole={userRole} />
           </main>
+          <ChatLauncher />
         </div>
       </div>
     );
