@@ -40,24 +40,3 @@ Please provide helpful, concise answers about navigating and using this applicat
     throw new Error('Failed to get response from Gemini API');
   }
 }
-
-// Test function for the API
-export async function testGemini(): Promise<string> {
-  if (!process.env.GEMINI_API_KEY) {
-    throw new Error('GEMINI_API_KEY environment variable is not set');
-  }
-
-  const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-  const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
-
-  try {
-    const result = await model.generateContent(
-      'Explain how AI works in a few words'
-    );
-    const response = await result.response;
-    return response.text();
-  } catch (error) {
-    console.error('Error in test function:', error);
-    throw error;
-  }
-}
