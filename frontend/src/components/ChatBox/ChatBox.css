@@ -27,5 +27,5 @@
 }
 
 .chat-input button {
-  @apply bg-primary hover:cursor-pointer text-white border-none p-10px;
+  @apply bg-primary hover:cursor-pointer text-white border-none p-10;
 }
