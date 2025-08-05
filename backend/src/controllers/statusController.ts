@@ -46,6 +46,25 @@ const updateStatus = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Failed to update status.' });
   }
 }
+const updateStatusDuration = async (req: Request, res: Response) => {
+  const { code, default_time } = req.body;
+  if (!code || !default_time) {
+    return res.status(400).json({ message: 'Code and default_time are required.' });
+  }
+  try {
+    const updatedStatus = await Status.findOneAndUpdate(
+      { code },
+      { default_time },
+      { new: true }
+    );
+    if (!updatedStatus) {
+      return res.status(404).json({ message: 'Status not found.' });
+    }
+    res.json(updatedStatus);
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to update status duration.' });
+  } 
+}
 
 const deleteStatus = async (req: Request, res: Response) => {
   const { code } = req.params;
@@ -64,5 +83,6 @@ export const statusController = {
   getStatuses, 
     createStatus,
     updateStatus,
-    deleteStatus
+    deleteStatus,
+    updateStatusDuration
 };

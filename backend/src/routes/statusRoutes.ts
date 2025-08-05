@@ -8,6 +8,7 @@ router.use(authenticate);
 
 router.get('/', requireAdminOrSurgeryTeam, statusController.getStatuses);
 
+router.put('/duration', requireAdmin, statusController.updateStatusDuration);
 router.post('/', requireAdmin, statusController.createStatus);
 router.put('/', requireAdmin, statusController.updateStatus);
 router.delete('/:code', requireAdmin, statusController.deleteStatus);
