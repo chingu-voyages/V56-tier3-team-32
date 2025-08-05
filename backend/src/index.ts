@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import patientRoutes from './routes/patientRoutes';
 import statusRoutes from './routes/statusRoutes';
 import patientDisplayRoutes from './routes/patientDisplayRoutes';
+import geminiRoute from './routes/geminiRoute';
 
 dotenv.config();
 
@@ -46,6 +47,9 @@ app.use('/statuses', statusRoutes);
 
 // Routes for patient display
 app.use('/patients', patientDisplayRoutes);
+
+// Routes for Gemini integration
+app.use('/ai', geminiRoute);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
