@@ -21,33 +21,56 @@ const PatientList = () => {
   const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
   const [formMode, setFormMode] = useState<'edit' | 'view' | null>(null);
   const [searchName,setSearchName]=useState<string | null>(null);
+useEffect(() => {
+  let durationInterval: NodeJS.Timeout;
+  let refreshInterval: NodeJS.Timeout;
+  let isMounted = true;
 
-  useEffect(() => {
-    const fetchPatients = async () => {
-      try {
-        setLoading(true);
-        const token = await getToken();
-        
-        const [patientsResponse, statusesResponse] = await Promise.all([
-          axios.get(`${BASE_URL}/admin/patients`, {
-            headers: { Authorization: `Bearer ${token}` },
-          }),
-          axios.get(`${BASE_URL}/statuses`, {
-            headers: { Authorization: `Bearer ${token}` },
-          })
-        ]);
-        
+  const fetchPatientsAndStatuses = async () => {
+    try {
+      setLoading(true);
+      const token = await getToken();
+
+      const [patientsResponse, statusesResponse] = await Promise.all([
+        axios.get(`${BASE_URL}/admin/patients`, {
+          headers: { Authorization: `Bearer ${token}` },
+        }),
+        axios.get(`${BASE_URL}/statuses`, {
+          headers: { Authorization: `Bearer ${token}` },
+        }),
+      ]);
+
+      if (isMounted) {
         setPatients(patientsResponse.data);
         setStatuses(statusesResponse.data);
         setError(null);
-      } catch (err) {
-        setError('Failed to fetch patient data.');
-      } finally {
-        setLoading(false);
       }
-    };
-    fetchPatients();
-  }, [getToken]);
+    } catch (err) {
+      if (isMounted) setError('Failed to fetch patient data.');
+    } finally {
+      if (isMounted) setLoading(false);
+    }
+  };
+
+  // Initial fetch
+  fetchPatientsAndStatuses();
+
+  // Interval to force re-render for durations
+  durationInterval = setInterval(() => {
+    setPatients(prev => [...prev]);
+  }, 1000);
+
+  // Interval to refresh patient data
+  refreshInterval = setInterval(() => {
+    fetchPatientsAndStatuses();
+  }, 30000);
+
+  return () => {
+    isMounted = false;
+    clearInterval(durationInterval);
+    clearInterval(refreshInterval);
+  };
+}, [getToken]);
 
   const getStatusCode = (status: Patient['status']): string => {
     return status?.code ?? 'Unknown';
@@ -147,6 +170,7 @@ const PatientList = () => {
           <th className='table-cell'>First Name</th>
           <th className='table-cell'>Last Name</th> 
           <th className='table-cell'>Status</th>
+          <th className='table-cell'>Duration</th>
           {isAdmin && <th className='table-cell'>Actions</th>}
         </tr>
       </thead>
@@ -180,6 +204,9 @@ const PatientList = () => {
                     </option>
                   ))}
                 </select>
+              </td>
+              <td className='table-cell'>
+                {patient.statusDuration}
               </td>
               {isAdmin && (
                 <td className='table-cell'>
