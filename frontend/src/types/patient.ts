@@ -12,6 +12,6 @@ export interface Patient {
   status: { code: string };
    statusStartTime?: string;
   updatedAt: string;
-  statusDuration: string;  // Add this line
+  statusDuration: string; 
   createdAt: string;
 }
