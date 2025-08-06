@@ -14,6 +14,7 @@ export interface PatientType extends Document {
   createdAt: Date;
   status: mongoose.Types.ObjectId;
   updatedAt: Date;
+  surgeryType:string;
 }
 
 const patientSchema = new Schema<PatientType>({
@@ -28,6 +29,7 @@ const patientSchema = new Schema<PatientType>({
   contactEmail: { type: String, required: true },
   // The `createdAt` field is managed automatically by the `timestamps` option.
   status: { type: Schema.Types.ObjectId, ref: 'Status', required: true },
+  surgeryType: { type: String, enum: ['Type 1 - Basic', 'Type 2 - Moderate', 'Type 3 - Critical'], required: true }
 }, {
   timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' }
 });
