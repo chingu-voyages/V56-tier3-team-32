@@ -11,7 +11,7 @@ export async function askGemini(question: string): Promise<string> {
   const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
 
   // Read the README for context
-  const readmePath = path.join(process.cwd(), '..', 'README.md');
+  const readmePath = path.join(__dirname, '..', '..', 'ai-context.md');
   let readmeContent = '';
 
   try {
