@@ -98,9 +98,6 @@ const GuestView: React.FC = () => {
             {patient.statusCode}
           </p>
         </div>
-        <p className='patient-card-updated'>
-          Updated: {formatLastUpdated(patient.updatedAt)}
-        </p>
       </div>
     );
   };

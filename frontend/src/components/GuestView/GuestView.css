@@ -115,11 +115,11 @@
 }
 
 .patient-card-fullscreen {
-  @apply rounded-lg p-6 shadow-lg text-black flex flex-col gap-3 items-center;
+  @apply rounded-lg p-6 shadow-lg text-black flex flex-col gap-3 items-center  min-h-56 justify-center;
 }
 
 .patient-card-regular {
-  @apply rounded-md p-4 shadow-md text-black flex flex-col gap-2 items-center;
+  @apply rounded-md p-4 shadow-md text-black flex flex-col gap-2 items-center min-h-56 justify-center;
 }
 
 .patient-card-content {
@@ -127,7 +127,7 @@
 }
 
 .patient-card-content-regular {
-  @apply px-8 py-3 w-fit;
+  @apply px-8 py-3 w-fit flex items-center gap-5 justify-between lg:w-full;
 }
 
 .patient-card-id-fullscreen {
