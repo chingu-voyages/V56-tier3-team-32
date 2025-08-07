@@ -2,7 +2,6 @@ import { Request, Response } from 'express';
 import { Patient } from '../models/patientModel';
 import { generatePatientId } from '../utils/generatePatientId';
 import Status from '../models/statusModel';
-import { create } from 'domain';
 const CHECKED_IN_STATUS_ID = '6876b51b6e7ee884eb6b67c3';
 
 export const generateNewPatientId = async (
@@ -25,8 +24,10 @@ export const createPatient = async (
   res: Response
 ): Promise<Response> => {
   try {
-    if (req.body.patientId.length != 6)
-      return res.status(400).json({ message: 'Failed to create patient' });
+    if (req.body.patientId.length !== 6)
+      return res
+        .status(400)
+        .json({ message: 'Patient ID must be exactly 6 characters long' });
     const patientId = req.body.patientId || (await generatePatientId());
     const newPatient = await Patient.create({
       ...req.body,
@@ -65,7 +66,6 @@ export const updatePatient = async (
   res: Response
 ): Promise<Response> => {
   try {
-    console.log(req);
     const patientToUpdate = {
       ...req.body.updatePatient,
       patientId: req.params.patientId,

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getStatusColor, getStatusTextColor } from '../../utils/StatusColors';
+import { useNavigate } from 'react-router-dom';
 import './GuestView.css';
 
 type Patient = {
@@ -19,6 +20,8 @@ const GuestView: React.FC = () => {
   const [startIndex, setStartIndex] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showOptionA, setShowOptionA] = useState(true);
+
+  const navigate = useNavigate();
 
   const toggleFullscreen = () => {
     if (!isFullscreen) {
@@ -302,10 +305,7 @@ const GuestView: React.FC = () => {
         <button onClick={toggleFullscreen} className='fullscreen-button'>
           {isFullscreen ? 'Exit Fullscreen' : 'Fullscreen View'}
         </button>
-        <button
-          onClick={() => (window.location.href = '/login')}
-          className='login-button'
-        >
+        <button onClick={() => navigate('/login')} className='login-button'>
           Log In
         </button>
       </div>
