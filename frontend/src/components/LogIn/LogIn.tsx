@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useClerk } from '@clerk/clerk-react';
+import { useNavigate } from 'react-router-dom';
 import './LogIn.css';
 
 const LogIn: React.FC = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
+  const navigate = useNavigate();
 
   useEffect(() => {
     const hourInterval = 60 * 60 * 1000;
@@ -30,17 +32,23 @@ const LogIn: React.FC = () => {
     }
   };
 
+  const handleBack = () => {
+    navigate('/');
+  };
+
   return (
     <div className='login-container'>
       <div className='login-header'>
-        <h1 className='app-title'>SurgeVenger Status Board</h1>
-        <p className='text-lg'>
-          {currentDate.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          })}{' '}
-        </p>
+        <div className='login-header-text'>
+          <h1>SurgeVenger Status Board</h1>
+          <p className='text-lg'>
+            {currentDate.toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })}{' '}
+          </p>
+        </div>
       </div>
 
       <div className='login-card'>
@@ -67,13 +75,22 @@ const LogIn: React.FC = () => {
               For Admin and Surgery Team members only
             </p>
 
-            <button
-              onClick={handleSignIn}
-              disabled={isLoading}
-              className='primary-btn'
-            >
-              {isLoading ? <div className='loading-spinner'></div> : 'Sign In'}
-            </button>
+            <div className='login-buttons'>
+              <button
+                onClick={handleSignIn}
+                disabled={isLoading}
+                className='primary-btn'
+              >
+                {isLoading ? (
+                  <div className='loading-spinner'></div>
+                ) : (
+                  'Sign In'
+                )}
+              </button>
+              <button className='secondary-btn' onClick={handleBack}>
+                Back to Status Board
+              </button>
+            </div>
           </div>
 
           <div className='divider'>

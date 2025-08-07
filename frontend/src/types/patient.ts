@@ -14,4 +14,5 @@ export interface Patient {
   updatedAt: string;
   statusDuration: string; 
   createdAt: string;
+  surgeryType: string;
 }

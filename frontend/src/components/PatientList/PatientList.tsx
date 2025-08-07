@@ -13,7 +13,7 @@ const PatientList = () => {
   const { user } = useUser();
   const userRole = String(user?.publicMetadata?.role);
   const isAdmin = userRole === 'admin';
-  
+
   const [patients, setPatients] = useState<Patient[]>([]);
   const [statuses, setStatuses] = useState<Status[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -101,7 +101,7 @@ const calculateStatusDuration = (statusStartTime: string, updatedAt: string): st
   };
 
   const handleStatusChange = async (patientId: string, newStatusId: string) => {
-    const newStatus = statuses.find(status => status._id === newStatusId);
+    const newStatus = statuses.find((status) => status._id === newStatusId);
     if (!newStatus) return;
 
     setPatients((prev) =>
@@ -119,7 +119,7 @@ const calculateStatusDuration = (statusStartTime: string, updatedAt: string): st
 
     try {
       const token = await getToken();
-      
+
       await axios.patch(
         `${BASE_URL}/admin/patients/${patientId}/status`,
         { statusId: newStatusId },
@@ -157,29 +157,31 @@ const calculateStatusDuration = (statusStartTime: string, updatedAt: string): st
     );
     handleCloseForm();
   };
-  
-// handling search functionality 
+
   const handleSearchChange = (
-      e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-    ) => {
-      const { value } = e.target;
-      setSearchName(value);
-    };
-    const handleSearch = async (e: React.FormEvent) => {
-        e.preventDefault();
-        try{
-          const token = await getToken();
-          const response= await axios.get(`${BASE_URL}/admin/search?lastName=${searchName}`,{
-            headers: {
-              Authorization: `Bearer ${token}`,
-            }
-          });
-          setPatients(response.data);
-          setError(null);
-        }catch (err) {
-          setError('Failed to fetch patient data.');
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { value } = e.target;
+    setSearchName(value);
+  };
+  const handleSearch = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const token = await getToken();
+      const response = await axios.get(
+        `${BASE_URL}/admin/search?lastName=${searchName}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      }
+      );
+      setPatients(response.data);
+      setError(null);
+    } catch (err) {
+      setError('Failed to fetch patient data.');
+    }
+  };
   if (selectedPatient && formMode) {
     return (
       <PatientForm
@@ -250,49 +252,48 @@ const calculateStatusDuration = (statusStartTime: string, updatedAt: string): st
                     className='view-button'
                     aria-label='View Patient Details'
                     onClick={() => handleViewPatient(patient)}
-                  >
+                    >
                     View
-                  </button>
-                </td>
-              )}
-            </tr>
-          );
-        })}
-      </tbody>
-      {/* TODO(Maybe): Search/filter functionality */}
-      {/* TODO(Maybe): Add pagination if needed */}
-    </table>
+                      </button>
+                    </div>
+                  </td>
+                )}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
   );
 
   return (
-    <div className='mx-10'>
-      <div className='search-container'>
-      <form className='patient-form' onSubmit={handleSearch}>
-          <p className='text-3xl font-semibold my-4 text-primary inline'>
-            Search Patient
-          </p>
-          <input
-            type='text'
-            id='firstName'
-            name='firstName'
-            placeholder='Enter Last Name'
-            onChange={handleSearchChange}
-          />
-          <button type='submit' className='submit-btn' disabled={loading}>Search</button>
-      </form>
+    <div className='patient-list-container'>
+      <div>
+        <form className='search-form' onSubmit={handleSearch}>
+          <div className='search-input-group'>
+            <input
+              type='text'
+              id='firstName'
+              name='firstName'
+              placeholder='Enter Last Name'
+              onChange={handleSearchChange}
+              className='search-input'
+            />
+            <button type='submit' className='submit-btn' disabled={loading}>
+              Search
+            </button>
+          </div>
+        </form>
       </div>
-      <hr />
-      <h1 className='text-3xl font-semibold my-4 text-primary text-center'>
-        Patient List
-      </h1>
+      <h1 className='patient-list-title'>Patient List</h1>
 
       {loading ? (
         <p className='loading-text'>Loading patients...</p>
       ) : error ? (
         <p className='error-text'>{error}</p>
-      ) : patients.length===0? (
+      ) : patients.length === 0 ? (
         <p className='error-text'>No patients found with that last name</p>
-      ):(
+      ) : (
         patientData()
       )}
     </div>

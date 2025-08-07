@@ -3,11 +3,11 @@
 }
 
 .login-header {
-  @apply flex justify-between items-center px-6 py-4 text-center bg-primary text-white;
+  @apply px-6 py-4 bg-primary text-white text-xl font-semibold;
 }
 
-.app-title {
-  @apply text-xl font-semibold;
+.login-header-text {
+  @apply max-w-7xl mx-auto w-full flex justify-between items-center text-center;
 }
 
 .login-card {
@@ -54,10 +54,19 @@
   @apply text-font-secondary text-sm mb-6 text-left;
 }
 
+.login-buttons {
+  @apply flex flex-col gap-4 mt-6;
+}
+
 .primary-btn {
   @apply w-full flex items-center justify-center px-6 py-3 bg-primary text-white font-medium rounded-lg 
          hover:bg-accent focus:outline-none focus:ring-4 focus:ring-primary focus:ring-opacity-20 
          transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed min-h-[48px];
+}
+
+.secondary-btn {
+  @apply w-full flex items-center justify-center px-6 py-3 bg-transparent text-primary border-primary border-2 rounded-lg
+  font-medium hover:cursor-pointer hover:bg-accent transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed min-h-[48px];
 }
 
 .loading-spinner {

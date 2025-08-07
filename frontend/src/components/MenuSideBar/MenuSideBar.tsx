@@ -4,9 +4,10 @@ import './MenuSideBar.css';
 
 interface SidebarProps {
   userRole: string;
+  onLinkClick?: () => void;
 }
 
-const MenuSideBar: React.FC<SidebarProps> = ({ userRole }) => {
+const MenuSideBar: React.FC<SidebarProps> = ({ userRole, onLinkClick }) => {
   const location = useLocation();
 
   const isActive = (path: string) => location.pathname === path;
@@ -30,11 +31,19 @@ const MenuSideBar: React.FC<SidebarProps> = ({ userRole }) => {
     {
       path: '/guest-view',
       label: 'Guest View',
-      roles: [], // No roles required - accessible to all
-    }
+      roles: [],
+    },
   ];
 
-const filteredNavItems = navItems.filter((item) => item.roles.length === 0 || item.roles.includes(userRole));
+  const filteredNavItems = navItems.filter(
+    (item) => item.roles.length === 0 || item.roles.includes(userRole)
+  );
+
+  const handleLinkClick = () => {
+    if (onLinkClick) {
+      onLinkClick();
+    }
+  };
 
   return (
     <div className='sidebar'>
@@ -49,6 +58,7 @@ const filteredNavItems = navItems.filter((item) => item.roles.length === 0 || it
                   className={`sidebar-link ${
                     isActive(item.path) ? 'sidebar-link--active' : ''
                   }`}
+                  onClick={handleLinkClick}
                 >
                   <span>{item.label}</span>
                 </Link>
