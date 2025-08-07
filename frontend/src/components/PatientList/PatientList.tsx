@@ -255,7 +255,6 @@ const calculateStatusDuration = (statusStartTime: string, updatedAt: string): st
                     >
                     View
                       </button>
-                    </div>
                   </td>
                 )}
               </tr>
@@ -263,7 +262,6 @@ const calculateStatusDuration = (statusStartTime: string, updatedAt: string): st
           })}
         </tbody>
       </table>
-    </div>
   );
 
   return (
