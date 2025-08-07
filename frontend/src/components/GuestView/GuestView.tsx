@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getStatusColor, getStatusTextColor } from '../../utils/StatusColors';
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '@clerk/clerk-react';
 import './GuestView.css';
 
 type Patient = {
@@ -16,6 +17,7 @@ const INTERVAL_MS = 10000;
 const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
 
 const GuestView: React.FC = () => {
+  const { isSignedIn } = useUser();
   const [patients, setPatients] = useState<Patient[]>([]);
   const [startIndex, setStartIndex] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -305,9 +307,11 @@ const GuestView: React.FC = () => {
         <button onClick={toggleFullscreen} className='fullscreen-button'>
           {isFullscreen ? 'Exit Fullscreen' : 'Fullscreen View'}
         </button>
-        <button onClick={() => navigate('/login')} className='login-button'>
-          Log In
-        </button>
+        {!isSignedIn && (
+          <button onClick={() => navigate('/login')} className='login-button'>
+            Log In
+          </button>
+        )}
       </div>
     </div>
   );
