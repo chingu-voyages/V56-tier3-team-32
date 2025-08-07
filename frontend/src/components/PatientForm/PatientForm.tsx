@@ -24,6 +24,7 @@ const initialState: Omit<Patient, '_id' | 'createdAt' | 'status'> = {
   country: '',
   telephone: 0,
   contactEmail: '',
+  surgeryType: '',
 };
 
 const PatientForm: React.FC<PatientFormProps> = ({
@@ -111,6 +112,7 @@ const PatientForm: React.FC<PatientFormProps> = ({
         country: patientData.country,
         telephone: patientData.telephone,
         contactEmail: patientData.contactEmail,
+        surgeryType: patientData.surgeryType,
       });
       if (mode === 'edit') {
         setSelectedStatus(statusValue);
@@ -352,6 +354,35 @@ const PatientForm: React.FC<PatientFormProps> = ({
             required={!isReadOnly}
             className={isReadOnly ? 'readonly-label' : ''}
           />
+        </div>
+
+        <div>
+            <label htmlFor='surgeryType'>Surgery Type:</label>
+          <br />
+          {isReadOnly ? (
+            <input
+              type='text'
+              id='surgeryType'
+              name='surgeryType'
+              value={patient.surgeryType}
+              readOnly
+              className='readonly-label'
+            />
+          ) : (
+            <select
+              name='surgeryType'
+              id='surgeryType'
+              value={patient.surgeryType}
+              onChange={handleChange}
+              required
+            >
+
+            <option value="Type 1 - Basic">Type 1 - Basic</option>
+            <option value="Type 2 - Moderate">Type 2 - Moderate</option>
+            <option value="Type 3 - Critical">Type 3 - Critical</option>
+            </select>
+          )}
+          
         </div>
 
         <div>
