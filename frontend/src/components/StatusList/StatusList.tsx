@@ -54,26 +54,24 @@ const StatusList = () => {
   }, [getToken]);
 
   return (
-    <div className="status-page">
+    <div className='status-page'>
       {isLoading ? (
-        <div className="loading-indicator">Loading...</div>
+        <div className='loading-indicator'>Loading...</div>
       ) : error ? (
-        <div className="error-message">{error}</div>
+        <div className='error-message'>{error}</div>
       ) : (
         statuses.map((status) => (
           <div
             key={status._id}
             title={status.description}
-            className="status-codes"
+            className='status-codes'
             style={{
               backgroundColor: getStatusColor(status.code),
               color: getStatusTextColor(status.code),
             }}
           >
             <span>{status.code}</span>
-            <span className="glow-text">
-              {statusCounts[status.code] ?? 0}
-            </span>
+            <span className='glow-text'>{statusCounts[status.code] ?? 0}</span>
           </div>
         ))
       )}

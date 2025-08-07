@@ -154,7 +154,6 @@ const PatientForm: React.FC<PatientFormProps> = ({
           ...patient,
           status: statuses.find(status => status.code === selectedStatus)?._id ?? selectedStatus,
         };
-        // TODO: update with correct endpoint after backend api
         response = await axios.put(
           `${BASE_URL}/admin/patients/${patient.patientId}`,
           {

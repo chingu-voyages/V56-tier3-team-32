@@ -24,8 +24,10 @@ export const createPatient = async (
   res: Response
 ): Promise<Response> => {
   try {
-    if (req.body.patientId.length != 6)
-      return res.status(400).json({ message: 'Failed to create patient' });
+    if (req.body.patientId.length !== 6)
+      return res
+        .status(400)
+        .json({ message: 'Patient ID must be exactly 6 characters long' });
     const patientId = req.body.patientId || (await generatePatientId());
     const newPatient = await Patient.create({
       ...req.body,
@@ -64,7 +66,6 @@ export const updatePatient = async (
   res: Response
 ): Promise<Response> => {
   try {
-    console.log(req);
     const patientToUpdate = {
       ...req.body.updatePatient,
       patientId: req.params.patientId,
@@ -104,12 +105,10 @@ export const getPatientByRecentlyChangedStatus = async (
     );
   } catch (error: any) {
     console.error('Error fetching recent patients:', error);
-    return res
-      .status(500)
-      .json({
-        message: 'Failed to fetch recent patients',
-        error: error.message,
-      });
+    return res.status(500).json({
+      message: 'Failed to fetch recent patients',
+      error: error.message,
+    });
   }
 };
 
@@ -142,12 +141,10 @@ export const updatePatientStatus = async (
     return res.status(200).json(updatedPatient);
   } catch (error: any) {
     console.error('Error updating patient status:', error);
-    return res
-      .status(500)
-      .json({
-        message: 'Failed to update patient status',
-        error: error.message,
-      });
+    return res.status(500).json({
+      message: 'Failed to update patient status',
+      error: error.message,
+    });
   }
 };
 
@@ -184,12 +181,10 @@ export const getPatientsByStatus = async (
     return res.status(200).json(patients);
   } catch (error: any) {
     console.error('Error fetching patients by status:', error);
-    return res
-      .status(500)
-      .json({
-        message: 'Failed to fetch patients by status',
-        error: error.message,
-      });
+    return res.status(500).json({
+      message: 'Failed to fetch patients by status',
+      error: error.message,
+    });
   }
 };
 
@@ -209,12 +204,10 @@ export const getPatientsCountByStatus = async (
     return res.status(200).json(counts);
   } catch (error: any) {
     console.error('Error fetching patients count by status:', error);
-    return res
-      .status(500)
-      .json({
-        message: 'Failed to fetch patients count by status',
-        error: error.message,
-      });
+    return res.status(500).json({
+      message: 'Failed to fetch patients count by status',
+      error: error.message,
+    });
   }
 };
 
@@ -229,15 +222,14 @@ export const getAnonymizedPatients = async (
     const anonymizedPatients = patients.map((patient: any) => ({
       patientId: patient.patientId,
       statusCode: patient.status?.code,
+      updatedAt: patient.updatedAt,
     }));
     return res.status(200).json(anonymizedPatients);
   } catch (error: any) {
     console.error('Error fetching anonymized patients:', error);
-    return res
-      .status(500)
-      .json({
-        message: 'Failed to fetch anonymized patients',
-        error: error.message,
-      });
+    return res.status(500).json({
+      message: 'Failed to fetch anonymized patients',
+      error: error.message,
+    });
   }
 };
