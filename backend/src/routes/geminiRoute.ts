@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { geminiRouter } from '../controllers/gemini';
+import { geminiRouter } from '../controllers/geminiController';
 
 const router = Router();
 
