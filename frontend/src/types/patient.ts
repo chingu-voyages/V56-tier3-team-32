@@ -10,7 +10,7 @@ export interface Patient {
   telephone: number;
   contactEmail: string;
   status: { code: string };
-   statusStartTime?: string;
+  statusStartTime: string;
   updatedAt: string;
   statusDuration: string; 
   createdAt: string;

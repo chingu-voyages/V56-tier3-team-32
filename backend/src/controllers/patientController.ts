@@ -158,6 +158,7 @@ export const updatePatientStatus = async (
       path: 'status',
       select: 'code -_id',
     });
+    
     if (!updatedPatient) {
       return res.status(404).json({ message: 'Patient not found' });
     }

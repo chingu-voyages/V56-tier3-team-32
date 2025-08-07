@@ -21,9 +21,8 @@ const PatientList = () => {
   const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
   const [formMode, setFormMode] = useState<'edit' | 'view' | null>(null);
   const [searchName,setSearchName]=useState<string | null>(null);
-useEffect(() => {
-  let durationInterval: NodeJS.Timeout;
-  let refreshInterval: NodeJS.Timeout;
+  
+  useEffect(() => {
   let isMounted = true;
 
   const fetchPatientsAndStatuses = async () => {
@@ -55,22 +54,47 @@ useEffect(() => {
   // Initial fetch
   fetchPatientsAndStatuses();
 
-  // Interval to force re-render for durations
-  durationInterval = setInterval(() => {
-    setPatients(prev => [...prev]);
-  }, 1000);
-
-  // Interval to refresh patient data
-  refreshInterval = setInterval(() => {
-    fetchPatientsAndStatuses();
-  }, 30000);
-
   return () => {
     isMounted = false;
-    clearInterval(durationInterval);
-    clearInterval(refreshInterval);
   };
 }, [getToken]);
+
+useEffect(() => {
+  const interval = setInterval(() => {
+    setPatients(prev => 
+      prev.map(patient => ({
+        ...patient,
+        statusDuration: calculateStatusDuration(patient.statusStartTime, patient.updatedAt)
+      }))
+    );
+  }, 1000); // Update every second
+
+  return () => clearInterval(interval);
+}, []);
+
+const calculateStatusDuration = (statusStartTime: string, updatedAt: string): string => {
+  try {
+  const now = new Date();
+  const start = new Date(statusStartTime || updatedAt);
+  
+  if (isNaN(start.getTime())) {
+    return '0m'; // Invalid date, return 0 minutes
+  }
+
+  const minutes = Math.floor((now.getTime() - start.getTime()) / (1000 * 60));
+  
+  const hours = Math.floor(minutes / 60);
+  const mins = minutes % 60;
+  
+  if (hours > 0) {
+    return `${hours}h ${mins}m`;
+  }
+  return `${mins}m`;
+} catch (error) {
+    console.error('Error calculating status duration:', error);
+    return '0m'; // Fallback in case of error
+  }
+};
 
   const getStatusCode = (status: Patient['status']): string => {
     return status?.code ?? 'Unknown';
@@ -83,7 +107,12 @@ useEffect(() => {
     setPatients((prev) =>
       prev.map((patient) =>
         patient.patientId === patientId 
-          ? { ...patient, status: { code: newStatus.code } }
+          ? { 
+            ...patient, 
+            status: { code: newStatus.code },
+            statusStartTime: new Date().toISOString(),
+            statusDuration: '0m' 
+          }
           : patient
       )
     );
