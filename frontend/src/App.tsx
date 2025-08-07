@@ -7,6 +7,7 @@ import AppRoutes from './routes/AppRoutes';
 import LogIn from './components/LogIn/LogIn';
 import ChatLauncher from './components/ChatLauncher/ChatLauncher';
 import GuestView from './components/GuestView/GuestView';
+import PWAInstall from './components/PWAInstall/PWAInstall';
 
 function App() {
   const { user, isSignedIn } = useUser();
@@ -103,6 +104,7 @@ function App() {
       <Router>
         {isSignedIn ? <Dashboard /> : <AuthRoutes />}
         <ChatLauncher />
+        <PWAInstall />
       </Router>
     </div>
   );
