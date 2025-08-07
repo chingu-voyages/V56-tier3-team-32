@@ -11,4 +11,5 @@ export interface Patient {
   contactEmail: string;
   createdAt: string;
   status: { code: string };
+  surgeryType: string;
 }
