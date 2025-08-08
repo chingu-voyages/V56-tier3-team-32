@@ -1,0 +1,103 @@
+.login-container {
+  @apply min-h-screen bg-white text-primary flex flex-col;
+}
+
+.login-header {
+  @apply px-6 py-4 bg-primary text-white text-xl font-semibold;
+}
+
+.login-header-text {
+  @apply max-w-7xl mx-auto w-full flex justify-between items-center text-center;
+}
+
+.login-card {
+  @apply flex flex-grow flex-row px-6 py-12 gap-12 max-w-7xl mx-auto w-full items-start justify-center;
+}
+
+.login-content {
+  @apply flex-1 max-w-2xl text-left;
+}
+
+.content-title {
+  @apply text-4xl font-extrabold mb-4 leading-tight;
+}
+
+.content-description {
+  @apply text-lg mb-6 max-w-xl;
+}
+
+.git-link {
+  @apply text-primary hover:text-accent hover:text-xl text-lg font-semibold hover:cursor-pointer hover:transition-all hover:duration-75;
+}
+
+.login-title {
+  @apply text-3xl font-bold text-primary mb-2;
+}
+
+.login-subtitle {
+  @apply text-font-secondary text-base;
+}
+
+.login-form {
+  @apply max-w-sm w-full bg-white border rounded-md p-4 shadow-sm self-start min-h-[340px];
+}
+
+.form-section {
+  @apply mb-6;
+}
+
+.section-title {
+  @apply text-2xl font-bold text-primary mb-2 text-left;
+}
+
+.section-description {
+  @apply text-font-secondary text-sm mb-6 text-left;
+}
+
+.login-buttons {
+  @apply flex flex-col gap-4 mt-6;
+}
+
+.primary-btn {
+  @apply w-full flex items-center justify-center px-6 py-3 bg-primary text-white font-medium rounded-lg 
+         hover:bg-accent focus:outline-none focus:ring-4 focus:ring-primary focus:ring-opacity-20 
+         transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed min-h-[48px];
+}
+
+.secondary-btn {
+  @apply w-full flex items-center justify-center px-6 py-3 bg-transparent text-primary border-primary border-2 rounded-lg
+  font-medium hover:cursor-pointer hover:bg-accent transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed min-h-[48px];
+}
+
+.loading-spinner {
+  @apply w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin;
+}
+
+.divider {
+  @apply relative my-6;
+}
+
+.divider::before {
+  @apply absolute inset-0 flex items-center border-t border-border-line;
+  content: '';
+}
+
+.divider-text {
+  @apply relative bg-white px-4 text-sm text-font-secondary;
+}
+
+.help-section {
+  @apply text-left;
+}
+
+.help-text {
+  @apply text-font-secondary text-sm mb-4;
+}
+
+.login-footer {
+  @apply px-8 py-4 bg-secondary border-t border-border-line;
+}
+
+.footer-text {
+  @apply text-center text-xs text-font-secondary;
+}

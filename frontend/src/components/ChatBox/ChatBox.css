@@ -1,0 +1,31 @@
+.chatbox-container {
+  @apply fixed bottom-20 right-5 w-[300px] h-[400px] bg-white border border-gray-300 rounded-xl overflow-hidden flex flex-col shadow-lg;
+}
+
+.chat-messages {
+  @apply flex-1 p-2.5 overflow-y-auto;
+}
+
+.chat-msg {
+  @apply mb-2 p-2 rounded-lg max-w-[90%];
+}
+
+.chat-msg.user {
+  @apply bg-secondary self-end;
+}
+
+.chat-msg.bot {
+  @apply bg-accent self-start;
+}
+
+.chat-input {
+  @apply flex border-t border-gray-300;
+}
+
+.chat-input input {
+  @apply flex-1 p-2.5 border-none outline-none;
+}
+
+.chat-input button {
+  @apply bg-primary hover:cursor-pointer text-white border-none p-10;
+}
