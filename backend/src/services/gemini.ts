@@ -9,7 +9,9 @@ import * as path from 'path';
 
 export async function askGemini(question: string): Promise<string> {
   if (!process.env.GEMINI_API_KEY) {
-    throw new Error('GEMINI_API_KEY environment variable is not set');
+    throw new Error(
+      'Required API key is not set in the environment configuration'
+    );
   }
 
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
