@@ -1,6 +1,5 @@
-const CACHE_NAME = 'surgevenger-v3';
-const API_CACHE_NAME = 'surgevenger-api-v3';
-const STATIC_CACHE_NAME = 'surgevenger-static-v3';
+const API_CACHE_NAME = 'surgevenger-api-v1';
+const STATIC_CACHE_NAME = 'surgevenger-static-v1';
 
 const urlsToCache = [
   '/',
@@ -70,8 +69,7 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  if (request.url.includes('/api/') || request.url.includes('/admin/')) {
-    event.respondWith(handleApiRequest(request));
+  if (url.pathname.startsWith('/api/') || url.pathname.startsWith('/admin/')) {
     return;
   }
 
