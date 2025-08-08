@@ -20,34 +20,81 @@ const PatientList = () => {
   const [error, setError] = useState<string | null>(null);
   const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
   const [formMode, setFormMode] = useState<'edit' | 'view' | null>(null);
-  const [searchName, setSearchName] = useState<string | null>(null);
-
+  const [searchName,setSearchName]=useState<string | null>(null);
+  
   useEffect(() => {
-    const fetchPatients = async () => {
-      try {
-        setLoading(true);
-        const token = await getToken();
+  let isMounted = true;
 
-        const [patientsResponse, statusesResponse] = await Promise.all([
-          axios.get(`${BASE_URL}/admin/patients`, {
-            headers: { Authorization: `Bearer ${token}` },
-          }),
-          axios.get(`${BASE_URL}/statuses`, {
-            headers: { Authorization: `Bearer ${token}` },
-          }),
-        ]);
+  const fetchPatientsAndStatuses = async () => {
+    try {
+      setLoading(true);
+      const token = await getToken();
 
+      const [patientsResponse, statusesResponse] = await Promise.all([
+        axios.get(`${BASE_URL}/admin/patients`, {
+          headers: { Authorization: `Bearer ${token}` },
+        }),
+        axios.get(`${BASE_URL}/statuses`, {
+          headers: { Authorization: `Bearer ${token}` },
+        }),
+      ]);
+
+      if (isMounted) {
         setPatients(patientsResponse.data);
         setStatuses(statusesResponse.data);
         setError(null);
-      } catch (err) {
-        setError('Failed to fetch patient data.');
-      } finally {
-        setLoading(false);
       }
-    };
-    fetchPatients();
-  }, [getToken]);
+    } catch (err) {
+      if (isMounted) setError('Failed to fetch patient data.');
+    } finally {
+      if (isMounted) setLoading(false);
+    }
+  };
+
+  // Initial fetch
+  fetchPatientsAndStatuses();
+
+  return () => {
+    isMounted = false;
+  };
+}, [getToken]);
+
+useEffect(() => {
+  const interval = setInterval(() => {
+    setPatients(prev => 
+      prev.map(patient => ({
+        ...patient,
+        statusDuration: calculateStatusDuration(patient.statusStartTime, patient.updatedAt)
+      }))
+    );
+  }, 1000); // Update every second
+
+  return () => clearInterval(interval);
+}, []);
+
+const calculateStatusDuration = (statusStartTime: string, updatedAt: string): string => {
+  try {
+  const now = new Date();
+  const start = new Date(statusStartTime || updatedAt);
+  
+  if (isNaN(start.getTime())) {
+    return '0m'; // Invalid date, return 0 minutes
+  }
+
+  const minutes = Math.floor((now.getTime() - start.getTime()) / (1000 * 60));
+  
+  const hours = Math.floor(minutes / 60);
+  const mins = minutes % 60;
+  
+  if (hours > 0) {
+    return `${hours}h ${mins}m`;
+  }
+  return `${mins}m`;
+} catch (error) {
+    console.error('Error calculating status duration:', error);
+    return '0m'; // Fallback in case of error
+  }
+};
 
   const getStatusCode = (status: Patient['status']): string => {
     return status?.code ?? 'Unknown';
@@ -59,8 +106,13 @@ const PatientList = () => {
 
     setPatients((prev) =>
       prev.map((patient) =>
-        patient.patientId === patientId
-          ? { ...patient, status: { code: newStatus.code } }
+        patient.patientId === patientId 
+          ? { 
+            ...patient, 
+            status: { code: newStatus.code },
+            statusStartTime: new Date().toISOString(),
+            statusDuration: '0m' 
+          }
           : patient
       )
     );
@@ -142,72 +194,67 @@ const PatientList = () => {
   }
 
   const patientData = () => (
-    <div className='table-container'>
-      <table className='table'>
-        <thead>
-          <tr className='tablehead'>
-            <th className='table-cell'>Patient Id</th>
-            <th className='table-cell'>First Name</th>
-            <th className='table-cell'>Last Name</th>
-            <th className='table-cell'>Status</th>
-            {isAdmin && <th className='table-cell'>Actions</th>}
-          </tr>
-        </thead>
-        <tbody>
-          {patients.map((patient) => {
-            const statusCode = getStatusCode(patient.status);
-            const currentStatus = statuses.find(
-              (status) => status.code === statusCode
-            );
-
-            return (
-              <tr key={patient._id} className='table-row'>
-                <td className='table-cell' data-label='Patient Id'>
-                  {patient.patientId}
-                </td>
-                <td className='table-cell' data-label='First Name'>
-                  {patient.firstName}
-                </td>
-                <td className='table-cell' data-label='Last Name'>
-                  {patient.lastName}
-                </td>
-                <td className='table-cell' data-label='Status'>
-                  <select
-                    value={currentStatus?._id || 'Unknown'}
-                    onChange={(e) =>
-                      handleStatusChange(patient.patientId, e.target.value)
-                    }
-                    className='status-dropdown'
-                    style={{
-                      backgroundColor: getStatusColor(statusCode),
-                      color: getStatusTextColor(statusCode),
-                    }}
+    <table className='table'>
+      <thead>
+        <tr className='tablehead'>
+          <th className='table-cell'>Patient Id</th>
+          <th className='table-cell'>First Name</th>
+          <th className='table-cell'>Last Name</th> 
+          <th className='table-cell'>Status</th>
+          <th className='table-cell'>Duration</th>
+          {isAdmin && <th className='table-cell'>Actions</th>}
+        </tr>
+      </thead>
+      <tbody>
+        {patients.map((patient) => {
+          const statusCode = getStatusCode(patient.status);
+          const currentStatus = statuses.find(status => status.code === statusCode);
+          
+          return (
+            <tr key={patient._id} className='table-row'>
+              <td className='table-cell'>{patient.patientId}</td>
+              <td className='table-cell'>
+                {patient.firstName}
+              </td>
+              <td className='table-cell'>
+                {patient.lastName}
+              </td>
+              <td className='table-cell'>
+                <select
+                  value={currentStatus?._id || 'Unknown'}
+                  onChange={(e) => handleStatusChange(patient.patientId, e.target.value)}
+                  className='status-dropdown'
+                  style={{
+                    backgroundColor: getStatusColor(statusCode),
+                    color: getStatusTextColor(statusCode),
+                  }}
+                >
+                  {statuses.map((status) => (
+                    <option key={status._id} value={status._id}>
+                      {status.code}
+                    </option>
+                  ))}
+                </select>
+              </td>
+              <td className='table-cell'>
+                {patient.statusDuration}
+              </td>
+              {isAdmin && (
+                <td className='table-cell'>
+                  <button
+                    className='edit-button'
+                    aria-label='Edit Patient Details'
+                    onClick={() => handleEditPatient(patient)}
                   >
-                    {statuses.map((status) => (
-                      <option key={status._id} value={status._id}>
-                        {status.code}
-                      </option>
-                    ))}
-                  </select>
-                </td>
-                {isAdmin && (
-                  <td className='table-cell' data-label='Actions'>
-                    <div className='action-buttons'>
-                      <button
-                        className='edit-button'
-                        aria-label='Edit Patient Details'
-                        onClick={() => handleEditPatient(patient)}
-                      >
-                        Edit
+                    Edit
+                  </button>
+                  <button
+                    className='view-button'
+                    aria-label='View Patient Details'
+                    onClick={() => handleViewPatient(patient)}
+                    >
+                    View
                       </button>
-                      <button
-                        className='view-button'
-                        aria-label='View Patient Details'
-                        onClick={() => handleViewPatient(patient)}
-                      >
-                        View
-                      </button>
-                    </div>
                   </td>
                 )}
               </tr>
@@ -215,7 +262,6 @@ const PatientList = () => {
           })}
         </tbody>
       </table>
-    </div>
   );
 
   return (

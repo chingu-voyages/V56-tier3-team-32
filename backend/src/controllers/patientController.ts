@@ -4,6 +4,21 @@ import { generatePatientId } from '../utils/generatePatientId';
 import Status from '../models/statusModel';
 const CHECKED_IN_STATUS_ID = '6876b51b6e7ee884eb6b67c3';
 
+// Helper function to calculate status duration
+const calculateStatusDuration = (statusStartTime: Date, updatedAt: Date): string => {
+  const startTime = statusStartTime || updatedAt;
+  const now = new Date();
+  const minutes = Math.floor((now.getTime() - startTime.getTime()) / (1000 * 60));
+  
+  const hours = Math.floor(minutes / 60);
+  const mins = minutes % 60;
+  
+  if (hours > 0) {
+    return `${hours}h ${mins}m`;
+  }
+  return `${mins}m`;
+};
+
 export const generateNewPatientId = async (
   req: Request,
   res: Response
@@ -33,6 +48,7 @@ export const createPatient = async (
       ...req.body,
       patientId,
       status: CHECKED_IN_STATUS_ID,
+      statusStartTime: new Date(),
     });
     return res.status(201).json(newPatient);
   } catch (error: any) {
@@ -52,7 +68,14 @@ export const getAllPatients = async (
       path: 'status',
       select: 'code -_id',
     });
-    return res.status(200).json(patients);
+    
+    // Add duration to each patient
+    const patientsWithDuration = patients.map(patient => ({
+      ...patient.toObject(),
+      statusDuration: calculateStatusDuration(patient.statusStartTime, patient.updatedAt)
+    }));
+    
+    return res.status(200).json(patientsWithDuration);
   } catch (error: any) {
     console.error('Error fetching patients:', error);
     return res
@@ -128,12 +151,13 @@ export const updatePatientStatus = async (
 
     const updatedPatient = await Patient.findOneAndUpdate(
       { patientId },
-      { $set: { status: statusId } },
+      { $set: { status: statusId, statusStartTime: new Date() } },
       { new: true, runValidators: true }
     ).populate({
       path: 'status',
       select: 'code -_id',
     });
+    
     if (!updatedPatient) {
       return res.status(404).json({ message: 'Patient not found' });
     }
@@ -153,8 +177,18 @@ export const searchPatients = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const patients = await Patient.find({ lastName: req.query.lastName });
-    return res.status(200).json(patients);
+    const patients = await Patient.find({ lastName: req.query.lastName }).populate({
+      path: 'status',
+      select: 'code -_id',
+    });
+    
+    // Add duration to each patient
+    const patientsWithDuration = patients.map(patient => ({
+      ...patient.toObject(),
+      statusDuration: calculateStatusDuration(patient.statusStartTime, patient.updatedAt)
+    }));
+    
+    return res.status(200).json(patientsWithDuration);
   } catch (error: any) {
     console.error('Error searching patient:', error);
     return res

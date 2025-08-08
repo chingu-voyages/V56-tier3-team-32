@@ -14,7 +14,7 @@ interface PatientFormProps {
 }
 
 const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
-const initialState: Omit<Patient, '_id' | 'createdAt' | 'status'> = {
+const initialState: Omit<Patient, '_id' |  'status' | 'statusStartTime' | 'updatedAt'| 'statusDuration'| 'createdAt'> = {
   patientId: '',
   firstName: '',
   lastName: '',
