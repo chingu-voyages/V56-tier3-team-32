@@ -1,12 +1,11 @@
 import './App.css';
 import { UserButton, useUser } from '@clerk/clerk-react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { useState } from 'react';
 import MenuSideBar from './components/MenuSideBar/MenuSideBar';
 import AppRoutes from './routes/AppRoutes';
-import LogIn from './components/LogIn/LogIn';
+import PublicRoutes from './routes/PublicRoutes';
 import ChatLauncher from './components/ChatLauncher/ChatLauncher';
-import GuestView from './components/GuestView/GuestView';
 import PWAInstall from './components/PWAInstall/PWAInstall';
 
 function App() {
@@ -91,18 +90,10 @@ function App() {
     </div>
   );
 
-  const AuthRoutes = () => (
-    <Routes>
-      <Route path='/login' element={<LogIn />} />
-      <Route path='/' element={<GuestView />} />
-      <Route path='*' element={<GuestView />} />
-    </Routes>
-  );
-
   return (
     <div className='App'>
       <Router>
-        {isSignedIn ? <Dashboard /> : <AuthRoutes />}
+        {isSignedIn ? <Dashboard /> : <PublicRoutes />}
         <ChatLauncher />
         <PWAInstall />
       </Router>
