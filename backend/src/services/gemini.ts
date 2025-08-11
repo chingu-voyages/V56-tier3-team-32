@@ -57,6 +57,9 @@ export async function askGemini(question: string): Promise<string> {
   const model = genAI.getGenerativeModel({
     model: 'gemini-2.5-flash',
     tools: [{ functionDeclarations: [getDatabaseSchemaDeclaration] }],
+    generationConfig: {
+      maxOutputTokens: 5000
+    }
   });
 
   // Read the README for context
@@ -166,28 +169,44 @@ Available functions:
             let queryResult;
 
             try {
-              const parsedQuery = queryArgs.query
-                ? JSON.parse(queryArgs.query)
-                : {};
               queryResult = await executeDbQuery(
-                parsedQuery,
+                queryArgs.query,
                 queryArgs.collection,
                 queryArgs.operation
               );
             } catch (e) {
-              queryResult = 'Failed to parse query.';
+              queryResult = {
+                success: false,
+                error: 'Query failed.',
+                collection: queryArgs.collection,
+                operation: queryArgs.operation,
+                queryExecutedAt: new Date().toISOString(),
+              };
             }
-
-            const finalResponse = await expandedChat.sendMessage([
-              {
-                functionResponse: {
-                  name: 'executeDbQuery',
-                  response: queryResult,
+            
+            try {
+              const finalResponse = await expandedChat.sendMessage([
+                {
+                  functionResponse: {
+                    name: 'executeDbQuery',
+                    response: {
+                      success: queryResult.success,
+                      data: queryResult.data
+                    },
+                  },
                 },
-              },
-            ]);
-
-            return finalResponse.response.text();
+              ]);
+              const responseText = finalResponse.response.text();
+              
+              if (!responseText || responseText.trim() === '') {
+                throw new Error('Gemini API returned empty response');
+              }
+              
+              return responseText;
+            } catch (error) {
+              console.error('Error sending to Gemini API:', error);
+              throw error;
+            }
           }
         }
 
@@ -253,7 +272,7 @@ const getReadonlyConnection = async (): Promise<mongoose.Connection> => {
 export const executeDbQuery = async (
   query: any,
   collection: string,
-  operation: string = 'find'
+  operation: string
 ): Promise<any> => {
   try {
     const connection = await getReadonlyConnection();
@@ -275,7 +294,6 @@ export const executeDbQuery = async (
     }
 
     let result = await method.call(targetCollection, query);
-
     if (result && typeof result.toArray === 'function') {
       result = await result.toArray();
     }

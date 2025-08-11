@@ -14,6 +14,16 @@ const urlsToCache = [
   '/static/css/main.css',
 ];
 
+const isAuthRequest = (url) => {
+  return (
+    url.includes('clerk') ||
+    url.includes('auth') ||
+    url.includes('login') ||
+    url.includes('logout') ||
+    url.includes('session')
+  );
+};
+
 self.addEventListener('install', (event) => {
   console.log('Service Worker installing...');
   event.waitUntil(
@@ -41,11 +51,7 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames.map((cacheName) => {
-          if (
-            cacheName !== CACHE_NAME &&
-            cacheName !== API_CACHE_NAME &&
-            cacheName !== STATIC_CACHE_NAME
-          ) {
+          if (cacheName !== API_CACHE_NAME && cacheName !== STATIC_CACHE_NAME) {
             console.log('Deleting old cache:', cacheName);
             return caches.delete(cacheName);
           }
@@ -59,6 +65,11 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
+
+  if (isAuthRequest(request.url)) {
+    event.respondWith(fetch(request));
+    return;
+  }
 
   if (
     request.url.includes('/patients') ||
