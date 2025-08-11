@@ -9,6 +9,10 @@ export interface Patient {
   country: string;
   telephone: number;
   contactEmail: string;
-  createdAt: string;
   status: { code: string };
+  statusStartTime: string;
+  updatedAt: string;
+  statusDuration: string; 
+  createdAt: string;
+  surgeryType: string;
 }
