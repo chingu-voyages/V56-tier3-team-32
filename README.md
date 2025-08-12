@@ -1,3 +1,15 @@
+##  Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [Overview](#overview)
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Setup](#setup)
+- [Database Config](#database-config)
+- [User Stories](#user-stories)
+- [Our Team](#our-team)
+- [Contributor Graph](#contributor-graph)
+
 ## Project setup instructions
 
 ### Backend
