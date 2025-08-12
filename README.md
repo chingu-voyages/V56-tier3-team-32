@@ -1,7 +1,7 @@
+# SurgeVenger
 <div align="left">
     <div style="display: inline-block;">
-        <h2 style="display: inline-block; vertical-align: middle; margin-top: 0;">SurgeVenger</h2>
-        <br>
+    <br>
 	<img src="https://img.shields.io/github/last-commit/chingu-voyages/V56-tier3-team-32?style=default&logo=git&logoColor=white&color=474747" alt="last-commit">
 	<img src="https://img.shields.io/github/languages/top/chingu-voyages/V56-tier3-team-32?style=default&color=474747" alt="repo-top-language">
 	<img src="https://img.shields.io/github/languages/count/chingu-voyages/V56-tier3-team-32?style=default&color=474747" alt="repo-language-count">
@@ -21,6 +21,76 @@
 - [User Stories](#user-stories)
 - [Our Team](#our-team)
 - [Contributor Graph](#contributor-graph)
+
+## Overview
+
+The Surgery Center Status Board is a web application that enables surgical center staff to manage and track patient surgery progress. The application provides different interfaces for Admins, Surgical Team Members, and Guests. Admins enter patient information, Surgical Team Members update surgery statuses, and Guests can view anonymized status updates from the waiting area. The system improves operational visibility, reduces anxiety for waiting families, and ensures status updates are compliant with privacy regulations.
+
+## Features
+
+### Admin Features
+- [X] Create new patient (auto-generate patient ID)
+- [X] Edit patient info (except ID)
+- [X] View patient details (Full)
+- [ ] Add surgeries to tiers for statistics collection and hospital attractiveness
+- [ ] Create more status options to expand later
+- [ ] View analytics of status durations per patient to identify bottlenecks
+- [ ] Restrict surgery team members to only see/edit assigned patients
+
+### Surgery Team Features
+- [X] Update patient surgery status
+- [X] View patient details (Partial)
+- [ ] Surgery team members can only manage assigned patients (per admin restriction)
+- [ ] Get notifications when a patient is done with surgery to prep for next surgery
+
+### Guest Features
+- [ ] View hospital visitation guidelines and support information
+- [ ] Subscribe to status updates to know when to pick up or visit
+
+## 🔄 Shared Features (with Role Tags)
+- [X] View status count dashboard _(Admin, Surgery Team)_
+- [X] View patient list _(Admin, Surgery Team)_
+- [X] Search patients by last name _(Admin, Surgery Team)_
+- [X] Track status duration timers _(Admin, Surgery Team)_
+- [X] Real-time status updates _(Admin, Surgery Team)_
+- [X] View anonymized patient status board _(All Users)_
+- [X] Fullscreen mode for waiting room displays of Status Board _(All Users)_
+- [X] Auto-rotating patient display (10-second intervals) _(All Users)_
+- [X] Color-coded status indicators _(All Users)_
+- [ ] See patient’s surname initial and first name in Status Board for identification _(All Users)_
+- [ ] Sort patients alphabetically _(Admin, Surgery Team)_
+
+## Authentication & Security
+- [X] Clerk Authentication integration
+- [X] Role-based access control
+- [X] JWT token authorization
+
+## Global Platform Features
+- [X] Google Gemini AI chat support
+- [X] Application guidance and navigation help
+- [X] Context-aware responses
+- [X] PWA integration
+- [X] App installaion capability
+- [X] Offline functionality
+- [X] Responsive mobile-first desgin
+- [ ] Theme switching for user preference
+- [ ] Enable multiple hospitals to subscribe with different staff/users (subscriptions)
+
+##  Getting Started
+
+###  Prerequisites
+
+Before getting started with V56-tier3-team-32, ensure your runtime environment meets the following requirements:
+
+#### Node.js & Package Manager
+- **Node.js**: Version 18.0.0 or higher
+- **npm**: Version 8.0.0 or higher (or **yarn**: Version 1.22.0 or higher)
+
+#### Environment Variables Required
+
+- Valid **Clerk** account and API keys for authentication
+- **Google Gemini AI** API key for chat functionality
+- **MongoDB** connection string (local or MongoDB Atlas)
 
 ## Project setup instructions
 
@@ -46,21 +116,6 @@ coding!
 - Brandon Datch (Dev) #5: [GitHub](https://github.com/Brandon-Isaac) / [LinkedIn](https://linkedin.com/in/isaac-datch-947067288)
 - Tunde Ademola Kujore (Product Owner) #6:[GitHub](https://github.com/Dhemmyhardy) / [LinkedIn](https://linkedin.com/in/tundeademolakujore/)
   
-# voyage-tasks
-
-Your project's `readme` is as important to success as your code. For 
-this reason you should put as much care into its creation and maintenance
-as you would any other component of the application.
-
-If you are unsure of what should go into the `readme` let this article,
-written by an experienced Chingu, be your starting point - 
-[Keys to a well written README](https://tinyurl.com/yk3wubft).
-
-And before we go there's "one more thing"! Once you decide what to include
-in your `readme` feel free to replace the text we've provided here.
-
-> Own it & Make it your Own! - Y
-
 ## Team Documents
 
 You may find these helpful as you work together to organize your project.
@@ -75,9 +130,11 @@ For production (at the main branch)
 - [Team Project Ideas](./docs/team_project_ideas.md)
 - [Team Decision Log](./docs/team_decision_log.md)
 
-Meeting Agenda templates (located in the `/docs` directory in this repo):
-
-- Meeting - Voyage Kickoff --> ./docs/meeting-voyage_kickoff.docx
-- Meeting - App Vision & Feature Planning --> ./docs/meeting-vision_and_feature_planning.docx
-- Meeting - Sprint Retrospective, Review, and Planning --> ./docs/meeting-sprint_retrospective_review_and_planning.docx
-- Meeting - Sprint Open Topic Session --> ./docs/meeting-sprint_open_topic_session.docx
+## <summary>Contributor Graph</summary>
+<br>
+<p align="left">
+   <a href="https://github.com{/chingu-voyages/V56-tier3-team-32/}graphs/contributors">
+      <img src="https://contrib.rocks/image?repo=chingu-voyages/V56-tier3-team-32">
+   </a>
+</p>
+</details>
