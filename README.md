@@ -1,3 +1,15 @@
+<div align="left">
+    <div style="display: inline-block;">
+        <h2 style="display: inline-block; vertical-align: middle; margin-top: 0;">SurgeVenger</h2>
+        <br>
+	<img src="https://img.shields.io/github/last-commit/chingu-voyages/V56-tier3-team-32?style=default&logo=git&logoColor=white&color=474747" alt="last-commit">
+	<img src="https://img.shields.io/github/languages/top/chingu-voyages/V56-tier3-team-32?style=default&color=474747" alt="repo-top-language">
+	<img src="https://img.shields.io/github/languages/count/chingu-voyages/V56-tier3-team-32?style=default&color=474747" alt="repo-language-count">
+  <img src="https://img.shields.io/github/contributors/chingu-voyages/V56-tier3-team-32?style=default&color=474747" alt="contributors">    
+  </div>
+</div>
+<br clear="left"/>
+
 ##  Table of Contents
 
 - [Table of Contents](#table-of-contents)
