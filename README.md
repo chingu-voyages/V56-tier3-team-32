@@ -19,8 +19,8 @@ coding!
 - Shivanand Gupta (Svont)(Dev)" #2: [GitHub](https://github.com/Shivanand-0) / [LinkedIn](https://www.linkedin.com/in/ishivanandgupta/)
 - Win Win Khaing (Thea) (Developer) #3: [GitHub](https://github.com/TheaWin) / [LinkedIn](https://www.linkedin.com/in/thea-win/)
 - Evaldas Visockas (Dev) #4: [Github](https://github.com/EvalVis) / [LinkedIn](https://www.linkedin.com/in/evaldas-visockas/)
-  ...
 - Brandon Datch (Dev) #5: [GitHub](https://github.com/Brandon-Isaac) / [LinkedIn](https://linkedin.com/in/isaac-datch-947067288)
+- Tunde Ademola Kujore (Product Owner) #6:[GitHub](https://github.com/Dhemmyhardy) / [LinkedIn](https://linkedin.com/in/tundeademolakujore/)
   
 # voyage-tasks
 
