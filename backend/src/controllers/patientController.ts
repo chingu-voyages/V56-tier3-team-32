@@ -177,7 +177,7 @@ export const searchPatients = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const patients = await Patient.find({ lastName: req.query.lastName }).populate({
+    const patients = await Patient.find({ lastName: {$regex:'^'+req.query.lastName, $options:'i'} }).populate({
       path: 'status',
       select: 'code -_id',
     });
