@@ -175,8 +175,12 @@ export const updatePatientStatus = async (
 export const searchPatients = async (
   req: Request,
   res: Response
-): Promise<Response> => {
+): Promise<void> => {
   try {
+    if(req.query.lastName=== undefined || req.query.lastName ===''|| req.query.lastName ==='null') {
+      console.log('inside condition')
+    return res.redirect('./patients');
+    }
     const patients = await Patient.find({ lastName: {$regex:'^'+req.query.lastName, $options:'i'} }).populate({
       path: 'status',
       select: 'code -_id',
@@ -188,10 +192,10 @@ export const searchPatients = async (
       statusDuration: calculateStatusDuration(patient.statusStartTime, patient.updatedAt)
     }));
     
-    return res.status(200).json(patientsWithDuration);
+     res.status(200).json(patientsWithDuration);
   } catch (error: any) {
     console.error('Error searching patient:', error);
-    return res
+     res
       .status(500)
       .json({ message: 'Failed to search patient', error: error.message });
   }
