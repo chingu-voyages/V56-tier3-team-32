@@ -178,7 +178,6 @@ export const searchPatients = async (
 ): Promise<void> => {
   try {
     if(req.query.lastName=== undefined || req.query.lastName ===''|| req.query.lastName ==='null') {
-      console.log('inside condition')
     return res.redirect('./patients');
     }
     const patients = await Patient.find({ lastName: {$regex:'^'+req.query.lastName, $options:'i'} }).populate({
