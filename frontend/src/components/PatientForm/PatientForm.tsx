@@ -43,34 +43,6 @@ const PatientForm: React.FC<PatientFormProps> = ({
   const [successMessage, setSuccessMessage] = useState('');
   const [selectedStatus, setSelectedStatus] = useState<string>('');
 
-  // generate patient ID for create mode
-  useEffect(() => {
-    const handleCreateNewUser = async () => {
-      if (mode === 'create') {
-        try {
-          const token = await getToken();
-          const response = await axios.get(
-            `${BASE_URL}/admin/generate-patient-id`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-          console.log(response);
-
-          setPatient((prev) => ({
-            ...prev,
-            patientId: response.data.patientId,
-          }));
-        } catch (err: any) {
-          console.error('Error generating new patient ID:', err);
-        }
-      }
-    };
-    handleCreateNewUser();
-  }, [mode, getToken]);
-
   // fetch statuses for edit mode
   useEffect(() => {
     const fetchStatuses = async () => {
@@ -229,19 +201,21 @@ const PatientForm: React.FC<PatientFormProps> = ({
 
         {error && <div className='error-message'>{error}</div>}
 
-        <div>
-          <label htmlFor='patientId'>Patient No.:</label>
-          <br />
-          <input
-            type='text'
-            id='patientId'
-            name='patientId'
-            value={patient.patientId}
-            onChange={handleChange}
-            readOnly
-            className='readonly-label'
-          />
-        </div>
+        {mode !== 'create' && (
+          <div>
+            <label htmlFor='patientId'>Patient No.:</label>
+            <br />
+            <input
+              type='text'
+              id='patientId'
+              name='patientId'
+              value={patient.patientId}
+              onChange={handleChange}
+              readOnly
+              className='readonly-label'
+            />
+          </div>
+        )}
         <div>
           <label htmlFor='firstName'>First Name:</label>
           <br />
