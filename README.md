@@ -104,31 +104,12 @@ You can store env variables in your computer, or inside `.env` or `.env.local` f
 
 ## Our Team
 
-Everyone on your team should add their name along with a link to their GitHub
-& optionally their LinkedIn profiles below. Do this in Sprint #1 to validate
-your repo access and to practice PR'ing with your team *before* you start
-coding!
-
-- Hancke le Roux(SM) #1: [GitHub](https://github.com/HawkCoding) / [LinkedIn](https://www.linkedin.com/in/hancke-chris-le-roux-19981206za/)
-- Shivanand Gupta (Svont)(Dev)" #2: [GitHub](https://github.com/Shivanand-0) / [LinkedIn](https://www.linkedin.com/in/ishivanandgupta/)
+- Hancke le Roux(Scrum master) #1: [GitHub](https://github.com/HawkCoding) / [LinkedIn](https://www.linkedin.com/in/hancke-chris-le-roux-19981206za/)
+- Shivanand Gupta (Svont)(Developer)" #2: [GitHub](https://github.com/Shivanand-0) / [LinkedIn](https://www.linkedin.com/in/ishivanandgupta/)
 - Win Win Khaing (Thea) (Developer) #3: [GitHub](https://github.com/TheaWin) / [LinkedIn](https://www.linkedin.com/in/thea-win/)
-- Evaldas Visockas (Dev) #4: [Github](https://github.com/EvalVis) / [LinkedIn](https://www.linkedin.com/in/evaldas-visockas/)
-- Brandon Datch (Dev) #5: [GitHub](https://github.com/Brandon-Isaac) / [LinkedIn](https://linkedin.com/in/isaac-datch-947067288)
+- Evaldas Visockas (Developer) #4: [Github](https://github.com/EvalVis) / [LinkedIn](https://www.linkedin.com/in/evaldas-visockas/)
+- Brandon Datch (Developer) #5: [GitHub](https://github.com/Brandon-Isaac) / [LinkedIn](https://linkedin.com/in/isaac-datch-947067288)
 - Tunde Ademola Kujore (Product Owner) #6:[GitHub](https://github.com/Dhemmyhardy) / [LinkedIn](https://linkedin.com/in/tundeademolakujore/)
-  
-## Team Documents
-
-You may find these helpful as you work together to organize your project.
-
-For development (at the dev branch)
-- [Frontend](https://v56-tier3-team-32dev-git-dev-evaldas-projects-1b81790e.vercel.app/)
-- [Backend](https://surgery-status.onrender.com)
-
-For production (at the main branch)
-- [Frontend](https://v56-tier3-team-32main.vercel.app)
-- [Backend](https://v56-tier3-team-32.onrender.com)
-- [Team Project Ideas](./docs/team_project_ideas.md)
-- [Team Decision Log](./docs/team_decision_log.md)
 
 ## <summary>Contributor Graph</summary>
 <br>
@@ -138,3 +119,13 @@ For production (at the main branch)
    </a>
 </p>
 </details>
+
+## Deployments
+
+Development (dev branch)
+- [Frontend](https://v56-tier3-team-32dev-git-dev-evaldas-projects-1b81790e.vercel.app/)
+- [Backend](https://surgery-status.onrender.com)
+
+Production (main branch)
+- [Frontend](https://v56-tier3-team-32main.vercel.app)
+- [Backend](https://v56-tier3-team-32.onrender.com)
