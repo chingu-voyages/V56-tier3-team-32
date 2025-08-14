@@ -175,7 +175,7 @@ export const updatePatientStatus = async (
 export const searchPatients = async (
   req: Request,
   res: Response
-): Promise<void> => {
+): Promise<void | Response> => {
   try {
     if(req.query.lastName=== undefined || req.query.lastName ===''|| req.query.lastName ==='null') {
     return res.redirect('./patients');
@@ -202,21 +202,6 @@ export const searchPatients = async (
       {
         $unwind: '$status'
       },
-      {
-        $project: {
-          patientId: 1,
-          firstName: 1,
-          lastName: 1,
-          dateOfBirth: 1,
-          emergencyContact: 1,
-          status: {
-            code: '$status.code'
-          },
-          statusStartTime: 1,
-          createdAt: 1,
-          updatedAt: 1
-        }
-      }
     ]);
     // Add duration to each patient
     const patientsWithDuration = patients.map(patient => ({
@@ -224,10 +209,10 @@ export const searchPatients = async (
       statusDuration: calculateStatusDuration(patient.statusStartTime, patient.updatedAt)
     }));
     
-     res.status(200).json(patientsWithDuration);
+     return res.status(200).json(patientsWithDuration);
   } catch (error: any) {
     console.error('Error searching patient:', error);
-     res
+     return res
       .status(500)
       .json({ message: 'Failed to search patient', error: error.message });
   }
