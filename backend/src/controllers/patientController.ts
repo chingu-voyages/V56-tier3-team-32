@@ -19,31 +19,12 @@ const calculateStatusDuration = (statusStartTime: Date, updatedAt: Date): string
   return `${mins}m`;
 };
 
-export const generateNewPatientId = async (
-  req: Request,
-  res: Response
-): Promise<Response> => {
-  try {
-    const patientId = await generatePatientId();
-    return res.status(200).json({ patientId });
-  } catch (error: any) {
-    console.error('Error generating patient ID:', error);
-    return res
-      .status(500)
-      .json({ message: 'Failed to generate patient ID', error: error.message });
-  }
-};
-
 export const createPatient = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
   try {
-    if (req.body.patientId.length !== 6)
-      return res
-        .status(400)
-        .json({ message: 'Patient ID must be exactly 6 characters long' });
-    const patientId = req.body.patientId || (await generatePatientId());
+    const patientId = await generatePatientId();
     const newPatient = await Patient.create({
       ...req.body,
       patientId,
