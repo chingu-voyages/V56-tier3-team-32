@@ -84,6 +84,29 @@ The Surgery Center Status Board is a web application that enables surgical cente
 - **Node.js**: Version 18.0.0 or higher
 - **npm**: Version 8.0.0 or higher (or **yarn**: Version 1.22.0 or higher)
 
+#### Database
+
+The project uses [MongoDb Atlas](https://www.mongodb.com/products/platform/atlas-database). To set up the database:
+1) Log in to MongoDb Atlas
+2) Create a Cluster and the database
+3) Create two users: one with read and write access. The other with readonly access.
+4) Get connection strings for both users (will be used in environmental variables).
+
+#### Authentication/Authorization
+
+The project uses [Clerk](https://clerk.com/).
+
+To set it up:
+1) Log in to Clerk.
+2) Setup a project.
+3) Get the public and private keys (used in environmental variables).
+
+#### AI
+
+The project uses Gemini API as a chatbot.
+
+To set it up: Follow [this guide](https://aistudio.google.com/app/apikey) to get the API key (it will be used as an environmental variable).
+
 #### Environment Variables
 
 You can store env variables in your computer, or inside `.env` files.
@@ -102,11 +125,21 @@ Do not expose the following variables in code or other place accessible for fore
 - **`REACT_APP_CLERK_PUBLISHABLE_KEY`**: Clerk key used to enable frontend authentication.
 - **`REACT_APP_BASE_URL`**: URL pointing to your backend service address.
 
-## Project setup instructions
+### Running the project
 
-### Backend
+To run backend, execute:
 
-#### Environmental variables
+```
+cd backend
+npm run dev
+```
+
+To run frontend, execute:
+
+```
+cd frontend
+npm start
+```
 
 ## Our Team
 
@@ -127,6 +160,8 @@ Do not expose the following variables in code or other place accessible for fore
 </details>
 
 ## Deployments
+
+The project uses [Vercel](https://vercel.com) for frontend deployments and [Render](https://render.com/) for backend deployments.
 
 Development (dev branch)
 - [Frontend](https://v56-tier3-team-32dev-git-dev-evaldas-projects-1b81790e.vercel.app/)
