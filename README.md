@@ -131,6 +131,7 @@ To run backend, execute:
 
 ```
 cd backend
+npm install
 npm run dev
 ```
 
@@ -138,6 +139,7 @@ To run frontend, execute:
 
 ```
 cd frontend
+npm install
 npm start
 ```
 
