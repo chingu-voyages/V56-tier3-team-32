@@ -212,14 +212,14 @@ const calculateStatusDuration = (statusStartTime: string, updatedAt: string): st
           
           return (
             <tr key={patient._id} className='table-row'>
-              <td className='table-cell'>{patient.patientId}</td>
-              <td className='table-cell'>
+              <td className='table-cell' data-label='Patient Id'>{patient.patientId}</td>
+              <td className='table-cell' data-label='First Name'>
                 {patient.firstName}
               </td>
-              <td className='table-cell'>
+              <td className='table-cell' data-label='Last Name'>
                 {patient.lastName}
               </td>
-              <td className='table-cell'>
+              <td className='table-cell' data-label='Status'>
                 <select
                   value={currentStatus?._id || 'Unknown'}
                   onChange={(e) => handleStatusChange(patient.patientId, e.target.value)}
@@ -236,16 +236,17 @@ const calculateStatusDuration = (statusStartTime: string, updatedAt: string): st
                   ))}
                 </select>
               </td>
-              <td className='table-cell'>
+              <td className='table-cell' data-label='Duration'>
                 {patient.statusDuration}
               </td>
               {isAdmin && (
-                <td className='table-cell'>
-                  <button
-                    className='edit-button'
-                    aria-label='Edit Patient Details'
-                    onClick={() => handleEditPatient(patient)}
-                  >
+                <td className='table-cell' >
+                  <div className='action-buttons'>
+                    <button
+                      className='edit-button'
+                      aria-label='Edit Patient Details'
+                      onClick={() => handleEditPatient(patient)}
+                    >
                     Edit
                   </button>
                   <button
@@ -255,6 +256,7 @@ const calculateStatusDuration = (statusStartTime: string, updatedAt: string): st
                     >
                     View
                       </button>
+                    </div>
                   </td>
                 )}
               </tr>
