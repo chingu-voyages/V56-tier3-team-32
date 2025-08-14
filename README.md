@@ -80,27 +80,33 @@ The Surgery Center Status Board is a web application that enables surgical cente
 
 ###  Prerequisites
 
-Before getting started with V56-tier3-team-32, ensure your runtime environment meets the following requirements:
-
 #### Node.js & Package Manager
 - **Node.js**: Version 18.0.0 or higher
 - **npm**: Version 8.0.0 or higher (or **yarn**: Version 1.22.0 or higher)
 
-#### Environment Variables Required
+#### Environment Variables
 
-- Valid **Clerk** account and API keys for authentication
-- **Google Gemini AI** API key for chat functionality
-- **MongoDB** connection string (local or MongoDB Atlas)
+You can store env variables in your computer, or inside `.env` files.
+
+##### Backend
+
+Do not expose the following variables in code or other place accessible for foreign entities:
+
+- **`CLERK_SECRET_KEY`**: private key provided by Clerk allowing your backend server to validate JWTs (JSON Web Tokens) issued by Clerk.
+- **`GEMINI_API_KEY`**: Credentials for accesing Gemini API chatbot.
+- **`SURGERY_DATABASE_CONNECTION_CREDENTIALS`**: User credentials with Read/write access, pointing to a MongoDb database. Example: mongodb+srv://username:password@cluster_address/database_name.
+- **`SURGERY_DATABASE_CONNECTION_READONLY_CREDENTIALS`**: User credentials with readonly access, pointing to a MongoDb database. Used for AI to make on readonly queries on the spot.
+
+##### Frontend
+
+- **`REACT_APP_CLERK_PUBLISHABLE_KEY`**: Clerk key used to enable frontend authentication.
+- **`REACT_APP_BASE_URL`**: URL pointing to your backend service address.
 
 ## Project setup instructions
 
 ### Backend
 
 #### Environmental variables
-
-You can store env variables in your computer, or inside `.env` or `.env.local` files.
-
-**`REACT_APP_CLERK_PUBLISHABLE_KEY`**: Clerk key used to enable frontend authentication.
 
 ## Our Team
 
@@ -109,7 +115,7 @@ You can store env variables in your computer, or inside `.env` or `.env.local` f
 - Win Win Khaing (Thea) (Developer) #3: [GitHub](https://github.com/TheaWin) / [LinkedIn](https://www.linkedin.com/in/thea-win/)
 - Evaldas Visockas (Developer) #4: [Github](https://github.com/EvalVis) / [LinkedIn](https://www.linkedin.com/in/evaldas-visockas/)
 - Brandon Datch (Developer) #5: [GitHub](https://github.com/Brandon-Isaac) / [LinkedIn](https://linkedin.com/in/isaac-datch-947067288)
-- Tunde Ademola Kujore (Product Owner) #6:[GitHub](https://github.com/Dhemmyhardy) / [LinkedIn](https://linkedin.com/in/tundeademolakujore/)
+- Tunde Ademola Kujore (Product Owner) #6: [GitHub](https://github.com/Dhemmyhardy) / [LinkedIn](https://linkedin.com/in/tundeademolakujore/)
 
 ## <summary>Contributor Graph</summary>
 <br>
