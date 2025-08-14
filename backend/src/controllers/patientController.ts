@@ -180,14 +180,47 @@ export const searchPatients = async (
     if(req.query.lastName=== undefined || req.query.lastName ===''|| req.query.lastName ==='null') {
     return res.redirect('./patients');
     }
-    const patients = await Patient.find({ lastName: {$regex:'^'+req.query.lastName, $options:'i'} }).populate({
-      path: 'status',
-      select: 'code -_id',
-    });
-    
+    const patients = await Patient.aggregate([
+      {
+        $search: {
+          index: 'patientSearch',
+          text: {
+            query: req.query.lastName,
+            path: 'lastName',
+            fuzzy: { maxEdits: 2 }
+          }
+        }
+      },
+      {
+        $lookup: {
+          from: 'status',
+          localField: 'status',
+          foreignField: '_id',
+          as: 'status'
+        }
+      },
+      {
+        $unwind: '$status'
+      },
+      {
+        $project: {
+          patientId: 1,
+          firstName: 1,
+          lastName: 1,
+          dateOfBirth: 1,
+          emergencyContact: 1,
+          status: {
+            code: '$status.code'
+          },
+          statusStartTime: 1,
+          createdAt: 1,
+          updatedAt: 1
+        }
+      }
+    ]);
     // Add duration to each patient
     const patientsWithDuration = patients.map(patient => ({
-      ...patient.toObject(),
+      ...patient,
       statusDuration: calculateStatusDuration(patient.statusStartTime, patient.updatedAt)
     }));
     
