@@ -156,23 +156,44 @@ export const updatePatientStatus = async (
 export const searchPatients = async (
   req: Request,
   res: Response
-): Promise<Response> => {
+): Promise<void | Response> => {
   try {
-    const patients = await Patient.find({ lastName: req.query.lastName }).populate({
-      path: 'status',
-      select: 'code -_id',
-    });
-    
+    if(req.query.lastName=== undefined || req.query.lastName ===''|| req.query.lastName ==='null') {
+    return res.redirect('./patients');
+    }
+    const patients = await Patient.aggregate([
+      {
+        $search: {
+          index: 'patientSearch',
+          text: {
+            query: req.query.lastName,
+            path: 'lastName',
+            fuzzy: { maxEdits: 2 }
+          }
+        }
+      },
+      {
+        $lookup: {
+          from: 'status',
+          localField: 'status',
+          foreignField: '_id',
+          as: 'status'
+        }
+      },
+      {
+        $unwind: '$status'
+      },
+    ]);
     // Add duration to each patient
     const patientsWithDuration = patients.map(patient => ({
-      ...patient.toObject(),
+      ...patient,
       statusDuration: calculateStatusDuration(patient.statusStartTime, patient.updatedAt)
     }));
     
-    return res.status(200).json(patientsWithDuration);
+     return res.status(200).json(patientsWithDuration);
   } catch (error: any) {
     console.error('Error searching patient:', error);
-    return res
+     return res
       .status(500)
       .json({ message: 'Failed to search patient', error: error.message });
   }
