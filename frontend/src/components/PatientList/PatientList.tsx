@@ -129,7 +129,8 @@ const sortPatients = (patients: Patient[], sortBy: 'updatedAt' | 'lastName', sor
             ...patient, 
             status: { code: newStatus.code },
             statusStartTime: new Date().toISOString(),
-            statusDuration: '0m' 
+            statusDuration: '0m',
+            updatedAt: new Date().toISOString()
           }
           : patient
       )
