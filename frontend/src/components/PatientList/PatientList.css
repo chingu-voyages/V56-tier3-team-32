@@ -67,15 +67,15 @@
 }
 
 .action-buttons {
-  @apply flex gap-2 justify-center flex-wrap;
+  @apply flex w-full flex-wrap text-primary gap-2 justify-evenly md:justify-center;
 }
 
 .edit-button {
-  @apply border border-primary text-primary bg-white hover:bg-accent hover:text-white hover:border-accent px-2 py-1 rounded-md transition w-14 text-xs;
+  @apply border border-primary text-primary bg-white hover:bg-accent hover:text-white hover:border-accent py-1 rounded-md transition min-w-40 md:min-w-16 md:text-sm;
 }
 
 .view-button {
-  @apply border border-primary text-primary bg-white hover:bg-primary hover:text-hover px-2 py-1 rounded-md transition w-14 text-xs;
+  @apply border border-primary text-primary bg-white hover:bg-primary hover:text-hover py-1 rounded-md transition min-w-40 md:min-w-16 md:text-sm;
 }
 
 @media (max-width: 768px) {
@@ -116,17 +116,13 @@
     @apply border-0 p-2 flex justify-between items-center;
   }
 
-  .table-cell:before {
+  .table-cell[data-label]:before {
     content: attr(data-label) ': ';
     @apply font-semibold text-gray-600 mr-2;
   }
 
   .table-cell > * {
     @apply flex-1 text-right;
-  }
-
-  .action-buttons {
-    @apply justify-end;
   }
 
   .status-dropdown {
@@ -149,10 +145,6 @@
 
   .table-cell > * {
     @apply text-left w-full;
-  }
-
-  .action-buttons {
-    @apply w-full justify-start;
   }
 
   .edit-button,
