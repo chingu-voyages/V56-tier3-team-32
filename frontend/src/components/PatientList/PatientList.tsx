@@ -21,7 +21,9 @@ const PatientList = () => {
   const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
   const [formMode, setFormMode] = useState<'edit' | 'view' | null>(null);
   const [searchName,setSearchName]=useState<string | null>(null);
-  
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
   useEffect(() => {
   let isMounted = true;
 
@@ -104,6 +106,8 @@ const calculateStatusDuration = (statusStartTime: string, updatedAt: string): st
     const newStatus = statuses.find((status) => status._id === newStatusId);
     if (!newStatus) return;
 
+    const originalPatients = [...patients];
+
     setPatients((prev) =>
       prev.map((patient) =>
         patient.patientId === patientId 
@@ -130,9 +134,37 @@ const calculateStatusDuration = (statusStartTime: string, updatedAt: string): st
 
       setError(null);
     } catch (err) {
-      setError('Failed to update patient status.');
+      setPatients(originalPatients);
+      setErrorMessage('Failed to update patient status.');
+      setShowErrorModal(true);
     }
   };
+
+  const handleErrorModalClose = () => {
+    setShowErrorModal(false);
+    setErrorMessage('');
+  };
+
+  const renderErrorModal = () => (
+    <div className='error-overlay'>
+      <div className='error-content'>
+        <div className='error-header'>
+          <h2>Error!</h2>
+        </div>
+        <div className='error-body'>
+          <p>{errorMessage}</p>
+        </div>
+        <div className='error-footer'>
+          <button
+            className='error-btn-primary'
+            onClick={handleErrorModalClose}
+          >
+            OK
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 
   const handleEditPatient = (patient: Patient) => {
     setSelectedPatient(patient);
@@ -294,6 +326,8 @@ const calculateStatusDuration = (statusStartTime: string, updatedAt: string): st
       ) : (
         patientData()
       )}
+
+      {showErrorModal && renderErrorModal()}
     </div>
   );
 };
