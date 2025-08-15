@@ -229,8 +229,8 @@ const sortPatients = (patients: Patient[], sortBy: 'updatedAt' | 'lastName', sor
         <tr className='tablehead'>
           <th className='table-cell'>Patient Id</th>
           <th className='table-cell'>First Name</th>
-          <th className='table-cell sortable-header' onClick={() => handleSortChange('lastName')}>
-            Last Name {sortBy === 'lastName' && (sortOrder === 'asc' ? '↑' : '↓')}
+          <th className='table-cell'>
+            Last Name
           </th> 
           <th className='table-cell'>Status</th>
           <th className='table-cell'>Duration</th>
@@ -323,13 +323,19 @@ const sortPatients = (patients: Patient[], sortBy: 'updatedAt' | 'lastName', sor
           className={`sort-button ${sortBy === 'updatedAt' ? 'active' : ''}`}
           onClick={() => handleSortChange('updatedAt')}
         >
-          Recently Updated {sortBy === 'updatedAt' && (sortOrder === 'asc' ? '↑' : '↓')}
+          {sortBy === 'updatedAt' 
+            ? (sortOrder === 'desc' ? 'Recently Updated' : 'Least Recently Updated')
+            : 'Recently Updated'
+          }
         </button>
         <button 
           className={`sort-button ${sortBy === 'lastName' ? 'active' : ''}`}
           onClick={() => handleSortChange('lastName')}
         >
-          Surname {sortBy === 'lastName' && (sortOrder === 'asc' ? '↑' : '↓')}
+          {sortBy === 'lastName' 
+            ? (sortOrder === 'asc' ? 'Surname (A-Z)' : 'Surname (Z-A)')
+            : 'Surname (A-Z)'
+          }
         </button>
       </div>
 
