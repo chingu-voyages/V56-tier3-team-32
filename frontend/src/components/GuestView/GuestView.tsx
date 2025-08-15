@@ -6,6 +6,8 @@ import './GuestView.css';
 
 type Patient = {
   patientId: string;
+  firstName: string;
+  lastnameFirstLetter: string;
   statusCode: string;
   updatedAt?: string;
 };
@@ -96,6 +98,15 @@ const GuestView: React.FC = () => {
           <p
             className={
               isFullscreen
+                ? 'patient-card-name-fullscreen'
+                : 'patient-card-name-regular'
+            }
+          >
+            {patient.firstName} {patient.lastnameFirstLetter}. 
+          </p>
+          <p
+            className={
+              isFullscreen
                 ? 'patient-card-status-fullscreen'
                 : 'patient-card-status-regular'
             }
@@ -123,6 +134,7 @@ const GuestView: React.FC = () => {
       <thead className='table-header'>
         <tr className='table-header-row'>
           <th className={headerClasses}>Patient ID</th>
+          <th className={headerClasses}>Name</th>
           <th className={headerClasses}>Status</th>
           <th className={headerClasses}>Last Updated</th>
         </tr>
@@ -196,6 +208,9 @@ const GuestView: React.FC = () => {
               return (
                 <tr key={idx} className='table-row'>
                   <td className='table-cell-id'>{patient.patientId}</td>
+                  <td className='table-cell-name'>
+                    {patient.firstName} {patient.lastnameFirstLetter}.
+                  </td>
                   <td className='table-cell-status'>
                     <span
                       className='status-badge'
