@@ -251,57 +251,57 @@ const GuestView: React.FC = () => {
     );
   };
 
-  const OptionB = () => {
-    if (isFullscreen) {
-      return (
-        <div className='layout-fullscreen'>
-          <div className='header-section-fullscreen'>
-            <h2 className='title-fullscreen'>Surgery Status Board</h2>
-          </div>
-          <div className='header-section-content'>
-            <div className='content-wrapper-table'>
-              {renderPatientTable(true)}
-            </div>
-          </div>
-          <div className='header-section-footer'>{legendAndFooter()}</div>
-        </div>
-      );
-    }
+  // const OptionB = () => {
+  //   if (isFullscreen) {
+  //     return (
+  //       <div className='layout-fullscreen'>
+  //         <div className='header-section-fullscreen'>
+  //           <h2 className='title-fullscreen'>Surgery Status Board</h2>
+  //         </div>
+  //         <div className='header-section-content'>
+  //           <div className='content-wrapper-table'>
+  //             {renderPatientTable(true)}
+  //           </div>
+  //         </div>
+  //         <div className='header-section-footer'>{legendAndFooter()}</div>
+  //       </div>
+  //     );
+  //   }
 
-    return (
-      <div className='layout-regular'>
-        <div className='layout-flex-column'>
-          <div className='layout-table-card'>
-            <div className='layout-table-container'>
-              <h2 className='title-regular'>Surgery Status Board</h2>
-              {renderPatientTable()}
-            </div>
-          </div>
-        </div>
-        {legendAndFooter()}
-      </div>
-    );
-  };
+  //   return (
+  //     <div className='layout-regular'>
+  //       <div className='layout-flex-column'>
+  //         <div className='layout-table-card'>
+  //           <div className='layout-table-container'>
+  //             <h2 className='title-regular'>Surgery Status Board</h2>
+  //             {renderPatientTable()}
+  //           </div>
+  //         </div>
+  //       </div>
+  //       {legendAndFooter()}
+  //     </div>
+  //   );
+  // };
 
   const ControlButtons = () => (
     <div className='control-buttons-container'>
       <div className='control-buttons-group'>
-        <button
+        {/* <button
           onClick={() => setShowOptionA(true)}
           className={`option-button ${
             showOptionA ? 'option-button-active' : 'option-button-inactive'
           }`}
         >
           Option A
-        </button>
-        <button
+        </button> */}
+        {/* <button
           onClick={() => setShowOptionA(false)}
           className={`option-button ${
             !showOptionA ? 'option-button-active' : 'option-button-inactive'
           }`}
         >
           Option B
-        </button>
+        </button> */}
       </div>
       <div className='control-buttons-group'>
         <button onClick={toggleFullscreen} className='fullscreen-button'>
@@ -363,11 +363,7 @@ const GuestView: React.FC = () => {
       }
     >
       {isFullscreen ? (
-        showOptionA ? (
           <OptionA />
-        ) : (
-          <OptionB />
-        )
       ) : (
         <div className='guest-view-content'>
           <div className='guest-header-card'>
@@ -383,7 +379,7 @@ const GuestView: React.FC = () => {
               </div>
             </div>
           </div>
-          {showOptionA ? <OptionA /> : <OptionB />}
+          <OptionA />
         </div>
       )}
     </div>
