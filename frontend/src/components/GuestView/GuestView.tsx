@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getStatusColor, getStatusTextColor } from '../../utils/StatusColors';
+import { getStatusColor } from '../../utils/StatusColors';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '@clerk/clerk-react';
 import './GuestView.css';
@@ -21,7 +21,7 @@ const GuestView: React.FC = () => {
   const [patients, setPatients] = useState<Patient[]>([]);
   const [startIndex, setStartIndex] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [showOptionA, setShowOptionA] = useState(true);
+  // const [showOptionA, setShowOptionA] = useState(true);
 
   const navigate = useNavigate();
 
@@ -110,25 +110,25 @@ const GuestView: React.FC = () => {
     );
   };
 
-  const TableHeader = ({
-    isFullscreen = false,
-  }: {
-    isFullscreen?: boolean;
-  }) => {
-    const headerClasses = isFullscreen
-      ? 'table-header-cell-fullscreen'
-      : 'table-header-cell-regular';
+  // const TableHeader = ({
+  //   isFullscreen = false,
+  // }: {
+  //   isFullscreen?: boolean;
+  // }) => {
+  //   const headerClasses = isFullscreen
+  //     ? 'table-header-cell-fullscreen'
+  //     : 'table-header-cell-regular';
 
-    return (
-      <thead className='table-header'>
-        <tr className='table-header-row'>
-          <th className={headerClasses}>Patient ID</th>
-          <th className={headerClasses}>Status</th>
-          <th className={headerClasses}>Last Updated</th>
-        </tr>
-      </thead>
-    );
-  };
+  //   return (
+  //     <thead className='table-header'>
+  //       <tr className='table-header-row'>
+  //         <th className={headerClasses}>Patient ID</th>
+  //         <th className={headerClasses}>Status</th>
+  //         <th className={headerClasses}>Last Updated</th>
+  //       </tr>
+  //     </thead>
+  //   );
+  // };
 
   const legendAndFooter = () => (
     <>
@@ -185,39 +185,39 @@ const GuestView: React.FC = () => {
     );
   };
 
-  const renderPatientTable = (isFullscreen = false) => {
-    return (
-      <div className='table-container'>
-        <table className='table'>
-          <TableHeader isFullscreen={isFullscreen} />
-          <tbody>
-            {displayedPatients.map((patient, idx) => {
-              if (!patient) return <div key={idx} />;
-              return (
-                <tr key={idx} className='table-row'>
-                  <td className='table-cell-id'>{patient.patientId}</td>
-                  <td className='table-cell-status'>
-                    <span
-                      className='status-badge'
-                      style={{
-                        backgroundColor: getStatusColor(patient.statusCode),
-                        color: getStatusTextColor(patient.statusCode),
-                      }}
-                    >
-                      {patient.statusCode}
-                    </span>
-                  </td>
-                  <td className='table-cell-updated'>
-                    {formatLastUpdated(patient.updatedAt)}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
-    );
-  };
+  // const renderPatientTable = (isFullscreen = false) => {
+  //   return (
+  //     <div className='table-container'>
+  //       <table className='table'>
+  //         <TableHeader isFullscreen={isFullscreen} />
+  //         <tbody>
+  //           {displayedPatients.map((patient, idx) => {
+  //             if (!patient) return <div key={idx} />;
+  //             return (
+  //               <tr key={idx} className='table-row'>
+  //                 <td className='table-cell-id'>{patient.patientId}</td>
+  //                 <td className='table-cell-status'>
+  //                   <span
+  //                     className='status-badge'
+  //                     style={{
+  //                       backgroundColor: getStatusColor(patient.statusCode),
+  //                       color: getStatusTextColor(patient.statusCode),
+  //                     }}
+  //                   >
+  //                     {patient.statusCode}
+  //                   </span>
+  //                 </td>
+  //                 <td className='table-cell-updated'>
+  //                   {formatLastUpdated(patient.updatedAt)}
+  //                 </td>
+  //               </tr>
+  //             );
+  //           })}
+  //         </tbody>
+  //       </table>
+  //     </div>
+  //   );
+  // };
 
   const OptionA = () => {
     if (isFullscreen) {
@@ -369,7 +369,7 @@ const GuestView: React.FC = () => {
           <div className='guest-header-card'>
             <div className='guest-header-content'>
               <div>
-                <h1 className='guest-header-text'>Surgery Status Board</h1>
+                <h1 className='guest-header-text'>Surgery Status</h1>
                 <p className='guest-header-description'>
                   Real-time updates on surgery schedules and patient status
                 </p>
