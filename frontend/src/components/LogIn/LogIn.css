@@ -1,5 +1,5 @@
 .login-container {
-  @apply min-h-screen bg-white text-primary flex flex-col;
+  @apply bg-white text-primary flex flex-col min-h-screen;
 }
 
 .login-header {
@@ -11,11 +11,11 @@
 }
 
 .login-card {
-  @apply flex flex-grow flex-col lg:flex-row px-6 py-8 lg:py-12 gap-8 lg:gap-12 max-w-7xl mx-auto w-full items-start justify-center;
+  @apply flex flex-col lg:flex-row px-6 py-6 lg:py-8 gap-6 md:gap-8 lg:gap-12 max-w-7xl mx-auto w-full items-stretch justify-start flex-1;
 }
 
 .login-content {
-  @apply flex-1 max-w-2xl text-left w-full lg:w-auto;
+  @apply text-left w-full max-w-full lg:max-w-2xl lg:flex-1;
 }
 
 .content-title {
@@ -39,7 +39,7 @@
 }
 
 .login-form {
-  @apply max-w-sm w-full bg-white border rounded-md p-4 shadow-sm self-start lg:self-start min-h-[340px];
+  @apply max-w-full lg:max-w-sm w-full bg-white border rounded-md p-4 shadow-sm self-auto lg:self-start;
 }
 
 .form-section {
@@ -74,7 +74,7 @@
 }
 
 .divider {
-  @apply relative my-6;
+  @apply relative my-4 md:my-6;
 }
 
 .divider::before {
@@ -95,7 +95,7 @@
 }
 
 .login-footer {
-  @apply px-4 sm:px-8 py-4 bg-secondary border-t border-border-line;
+  @apply px-4 sm:px-8 py-4 bg-secondary border-t border-border-line mt-auto;
 }
 
 .footer-text {
