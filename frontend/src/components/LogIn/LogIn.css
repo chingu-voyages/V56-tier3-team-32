@@ -3,27 +3,27 @@
 }
 
 .login-header {
-  @apply px-6 py-4 bg-primary text-white text-xl font-semibold;
+  @apply px-4 sm:px-6 py-4 bg-primary text-white text-lg sm:text-xl font-semibold;
 }
 
 .login-header-text {
-  @apply max-w-7xl mx-auto w-full flex justify-between items-center text-center;
+  @apply max-w-7xl mx-auto w-full flex flex-col sm:flex-row sm:justify-between items-center text-center gap-2 sm:gap-0;
 }
 
 .login-card {
-  @apply flex flex-grow flex-row px-6 py-12 gap-12 max-w-7xl mx-auto w-full items-start justify-center;
+  @apply flex flex-grow flex-col lg:flex-row px-6 py-8 lg:py-12 gap-8 lg:gap-12 max-w-7xl mx-auto w-full items-start justify-center;
 }
 
 .login-content {
-  @apply flex-1 max-w-2xl text-left;
+  @apply flex-1 max-w-2xl text-left w-full lg:w-auto;
 }
 
 .content-title {
-  @apply text-4xl font-extrabold mb-4 leading-tight;
+  @apply text-2xl sm:text-3xl lg:text-4xl font-extrabold mb-4 leading-tight;
 }
 
 .content-description {
-  @apply text-lg mb-6 max-w-xl;
+  @apply text-base sm:text-lg mb-6 max-w-xl;
 }
 
 .git-link {
@@ -39,7 +39,7 @@
 }
 
 .login-form {
-  @apply max-w-sm w-full bg-white border rounded-md p-4 shadow-sm self-start min-h-[340px];
+  @apply max-w-sm w-full bg-white border rounded-md p-4 shadow-sm self-start lg:self-start min-h-[340px];
 }
 
 .form-section {
@@ -95,7 +95,7 @@
 }
 
 .login-footer {
-  @apply px-8 py-4 bg-secondary border-t border-border-line;
+  @apply px-4 sm:px-8 py-4 bg-secondary border-t border-border-line;
 }
 
 .footer-text {
