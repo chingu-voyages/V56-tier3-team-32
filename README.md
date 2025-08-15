@@ -108,6 +108,14 @@ The project uses Gemini API as a chatbot.
 
 To set it up: Follow [this guide](https://aistudio.google.com/app/apikey) to get the API key (it will be used as an environmental variable).
 
+#### Cloning the repo
+
+To Clone the repository:
+
+```
+git clone https://github.com/chingu-voyages/V56-tier3-team-32.git
+```
+
 #### Environment Variables
 
 You can store env variables in your computer, or inside `.env` files.
@@ -128,25 +136,20 @@ Do not expose the following variables in code or other place accessible for fore
 
 ### Running the project
 
-To Clone the repository:
+Before running the project, make have the project folder opened.
+
+To run backend, open a terminal and execute:
 
 ```
-git clone https://github.com/chingu-voyages/V56-tier3-team-32.git
-```
-
-To run backend, execute:
-
-```
-cd V56-tier3-team-32/backend
+cd backend
 npm install
 npm run dev
 ```
 
-To run frontend, execute:
-(Note: Use another terminal to run frontend)
+To run frontend, open another terminal and execute:
 
 ```
-cd V56-tier3-team-32/frontend
+cd frontend
 npm install
 npm start
 ```
