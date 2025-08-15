@@ -21,6 +21,8 @@ const PatientList = () => {
   const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
   const [formMode, setFormMode] = useState<'edit' | 'view' | null>(null);
   const [searchName,setSearchName]=useState<string | null>(null);
+  const [sortBy, setSortBy] = useState<'createdAt' | 'lastName'>('createdAt');
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
   
   useEffect(() => {
   let isMounted = true;
@@ -96,6 +98,22 @@ const calculateStatusDuration = (statusStartTime: string, updatedAt: string): st
   }
 };
 
+const sortPatients = (patients: Patient[], sortBy: 'createdAt' | 'lastName', sortOrder: 'asc' | 'desc'): Patient[] => {
+  return [...patients].sort((a, b) => {
+    let comparison = 0;
+    
+    if (sortBy === 'createdAt') {
+      const dateA = new Date(a.createdAt).getTime();
+      const dateB = new Date(b.createdAt).getTime();
+      comparison = dateA - dateB;
+    } else if (sortBy === 'lastName') {
+      comparison = a.lastName.localeCompare(b.lastName);
+    }
+    
+    return sortOrder === 'asc' ? comparison : -comparison;
+  });
+};
+
   const getStatusCode = (status: Patient['status']): string => {
     return status?.code ?? 'Unknown';
   };
@@ -164,6 +182,15 @@ const calculateStatusDuration = (statusStartTime: string, updatedAt: string): st
     const { value } = e.target;
     setSearchName(value);
   };
+
+  const handleSortChange = (newSortBy: 'createdAt' | 'lastName') => {
+    if (sortBy === newSortBy) {
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortBy(newSortBy);
+      setSortOrder(newSortBy === 'createdAt' ? 'desc' : 'asc');
+    }
+  };
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -193,20 +220,24 @@ const calculateStatusDuration = (statusStartTime: string, updatedAt: string): st
     );
   }
 
+  const sortedPatients = sortPatients(patients, sortBy, sortOrder);
+
   const patientData = () => (
     <table className='table'>
       <thead>
         <tr className='tablehead'>
           <th className='table-cell'>Patient Id</th>
           <th className='table-cell'>First Name</th>
-          <th className='table-cell'>Last Name</th> 
+          <th className='table-cell sortable-header' onClick={() => handleSortChange('lastName')}>
+            Last Name {sortBy === 'lastName' && (sortOrder === 'asc' ? '↑' : '↓')}
+          </th> 
           <th className='table-cell'>Status</th>
           <th className='table-cell'>Duration</th>
           {isAdmin && <th className='table-cell'>Actions</th>}
         </tr>
       </thead>
       <tbody>
-        {patients.map((patient) => {
+        {sortedPatients.map((patient) => {
           const statusCode = getStatusCode(patient.status);
           const currentStatus = statuses.find(status => status.code === statusCode);
           
@@ -284,6 +315,22 @@ const calculateStatusDuration = (statusStartTime: string, updatedAt: string): st
         </form>
       </div>
       <h1 className='patient-list-title'>Patient List</h1>
+      
+      <div className='sorting-controls'>
+        <span className='sort-label'>Sort by:</span>
+        <button 
+          className={`sort-button ${sortBy === 'createdAt' ? 'active' : ''}`}
+          onClick={() => handleSortChange('createdAt')}
+        >
+          Time Created {sortBy === 'createdAt' && (sortOrder === 'asc' ? '↑' : '↓')}
+        </button>
+        <button 
+          className={`sort-button ${sortBy === 'lastName' ? 'active' : ''}`}
+          onClick={() => handleSortChange('lastName')}
+        >
+          Surname {sortBy === 'lastName' && (sortOrder === 'asc' ? '↑' : '↓')}
+        </button>
+      </div>
 
       {loading ? (
         <p className='loading-text'>Loading patients...</p>
