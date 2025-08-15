@@ -132,7 +132,7 @@ export const updatePatientStatus = async (
 
     const updatedPatient = await Patient.findOneAndUpdate(
       { patientId },
-      { $set: { status: statusId, statusStartTime: new Date() } },
+      { $set: { status: statusId, statusStartTime: new Date(), updatedAt: new Date() } },
       { new: true, runValidators: true }
     ).populate({
       path: 'status',
