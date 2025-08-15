@@ -19,19 +19,23 @@ export interface PatientType extends Document {
 }
 
 const patientSchema = new Schema<PatientType>({
-  patientId: { type: String, required: true, unique: true },
-  firstName: { type: String, required: true },
-  lastName: { type: String, required: true },
-  street: { type: String, required: true },
-  city: { type: String, required: true },
-  state: { type: String, required: true },
-  country: { type: String, required: true },
+  patientId: { type: String, required: true, unique: true, trim: true },
+  firstName: { type: String, required: true, trim: true },
+  lastName: { type: String, required: true, trim: true },
+  street: { type: String, required: true, trim: true },
+  city: { type: String, required: true, trim: true },
+  state: { type: String, required: true, trim: true },
+  country: { type: String, required: true, trim: true },
   telephone: { type: Number, required: true },
-  contactEmail: { type: String, required: true },
-  // The `createdAt` field is managed automatically by the `timestamps` option.
+  contactEmail: { type: String, required: true, trim: true },
   status: { type: Schema.Types.ObjectId, ref: 'Status', required: true },
   statusStartTime: { type: Date, default: Date.now },
-  surgeryType: { type: String, enum: ['Type 1 - Basic', 'Type 2 - Moderate', 'Type 3 - Critical'], required: true }
+  surgeryType: { 
+    type: String, 
+    enum: ['Type 1 - Basic', 'Type 2 - Moderate', 'Type 3 - Critical'], 
+    required: true,
+    trim: true
+  },
 }, {
   timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' }
 });

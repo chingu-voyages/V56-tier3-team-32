@@ -39,37 +39,10 @@ const PatientForm: React.FC<PatientFormProps> = ({
   const [statuses, setStatuses] = useState<Status[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<{[key: string]: string}>({});
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [selectedStatus, setSelectedStatus] = useState<string>('');
-
-  // generate patient ID for create mode
-  useEffect(() => {
-    const handleCreateNewUser = async () => {
-      if (mode === 'create') {
-        try {
-          const token = await getToken();
-          const response = await axios.get(
-            `${BASE_URL}/admin/generate-patient-id`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-          console.log(response);
-
-          setPatient((prev) => ({
-            ...prev,
-            patientId: response.data.patientId,
-          }));
-        } catch (err: any) {
-          console.error('Error generating new patient ID:', err);
-        }
-      }
-    };
-    handleCreateNewUser();
-  }, [mode, getToken]);
 
   // fetch statuses for edit mode
   useEffect(() => {
@@ -120,13 +93,28 @@ const PatientForm: React.FC<PatientFormProps> = ({
     }
   }, [mode, patientData]);
 
+  const validateField = (name: string, value: any) => {
+    return !value ||
+    (typeof value === 'string' && value.trim() === '')
+    ? `${name.charAt(0).toUpperCase() + name.slice(1)} is required`
+    : '';
+  };
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
+    const newValue = name === 'telephone' ? Number(value) : value;
+    
     setPatient((prev) => ({
       ...prev,
-      [name]: name === 'telephone' ? Number(value) : value,
+      [name]: newValue,
+    }));
+
+    const error = validateField(name, newValue);
+    setFieldErrors(prev => ({
+      ...prev,
+      [name]: error
     }));
   };
 
@@ -229,19 +217,21 @@ const PatientForm: React.FC<PatientFormProps> = ({
 
         {error && <div className='error-message'>{error}</div>}
 
-        <div>
-          <label htmlFor='patientId'>Patient No.:</label>
-          <br />
-          <input
-            type='text'
-            id='patientId'
-            name='patientId'
-            value={patient.patientId}
-            onChange={handleChange}
-            readOnly
-            className='readonly-label'
-          />
-        </div>
+        {mode !== 'create' && (
+          <div>
+            <label htmlFor='patientId'>Patient No.:</label>
+            <br />
+            <input
+              type='text'
+              id='patientId'
+              name='patientId'
+              value={patient.patientId}
+              onChange={handleChange}
+              readOnly
+              className='readonly-label'
+            />
+          </div>
+        )}
         <div>
           <label htmlFor='firstName'>First Name:</label>
           <br />
@@ -255,6 +245,7 @@ const PatientForm: React.FC<PatientFormProps> = ({
             required={!isReadOnly}
             className={isReadOnly ? 'readonly-label' : ''}
           />
+          {fieldErrors.firstName && <div className='error-message'>{fieldErrors.firstName}</div>}
         </div>
         <div>
           <label htmlFor='lastName'>Last Name:</label>
@@ -269,6 +260,7 @@ const PatientForm: React.FC<PatientFormProps> = ({
             required={!isReadOnly}
             className={isReadOnly ? 'readonly-label' : ''}
           />
+          {fieldErrors.lastName && <div className='error-message'>{fieldErrors.lastName}</div>}
         </div>
         <div>
           <label htmlFor='street'>Street:</label>
@@ -283,6 +275,7 @@ const PatientForm: React.FC<PatientFormProps> = ({
             required={!isReadOnly}
             className={isReadOnly ? 'readonly-label' : ''}
           />
+          {fieldErrors.street && <div className='error-message'>{fieldErrors.street}</div>}
         </div>
         <div>
           <label htmlFor='city'>City:</label>
@@ -297,6 +290,7 @@ const PatientForm: React.FC<PatientFormProps> = ({
             required={!isReadOnly}
             className={isReadOnly ? 'readonly-label' : ''}
           />
+          {fieldErrors.city && <div className='error-message'>{fieldErrors.city}</div>}
         </div>
         <div>
           <label htmlFor='state'>State:</label>
@@ -311,6 +305,7 @@ const PatientForm: React.FC<PatientFormProps> = ({
             required={!isReadOnly}
             className={isReadOnly ? 'readonly-label' : ''}
           />
+          {fieldErrors.state && <div className='error-message'>{fieldErrors.state}</div>}
         </div>
         <div>
           <label htmlFor='country'>Country:</label>
@@ -325,6 +320,7 @@ const PatientForm: React.FC<PatientFormProps> = ({
             required={!isReadOnly}
             className={isReadOnly ? 'readonly-label' : ''}
           />
+          {fieldErrors.country && <div className='error-message'>{fieldErrors.country}</div>}
         </div>
         <div>
           <label htmlFor='telephone'>Telephone:</label>
@@ -375,13 +371,13 @@ const PatientForm: React.FC<PatientFormProps> = ({
               onChange={handleChange}
               required
             >
-
+            <option value="">Select Surgery Type</option>
             <option value="Type 1 - Basic">Type 1 - Basic</option>
             <option value="Type 2 - Moderate">Type 2 - Moderate</option>
             <option value="Type 3 - Critical">Type 3 - Critical</option>
             </select>
           )}
-          
+          {fieldErrors.surgeryType && <div className='error-message'>{fieldErrors.surgeryType}</div>}
         </div>
 
         <div>
