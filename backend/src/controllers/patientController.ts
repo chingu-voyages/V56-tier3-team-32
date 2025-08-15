@@ -254,9 +254,11 @@ export const getAnonymizedPatients = async (
   try {
     const patients = await Patient.find()
       .populate({ path: 'status', select: 'code -_id' })
-      .select('patientId status createdAt updatedAt');
+      .select('patientId firstName lastName status createdAt updatedAt');
     const anonymizedPatients = patients.map((patient: any) => ({
       patientId: patient.patientId,
+      firstName: patient.firstName,
+      lastnameFirstLetter: patient.lastName ? patient.lastName.charAt(0).toUpperCase() : '',
       statusCode: patient.status?.code,
       updatedAt: patient.updatedAt,
     }));

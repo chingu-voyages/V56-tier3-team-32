@@ -123,11 +123,11 @@
 }
 
 .patient-card-content {
-  @apply flex items-center gap-5 justify-between w-full;
+  @apply flex flex-col items-center gap-3 justify-center w-full;
 }
 
 .patient-card-content-regular {
-  @apply px-8 py-3 w-fit;
+  @apply px-4 py-3;
 }
 
 .patient-card-id-fullscreen {
@@ -140,6 +140,14 @@
 
 .patient-card-status-fullscreen {
   @apply text-xl font-medium;
+}
+
+.patient-card-name-fullscreen {
+  @apply text-xl font-medium;
+}
+
+.patient-card-name-regular {
+  @apply text-lg;
 }
 
 .patient-card-status-regular {
@@ -175,7 +183,7 @@
 }
 
 .table-header-cell-regular {
-  @apply border border-gray-200 px-4 py-4 text-center w-1/3 text-xl;
+  @apply border border-gray-200 px-4 py-4 text-center w-1/4 text-xl;
 }
 
 .table-row {
@@ -188,6 +196,10 @@
 
 .table-cell-status {
   @apply border border-gray-200 px-6 py-4 text-center font-medium;
+}
+
+.table-cell-name {
+  @apply border border-gray-200 px-6 py-4 text-center font-medium text-gray-900 text-xl;
 }
 
 .table-cell-updated {
