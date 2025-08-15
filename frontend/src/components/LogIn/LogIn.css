@@ -1,17 +1,19 @@
 .login-container {
   @apply bg-white text-primary flex flex-col min-h-screen;
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile */
 }
 
 .login-header {
-  @apply px-4 sm:px-6 py-4 bg-primary text-white text-lg sm:text-xl font-semibold;
+  @apply px-4 sm:px-6 py-2 sm:py-4 bg-primary text-white text-base sm:text-lg md:text-xl font-semibold;
 }
 
 .login-header-text {
-  @apply max-w-7xl mx-auto w-full flex flex-col sm:flex-row sm:justify-between items-center text-center gap-2 sm:gap-0;
+  @apply max-w-7xl mx-auto w-full flex flex-col sm:flex-row sm:justify-between items-center text-center gap-1 sm:gap-2;
 }
 
 .login-card {
-  @apply flex flex-col lg:flex-row px-6 py-6 lg:py-8 gap-6 md:gap-8 lg:gap-12 max-w-7xl mx-auto w-full items-stretch justify-start flex-1;
+  @apply flex flex-col lg:flex-row px-3 sm:px-6 py-3 sm:py-6 lg:py-8 gap-4 md:gap-6 lg:gap-12 max-w-7xl mx-auto w-full items-stretch justify-start flex-1;
 }
 
 .login-content {
@@ -19,15 +21,15 @@
 }
 
 .content-title {
-  @apply text-2xl sm:text-3xl lg:text-4xl font-extrabold mb-4 leading-tight;
+  @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold mb-2 sm:mb-4 leading-tight;
 }
 
 .content-description {
-  @apply text-base sm:text-lg mb-6 max-w-xl;
+  @apply text-sm sm:text-base md:text-lg mb-3 sm:mb-6 max-w-xl;
 }
 
 .git-link {
-  @apply text-primary hover:text-accent hover:text-xl text-lg font-semibold hover:cursor-pointer hover:transition-all hover:duration-75;
+  @apply text-primary hover:text-accent text-sm sm:text-base md:text-lg font-semibold hover:cursor-pointer hover:transition-all hover:duration-75;
 }
 
 .login-title {
@@ -39,34 +41,34 @@
 }
 
 .login-form {
-  @apply max-w-full lg:max-w-sm w-full bg-white border rounded-md p-4 shadow-sm self-auto lg:self-start;
+  @apply max-w-full lg:max-w-sm w-full bg-white border rounded-md p-3 sm:p-4 shadow-sm self-auto lg:self-start;
 }
 
 .form-section {
-  @apply mb-6;
+  @apply mb-3 sm:mb-6;
 }
 
 .section-title {
-  @apply text-2xl font-bold text-primary mb-2 text-left;
+  @apply text-lg sm:text-xl md:text-2xl font-bold text-primary mb-1 sm:mb-2 text-left;
 }
 
 .section-description {
-  @apply text-font-secondary text-sm mb-6 text-left;
+  @apply text-font-secondary text-xs sm:text-sm mb-3 sm:mb-6 text-left;
 }
 
 .login-buttons {
-  @apply flex flex-col gap-4 mt-6;
+  @apply flex flex-col gap-3 sm:gap-4 mt-3 sm:mt-6;
 }
 
 .primary-btn {
-  @apply w-full flex items-center justify-center px-6 py-3 bg-primary text-white font-medium rounded-lg 
+  @apply w-full flex items-center justify-center px-4 sm:px-6 py-2.5 sm:py-3 bg-primary text-white font-medium rounded-lg 
          hover:bg-accent focus:outline-none focus:ring-4 focus:ring-primary focus:ring-opacity-20 
-         transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed min-h-[48px];
+         transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed min-h-[42px] sm:min-h-[48px];
 }
 
 .secondary-btn {
-  @apply w-full flex items-center justify-center px-6 py-3 bg-transparent text-primary border-primary border-2 rounded-lg
-  font-medium hover:cursor-pointer hover:bg-accent transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed min-h-[48px];
+  @apply w-full flex items-center justify-center px-4 sm:px-6 py-2.5 sm:py-3 bg-transparent text-primary border-primary border-2 rounded-lg
+  font-medium hover:cursor-pointer hover:bg-accent transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed min-h-[42px] sm:min-h-[48px];
 }
 
 .loading-spinner {
@@ -74,7 +76,7 @@
 }
 
 .divider {
-  @apply relative my-4 md:my-6;
+  @apply relative my-2 sm:my-4 md:my-6;
 }
 
 .divider::before {
@@ -83,7 +85,7 @@
 }
 
 .divider-text {
-  @apply relative bg-white px-4 text-sm text-font-secondary;
+  @apply relative bg-white px-2 sm:px-4 text-xs sm:text-sm text-font-secondary;
 }
 
 .help-section {
@@ -91,11 +93,11 @@
 }
 
 .help-text {
-  @apply text-font-secondary text-sm mb-4;
+  @apply text-font-secondary text-xs sm:text-sm mb-2 sm:mb-4;
 }
 
 .login-footer {
-  @apply px-4 sm:px-8 py-4 bg-secondary border-t border-border-line mt-auto;
+  @apply px-4 sm:px-8 py-2 sm:py-4 bg-secondary border-t border-border-line mt-auto;
 }
 
 .footer-text {

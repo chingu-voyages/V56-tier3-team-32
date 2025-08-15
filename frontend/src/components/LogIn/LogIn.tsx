@@ -40,8 +40,8 @@ const LogIn: React.FC = () => {
     <div className='login-container'>
       <div className='login-header'>
         <div className='login-header-text'>
-          <h1>SurgeVenger Status Board</h1>
-          <p className='text-lg'>
+          <h1 className='text-sm sm:text-base md:text-lg lg:text-xl font-semibold'>SurgeVenger Status Board</h1>
+          <p className='text-xs sm:text-sm md:text-base'>
             {currentDate.toLocaleDateString('en-US', {
               year: 'numeric',
               month: 'long',
