@@ -21,7 +21,7 @@ const PatientList = () => {
   const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
   const [formMode, setFormMode] = useState<'edit' | 'view' | null>(null);
   const [searchName,setSearchName]=useState<string | null>(null);
-  const [sortBy, setSortBy] = useState<'createdAt' | 'lastName'>('createdAt');
+  const [sortBy, setSortBy] = useState<'updatedAt' | 'lastName'>('updatedAt');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
   
   useEffect(() => {
@@ -98,13 +98,13 @@ const calculateStatusDuration = (statusStartTime: string, updatedAt: string): st
   }
 };
 
-const sortPatients = (patients: Patient[], sortBy: 'createdAt' | 'lastName', sortOrder: 'asc' | 'desc'): Patient[] => {
+const sortPatients = (patients: Patient[], sortBy: 'updatedAt' | 'lastName', sortOrder: 'asc' | 'desc'): Patient[] => {
   return [...patients].sort((a, b) => {
     let comparison = 0;
     
-    if (sortBy === 'createdAt') {
-      const dateA = new Date(a.createdAt).getTime();
-      const dateB = new Date(b.createdAt).getTime();
+    if (sortBy === 'updatedAt') {
+      const dateA = new Date(a.updatedAt).getTime();
+      const dateB = new Date(b.updatedAt).getTime();
       comparison = dateA - dateB;
     } else if (sortBy === 'lastName') {
       comparison = a.lastName.localeCompare(b.lastName);
@@ -183,12 +183,12 @@ const sortPatients = (patients: Patient[], sortBy: 'createdAt' | 'lastName', sor
     setSearchName(value);
   };
 
-  const handleSortChange = (newSortBy: 'createdAt' | 'lastName') => {
+  const handleSortChange = (newSortBy: 'updatedAt' | 'lastName') => {
     if (sortBy === newSortBy) {
       setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
     } else {
       setSortBy(newSortBy);
-      setSortOrder(newSortBy === 'createdAt' ? 'desc' : 'asc');
+      setSortOrder(newSortBy === 'updatedAt' ? 'desc' : 'asc');
     }
   };
   const handleSearch = async (e: React.FormEvent) => {
@@ -319,10 +319,10 @@ const sortPatients = (patients: Patient[], sortBy: 'createdAt' | 'lastName', sor
       <div className='sorting-controls'>
         <span className='sort-label'>Sort by:</span>
         <button 
-          className={`sort-button ${sortBy === 'createdAt' ? 'active' : ''}`}
-          onClick={() => handleSortChange('createdAt')}
+          className={`sort-button ${sortBy === 'updatedAt' ? 'active' : ''}`}
+          onClick={() => handleSortChange('updatedAt')}
         >
-          Time Created {sortBy === 'createdAt' && (sortOrder === 'asc' ? '↑' : '↓')}
+          Recently Updated {sortBy === 'updatedAt' && (sortOrder === 'asc' ? '↑' : '↓')}
         </button>
         <button 
           className={`sort-button ${sortBy === 'lastName' ? 'active' : ''}`}
