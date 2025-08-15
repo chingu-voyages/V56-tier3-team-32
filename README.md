@@ -128,18 +128,25 @@ Do not expose the following variables in code or other place accessible for fore
 
 ### Running the project
 
+To Clone the repository:
+
+```
+git clone https://github.com/chingu-voyages/V56-tier3-team-32.git
+```
+
 To run backend, execute:
 
 ```
-cd backend
+cd V56-tier3-team-32/backend
 npm install
 npm run dev
 ```
 
 To run frontend, execute:
+(Note: Use another terminal to run frontend)
 
 ```
-cd frontend
+cd V56-tier3-team-32/frontend
 npm install
 npm start
 ```
@@ -147,7 +154,7 @@ npm start
 ## Our Team
 
 - Hancke le Roux(Scrum master) #1: [GitHub](https://github.com/HawkCoding) / [LinkedIn](https://www.linkedin.com/in/hancke-chris-le-roux-19981206za/)
-- Shivanand Gupta (Svont)(Developer)" #2: [GitHub](https://github.com/Shivanand-0) / [LinkedIn](https://www.linkedin.com/in/ishivanandgupta/)
+- Shivanand Gupta (Svont)(Developer) #2: [GitHub](https://github.com/Shivanand-0) / [LinkedIn](https://www.linkedin.com/in/ishivanandgupta/)
 - Win Win Khaing (Thea) (Developer) #3: [GitHub](https://github.com/TheaWin) / [LinkedIn](https://www.linkedin.com/in/thea-win/)
 - Evaldas Visockas (Developer) #4: [Github](https://github.com/EvalVis) / [LinkedIn](https://www.linkedin.com/in/evaldas-visockas/)
 - Brandon Datch (Developer) #5: [GitHub](https://github.com/Brandon-Isaac) / [LinkedIn](https://linkedin.com/in/isaac-datch-947067288)
