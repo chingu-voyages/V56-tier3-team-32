@@ -21,6 +21,7 @@
 - [User Stories](#user-stories)
 - [Our Team](#our-team)
 - [Contributor Graph](#contributor-graph)
+- [Deployments](#deployments)
 
 ## Overview
 
