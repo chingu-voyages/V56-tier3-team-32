@@ -93,14 +93,11 @@ const LogIn: React.FC = () => {
             </div>
           </div>
 
-          <div className='divider'>
-            <span className='divider-text'>
+          <div className='info-section'>
+            <p className='info-text'>
               Note: Login access is restricted to authorized staff and
               administrators only.
-            </span>
-          </div>
-
-          <div className='help-section'>
+            </p>
             <p className='help-text'>
               Need credentials? Contact your team leader or admin.
             </p>

@@ -83,25 +83,16 @@
   @apply w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin;
 }
 
-.divider {
-  @apply relative my-2 sm:my-4 md:my-6;
+.info-section {
+  @apply mt-3 sm:mt-6 text-left;
 }
 
-.divider::before {
-  @apply absolute inset-0 flex items-center border-t border-border-line;
-  content: '';
-}
-
-.divider-text {
-  @apply relative bg-white px-2 sm:px-4 text-xs sm:text-sm text-font-secondary;
-}
-
-.help-section {
-  @apply text-left;
+.info-text {
+  @apply text-font-secondary text-xs sm:text-sm mb-2 sm:mb-3 text-left;
 }
 
 .help-text {
-  @apply text-font-secondary text-xs sm:text-sm mb-2 sm:mb-4;
+  @apply text-font-secondary text-xs sm:text-sm mb-2 sm:mb-4 text-left;
 }
 
 .login-footer {
