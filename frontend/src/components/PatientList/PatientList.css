@@ -34,6 +34,26 @@
   @apply px-6 py-2 bg-primary text-white rounded-md hover:bg-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
 }
 
+.sorting-controls {
+  @apply flex items-center gap-4 mb-4 flex-wrap;
+}
+
+.sort-label {
+  @apply text-primary font-medium;
+}
+
+.sort-button {
+  @apply px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors text-sm font-medium;
+}
+
+.sort-button.active {
+  @apply bg-primary text-white border-primary hover:bg-accent;
+}
+
+.sortable-header {
+  @apply cursor-pointer hover:bg-gray-100 transition-colors;
+}
+
 .table-container {
   @apply overflow-x-auto;
 }
@@ -121,6 +141,14 @@
 
   .patient-list-title {
     @apply text-2xl font-bold;
+  }
+
+  .sorting-controls {
+    @apply justify-center;
+  }
+
+  .sort-button {
+    @apply px-3 py-1 text-xs;
   }
 
   .table-container {

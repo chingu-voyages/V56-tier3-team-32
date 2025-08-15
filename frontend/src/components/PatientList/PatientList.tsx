@@ -23,7 +23,9 @@ const PatientList = () => {
   const [searchName,setSearchName]=useState<string | null>(null);
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-
+  const [sortBy, setSortBy] = useState<'updatedAt' | 'lastName'>('updatedAt');
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
+    
   useEffect(() => {
   let isMounted = true;
 
@@ -98,6 +100,22 @@ const calculateStatusDuration = (statusStartTime: string, updatedAt: string): st
   }
 };
 
+const sortPatients = (patients: Patient[], sortBy: 'updatedAt' | 'lastName', sortOrder: 'asc' | 'desc'): Patient[] => {
+  return [...patients].sort((a, b) => {
+    let comparison = 0;
+    
+    if (sortBy === 'updatedAt') {
+      const dateA = new Date(a.updatedAt).getTime();
+      const dateB = new Date(b.updatedAt).getTime();
+      comparison = dateA - dateB;
+    } else if (sortBy === 'lastName') {
+      comparison = a.lastName.localeCompare(b.lastName);
+    }
+    
+    return sortOrder === 'asc' ? comparison : -comparison;
+  });
+};
+
   const getStatusCode = (status: Patient['status']): string => {
     return status?.code ?? 'Unknown';
   };
@@ -115,7 +133,8 @@ const calculateStatusDuration = (statusStartTime: string, updatedAt: string): st
             ...patient, 
             status: { code: newStatus.code },
             statusStartTime: new Date().toISOString(),
-            statusDuration: '0m' 
+            statusDuration: '0m',
+            updatedAt: new Date().toISOString()
           }
           : patient
       )
@@ -196,6 +215,15 @@ const calculateStatusDuration = (statusStartTime: string, updatedAt: string): st
     const { value } = e.target;
     setSearchName(value);
   };
+
+  const handleSortChange = (newSortBy: 'updatedAt' | 'lastName') => {
+    if (sortBy === newSortBy) {
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortBy(newSortBy);
+      setSortOrder(newSortBy === 'updatedAt' ? 'desc' : 'asc');
+    }
+  };
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -225,20 +253,24 @@ const calculateStatusDuration = (statusStartTime: string, updatedAt: string): st
     );
   }
 
+  const sortedPatients = sortPatients(patients, sortBy, sortOrder);
+
   const patientData = () => (
     <table className='table'>
       <thead>
         <tr className='tablehead'>
           <th className='table-cell'>Patient Id</th>
           <th className='table-cell'>First Name</th>
-          <th className='table-cell'>Last Name</th> 
+          <th className='table-cell'>
+            Last Name
+          </th> 
           <th className='table-cell'>Status</th>
           <th className='table-cell'>Duration</th>
           {isAdmin && <th className='table-cell'>Actions</th>}
         </tr>
       </thead>
       <tbody>
-        {patients.map((patient) => {
+        {sortedPatients.map((patient) => {
           const statusCode = getStatusCode(patient.status);
           const currentStatus = statuses.find(status => status.code === statusCode);
           
@@ -316,6 +348,28 @@ const calculateStatusDuration = (statusStartTime: string, updatedAt: string): st
         </form>
       </div>
       <h1 className='patient-list-title'>Patient List</h1>
+      
+      <div className='sorting-controls'>
+        <span className='sort-label'>Sort by:</span>
+        <button 
+          className={`sort-button ${sortBy === 'updatedAt' ? 'active' : ''}`}
+          onClick={() => handleSortChange('updatedAt')}
+        >
+          {sortBy === 'updatedAt' 
+            ? (sortOrder === 'desc' ? 'Recently Updated' : 'Least Recently Updated')
+            : 'Recently Updated'
+          }
+        </button>
+        <button 
+          className={`sort-button ${sortBy === 'lastName' ? 'active' : ''}`}
+          onClick={() => handleSortChange('lastName')}
+        >
+          {sortBy === 'lastName' 
+            ? (sortOrder === 'asc' ? 'Surname (A-Z)' : 'Surname (Z-A)')
+            : 'Surname (A-Z)'
+          }
+        </button>
+      </div>
 
       {loading ? (
         <p className='loading-text'>Loading patients...</p>

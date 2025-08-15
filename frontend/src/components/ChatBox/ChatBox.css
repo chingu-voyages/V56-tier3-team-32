@@ -2,6 +2,14 @@
   @apply fixed bottom-20 right-5 w-[300px] h-[400px] bg-white border border-gray-300 rounded-xl overflow-hidden flex flex-col shadow-lg;
 }
 
+.chat-header {
+  @apply bg-primary text-white p-3 text-center border-b border-gray-300;
+}
+
+.chat-header h3 {
+  @apply m-0 text-lg font-semibold;
+}
+
 .chat-messages {
   @apply flex-1 p-2.5 overflow-y-auto;
 }
