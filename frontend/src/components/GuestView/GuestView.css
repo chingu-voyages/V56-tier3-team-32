@@ -5,6 +5,7 @@
 .guest-view-fullscreen {
   @apply fixed inset-0 z-50 bg-white overflow-y-auto;
 }
+/* Added the overflow for scrollability */
 
 .guest-view-content {
   @apply p-6;
