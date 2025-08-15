@@ -41,6 +41,9 @@ const ChatBox = () => {
 
   return (
     <div className='chatbox-container'>
+      <div className='chat-header'>
+        <h3>Snapple</h3>
+      </div>
       <div className='chat-messages'>
         {messages.map((msg, index) => (
           <div key={index} className={`chat-msg ${msg.sender}`}>
