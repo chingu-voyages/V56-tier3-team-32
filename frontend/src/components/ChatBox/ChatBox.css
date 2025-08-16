@@ -27,7 +27,7 @@
 }
 
 .chat-input {
-  @apply flex border-t border-gray-300;
+  @apply flex border-t border-gray-300 h-16 items-center p-2.5 ;
 }
 
 .chat-input input {
@@ -35,5 +35,5 @@
 }
 
 .chat-input button {
-  @apply bg-primary hover:cursor-pointer text-white border-none p-10;
+  @apply bg-primary hover:cursor-pointer text-white border-none p-2.5 rounded-md transition-colors duration-200;
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getStatusColor, getStatusTextColor } from '../../utils/StatusColors';
+import { getStatusColor } from '../../utils/StatusColors';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '@clerk/clerk-react';
 import './GuestView.css';
@@ -23,7 +23,7 @@ const GuestView: React.FC = () => {
   const [patients, setPatients] = useState<Patient[]>([]);
   const [startIndex, setStartIndex] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [showOptionA, setShowOptionA] = useState(true);
+
 
   const navigate = useNavigate();
 
@@ -121,26 +121,6 @@ const GuestView: React.FC = () => {
     );
   };
 
-  const TableHeader = ({
-    isFullscreen = false,
-  }: {
-    isFullscreen?: boolean;
-  }) => {
-    const headerClasses = isFullscreen
-      ? 'table-header-cell-fullscreen'
-      : 'table-header-cell-regular';
-
-    return (
-      <thead className='table-header'>
-        <tr className='table-header-row'>
-          <th className={headerClasses}>Patient ID</th>
-          <th className={headerClasses}>Name</th>
-          <th className={headerClasses}>Status</th>
-          <th className={headerClasses}>Last Updated</th>
-        </tr>
-      </thead>
-    );
-  };
 
   const legendAndFooter = () => (
     <>
@@ -197,42 +177,6 @@ const GuestView: React.FC = () => {
     );
   };
 
-  const renderPatientTable = (isFullscreen = false) => {
-    return (
-      <div className='table-container'>
-        <table className='table'>
-          <TableHeader isFullscreen={isFullscreen} />
-          <tbody>
-            {displayedPatients.map((patient, idx) => {
-              if (!patient) return <div key={idx} />;
-              return (
-                <tr key={idx} className='table-row'>
-                  <td className='table-cell-id'>{patient.patientId}</td>
-                  <td className='table-cell-name'>
-                    {patient.firstName} {patient.lastnameFirstLetter}.
-                  </td>
-                  <td className='table-cell-status'>
-                    <span
-                      className='status-badge'
-                      style={{
-                        backgroundColor: getStatusColor(patient.statusCode),
-                        color: getStatusTextColor(patient.statusCode),
-                      }}
-                    >
-                      {patient.statusCode}
-                    </span>
-                  </td>
-                  <td className='table-cell-updated'>
-                    {formatLastUpdated(patient.updatedAt)}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
-    );
-  };
 
   const OptionA = () => {
     if (isFullscreen) {
@@ -266,57 +210,12 @@ const GuestView: React.FC = () => {
     );
   };
 
-  const OptionB = () => {
-    if (isFullscreen) {
-      return (
-        <div className='layout-fullscreen'>
-          <div className='header-section-fullscreen'>
-            <h2 className='title-fullscreen'>Surgery Status Board</h2>
-          </div>
-          <div className='header-section-content'>
-            <div className='content-wrapper-table'>
-              {renderPatientTable(true)}
-            </div>
-          </div>
-          <div className='header-section-footer'>{legendAndFooter()}</div>
-        </div>
-      );
-    }
 
-    return (
-      <div className='layout-regular'>
-        <div className='layout-flex-column'>
-          <div className='layout-table-card'>
-            <div className='layout-table-container'>
-              <h2 className='title-regular'>Surgery Status Board</h2>
-              {renderPatientTable()}
-            </div>
-          </div>
-        </div>
-        {legendAndFooter()}
-      </div>
-    );
-  };
 
   const ControlButtons = () => (
     <div className='control-buttons-container'>
       <div className='control-buttons-group'>
-        <button
-          onClick={() => setShowOptionA(true)}
-          className={`option-button ${
-            showOptionA ? 'option-button-active' : 'option-button-inactive'
-          }`}
-        >
-          Option A
-        </button>
-        <button
-          onClick={() => setShowOptionA(false)}
-          className={`option-button ${
-            !showOptionA ? 'option-button-active' : 'option-button-inactive'
-          }`}
-        >
-          Option B
-        </button>
+        
       </div>
       <div className='control-buttons-group'>
         <button onClick={toggleFullscreen} className='fullscreen-button'>
@@ -378,17 +277,13 @@ const GuestView: React.FC = () => {
       }
     >
       {isFullscreen ? (
-        showOptionA ? (
           <OptionA />
-        ) : (
-          <OptionB />
-        )
       ) : (
         <div className='guest-view-content'>
           <div className='guest-header-card'>
             <div className='guest-header-content'>
               <div>
-                <h1 className='guest-header-text'>Surgery Status Board</h1>
+                <h1 className='guest-header-text'>Surgery Status</h1>
                 <p className='guest-header-description'>
                   Real-time updates on surgery schedules and patient status
                 </p>
@@ -398,7 +293,7 @@ const GuestView: React.FC = () => {
               </div>
             </div>
           </div>
-          {showOptionA ? <OptionA /> : <OptionB />}
+          <OptionA />
         </div>
       )}
     </div>
