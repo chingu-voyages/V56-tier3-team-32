@@ -41,6 +41,9 @@ const ChatBox = () => {
 
   return (
     <div className='chatbox-container'>
+      <div className='chat-header'>
+        <h3>Snapple</h3>
+      </div>
       <div className='chat-messages'>
         {messages.map((msg, index) => (
           <div key={index} className={`chat-msg ${msg.sender}`}>
@@ -57,7 +60,11 @@ const ChatBox = () => {
           onKeyDown={handleKeyDown}
           placeholder='Ask for help...'
         />
-        <button onClick={sendMessage}>Send</button>
+        <button onClick={sendMessage}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 21L23 12L2 3V10L17 12L2 14V21Z" fill="currentColor"/>
+          </svg>
+        </button>
       </div>
     </div>
   );
