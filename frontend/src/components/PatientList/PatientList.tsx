@@ -109,7 +109,7 @@ const sortPatients = (patients: Patient[], sortBy: 'updatedAt' | 'lastName', sor
       const dateB = new Date(b.updatedAt).getTime();
       comparison = dateA - dateB;
     } else if (sortBy === 'lastName') {
-      comparison = a.lastName.localeCompare(b.lastName);
+      comparison = a.lastName.toLowerCase().localeCompare(b.lastName.toLowerCase());
     }
     
     return sortOrder === 'asc' ? comparison : -comparison;
