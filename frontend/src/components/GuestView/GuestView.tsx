@@ -6,6 +6,8 @@ import './GuestView.css';
 
 type Patient = {
   patientId: string;
+  firstName: string;
+  lastnameFirstLetter: string;
   statusCode: string;
   updatedAt?: string;
 };
@@ -96,6 +98,15 @@ const GuestView: React.FC = () => {
           <p
             className={
               isFullscreen
+                ? 'patient-card-name-fullscreen'
+                : 'patient-card-name-regular'
+            }
+          >
+            {patient.firstName} {patient.lastnameFirstLetter}. 
+          </p>
+          <p
+            className={
+              isFullscreen
                 ? 'patient-card-status-fullscreen'
                 : 'patient-card-status-regular'
             }
@@ -110,7 +121,6 @@ const GuestView: React.FC = () => {
     );
   };
 
- 
 
   const legendAndFooter = () => (
     <>
@@ -167,7 +177,6 @@ const GuestView: React.FC = () => {
     );
   };
 
-  
 
   const OptionA = () => {
     if (isFullscreen) {
